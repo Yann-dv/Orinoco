@@ -2,89 +2,94 @@
 <html lang="fr-FR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css" />
-    <meta property="og:title" content="Orinoco, votre e-commerce ! Un projet OpenClassrooms">
-    <meta property="twitter:title" content="Orinoco, votre e-commerce ! Un projet OpenClassrooms">
-    <meta name="description"
-        content="Le site e-commerce pour vos oursons en peluche ! Projet n°5 du parcour de Web Developpeur d'OpenClassrooms">
-    <meta property="og:description"
-        content="Le site e-commerce pour vos oursons en peluche ! Projet n°5 du parcour de Web Developpeur d'OpenClassrooms">
-    <meta property="twitter:description"
-        content="Le site e-commerce pour vos oursons en peluche ! Projet n°5 du parcour de Web Developpeur d'OpenClassrooms">
-    <meta property="og:image" content="./images/logo.png">
-    <meta property="twitter:image" content=".images/logo.png">
-    <meta property="twitter:card" content="summary_large_image">
-    <link rel="icon" href="./images/favicon.ico">
-    <title>Orinoco - Accueil</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css" />
+  <meta property="og:title" content="Orinoco, votre e-commerce ! Un projet OpenClassrooms">
+  <meta property="twitter:title" content="Orinoco, votre e-commerce ! Un projet OpenClassrooms">
+  <meta name="description"
+    content="Le site e-commerce pour vos oursons en peluche ! Projet n°5 du parcour de Web Developpeur d'OpenClassrooms">
+  <meta property="og:description"
+    content="Le site e-commerce pour vos oursons en peluche ! Projet n°5 du parcour de Web Developpeur d'OpenClassrooms">
+  <meta property="twitter:description"
+    content="Le site e-commerce pour vos oursons en peluche ! Projet n°5 du parcour de Web Developpeur d'OpenClassrooms">
+  <meta property="og:image" content="./images/logo.png">
+  <meta property="twitter:image" content=".images/logo.png">
+  <meta property="twitter:card" content="summary_large_image">
+  <link rel="icon" href="./images/favicon.ico">
+  <title>Orinoco - Accueil</title>
 </head>
 
 <body>
-    <header class="main-color d-flex justify-content-between align-items-center rounded-lg w-full py-1 px-1"><a href="./index.html"><img
-                class="logo-img m-3" src="./images/logo.png" width="240" height="120" alt="Orinico"></a>
-                <a class="panier-btn link-anim d-flex align-items-center mx-5" href="panier.html" aria-label="Bouton d'accès page panier">
-                  <img class="basket mx-1" src="./images/panier.jpg" width="35" height="30" alt="Image Panier"> Panier
-              </a>
-    </header>
-    <div class="main container">
-        <div class="row mb-3">
-            <div class="col">
-               <input class="form-control" id="searchInput" type="text" placeholder="Que recherchez-vous ?">
-            </div>
-         </div>
-          <div class="row" id=teddyList>
-            <div class="col-12 col-lg-4">
-              <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
-                <img src="./cours/css.jpeg" alt="Animations CSS modernes" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">Teddy 1</h5>
-                  <p class="card-text">Premier teddy</p>
-                  <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-lg-4">
-              <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 border-primary shadow">
-                <img src="./cours/js.jpeg" alt="Programmation JavaScript" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">Teddy 2</h5>
-                  <p class="card-text">Deuxième teddy</p>
-                  <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-lg-4">
-              <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 border-primary shadow">
-                <img src="./cours/swift.jpeg" alt="Programmation Swift" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">Teddy 3</h5>
-                  <p class="card-text">Troisième teddy</p>
-                  <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
-                </div>
-              </div>
-            </div>
+  <header class="main-color d-flex justify-content-between align-items-center rounded-lg w-full py-1 px-1">
+    <a href="./index.html"><img class="logo-img m-3" src="./images/logo.png" width="240" height="120" alt="Orinico"></a>
+    <a class="panier-btn link-anim d-flex align-items-center mx-5" href="panier.html"
+      aria-label="Bouton d'accès page panier">
+      <img class="basket mx-1" src="./images/panier.jpg" width="30" height="25" alt="Image Panier"> Panier
+    </a>
+  </header>
+  <div class="main container">
+    <div class="row mb-3 my-2">
+      <div class="col">
+        <div class="jumbotron my-1 mx-1 d-flex align-items-center justify-content-center">
+          <img src="./images/teddyfam.png" alt="Photos de plusieurs oursons à vendre">
+       </div>
+        <input class="form-control" id="searchInput" type="text" placeholder="Que recherchez-vous ?">
+      </div>
+    </div>
+    <div class="row" id=teddyList>
+      <div class="col-12 col-lg-4">
+        <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+          <img src="./cours/css.jpeg" alt="Animations CSS modernes" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Teddy 1</h5>
+            <p class="card-text">Premier teddy</p>
+            <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
           </div>
         </div>
-        <div class="footer bg-light">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <ul class="list-inline text-center">
-                  <li class="list-inline-item"><a href="#" class="link-anim">À propos</a></li>
-                  <li class="list-inline-item">&middot;</li>
-                  <li class="list-inline-item"><a href="#" class="link-anim">Vie privée</a></li>
-                  <li class="list-inline-item">&middot;</li>
-                  <li class="list-inline-item"><a href="#" class="link-anim">Conditions d'utilisations</a></li>
-                  <li class="list-inline-item">&middot;</li>
-                  <li class="list-inline-item"><a href="mailto:orinoco.contact@outlook.fr" class="link-anim">Contactez-nous</a></li>
-                </ul>
-              </div>
-            </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 border-primary shadow">
+          <img src="./cours/js.jpeg" alt="Programmation JavaScript" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Teddy 2</h5>
+            <p class="card-text">Deuxième teddy</p>
+            <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
           </div>
         </div>
-</div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 border-primary shadow">
+          <img src="./cours/swift.jpeg" alt="Programmation Swift" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Teddy 3</h5>
+            <p class="card-text">Troisième teddy</p>
+            <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item"><a href="#" class="link-anim">À propos</a></li>
+            <li class="list-inline-item">&middot;</li>
+            <li class="list-inline-item"><a href="#" class="link-anim">Vie privée</a></li>
+            <li class="list-inline-item">&middot;</li>
+            <li class="list-inline-item"><a href="#" class="link-anim">Conditions d'utilisations</a></li>
+            <li class="list-inline-item">&middot;</li>
+            <li class="list-inline-item"><a href="mailto:orinoco.contact@outlook.fr"
+                class="link-anim">Contactez-nous</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
 </body>
 
