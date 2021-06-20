@@ -1,5 +1,35 @@
+@font-face {
+  font-family: "belligerent";
+  src: url("../font/belligerent-webfont.woff") format("woff"), url("../font/belligerent-webfont.eot") format("eot"), url("../font/belligerent-webfont.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+* {
+  font-family: "belligerent";
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.link-anim {
+  background: linear-gradient(to top, #8f5bfd 0%, #8f5bfd 5%, transparent 5.01%) no-repeat left bottom/0 100%;
+  transition: background-size 0.3s;
+  font-size: 1.5rem;
+}
+
+.link-anim:hover {
+  background-size: 100% 100%;
+}
+
 .main-color {
   background-color: #f3e9f1;
+}
+
+.logo-img:hover, #return:hover {
+  transform: scale(0.8);
+  transition: 350ms ease-in-out;
 }
 
 /*# sourceMappingURL=custom_style.css.map */
