@@ -22,13 +22,11 @@
 </head>
 
 <body>
-    <header class="main-color d-flex justify-content-between items-center rounded-lg w-full py-1 px-1"><a href="./index.html"><img
+    <header class="main-color d-flex justify-content-between align-items-center rounded-lg w-full py-1 px-1"><a href="./index.html"><img
                 class="logo-img m-3" src="./images/logo.png" width="240" height="120" alt="Orinico"></a>
-        <nav class="navbar">
-            <ul class="list-group align-middle mx-3">
-                <li class="list-group"><a class="list-group-item list-group-item-action px-4 py-2 link-dark" href="./panier.html">Panier</a></li>
-            </ul>
-        </nav>
+                <a class="panier-btn link-anim d-flex align-items-center mx-5" href="panier.html" aria-label="Bouton d'accès page panier">
+                  <img class="basket mx-1" src="./images/panier.jpg" width="35" height="30" alt="Image Panier"> Panier
+              </a>
     </header>
     <div class="main container">
         <div class="row mb-3">
@@ -69,16 +67,18 @@
             </div>
           </div>
         </div>
-        <div class="bg-light">
+        <div class="footer bg-light">
           <div class="container">
             <div class="row">
               <div class="col">
                 <ul class="list-inline text-center">
-                  <li class="list-inline-item"><a href="#">À propos</a></li>
+                  <li class="list-inline-item"><a href="#" class="link-anim">À propos</a></li>
                   <li class="list-inline-item">&middot;</li>
-                  <li class="list-inline-item"><a href="#">Vie privée</a></li>
+                  <li class="list-inline-item"><a href="#" class="link-anim">Vie privée</a></li>
                   <li class="list-inline-item">&middot;</li>
-                  <li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+                  <li class="list-inline-item"><a href="#" class="link-anim">Conditions d'utilisations</a></li>
+                  <li class="list-inline-item">&middot;</li>
+                  <li class="list-inline-item"><a href="mailto:orinoco.contact@outlook.fr" class="link-anim">Contactez-nous</a></li>
                 </ul>
               </div>
             </div>
