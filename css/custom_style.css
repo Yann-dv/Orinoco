@@ -9,6 +9,10 @@
   font-family: "belligerent";
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .link-anim {
   background: linear-gradient(to top, #8f5bfd 0%, #8f5bfd 5%, transparent 5.01%) no-repeat left bottom/0 100%;
   transition: background-size 0.3s;
@@ -23,7 +27,7 @@
   background-color: #f3e9f1;
 }
 
-.logo-img:hover {
+.logo-img:hover, #return:hover {
   transform: scale(0.8);
   transition: 350ms ease-in-out;
 }
