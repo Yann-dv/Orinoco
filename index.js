@@ -12,17 +12,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 const mainContainer = document.getElementById('teddyList')
    addArticles(5)
-
-   document.querySelector("#searchInput").addEventListener("keyup", function() {
-    event.preventDefault();     
-    var value = this.value().toLowerCase();
-    document.querySelector("#teddyList .col-12").addEventListener("filter", function() {
-       this.toggle(this.text().toLowerCase().indexOf(value) > -1)
-    });
- });
-
   });
 
+  const searchInput = document.getElementById("searchInput");
+
+  searchInput.addEventListener("keyup", function() {
+    var value = document.querySelector(this).val().toLowerCase();
+    document.querySelector("#lessonList .col-12").filter(function() {
+       document.querySelector(this).toggle(document.querySelector(this).text().toLowerCase().indexOf(value) > -1)
+    });
+ });
     
 
    /* $(document).ready(function(){
@@ -30,6 +29,15 @@ const mainContainer = document.getElementById('teddyList')
          var value = $(this).val().toLowerCase();
          $("#lessonList .col-12").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         });
+      });
+   });*/
+
+     /* $(document).ready(function(){
+      searchInput.on("keyup", function() {
+         var value = document.querySelector(this).val().toLowerCase();
+         document.querySelector("#lessonList .col-12").filter(function() {
+            document.querySelector(this).toggle(document.querySelector(this).text().toLowerCase().indexOf(value) > -1)
          });
       });
    });*/
