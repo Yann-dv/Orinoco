@@ -19,6 +19,7 @@
   <meta property="twitter:card" content="summary_large_image">
   <link rel="icon" href="./images/favicon.ico">
   <title>Orinoco - Accueil</title>
+  <script src="./index.js" defer></script>
 </head>
 
 <body>
@@ -38,48 +39,20 @@
     <div class="row mb-3 my-2">
       <div class="col">
         <div class="jumbotron my-1 mx-1 d-flex align-items-center justify-content-center">
-          <img src="./images/teddyfam.png" alt="Photos de plusieurs oursons à vendre">
+          <img src="./images/teddyfam.png" class="img-fluid" alt="Photos de plusieurs oursons à vendre">
        </div>
-        <input class="form-control" id="searchInput" type="text" placeholder="Que recherchez-vous ?">
+       <!--Dynamic searchbar-->
+        <input class="form-control" id="searchInput" type="text" placeholder="Quel produit recherchez-vous ?">
       </div>
     </div>
     <div class="row main-color" id=teddyList>
-      <div class="col-12 col-lg-4">
-        <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
-          <img src="./cours/css.jpeg" alt="Teddy" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">Teddy 1</h5>
-            <p class="card-text">Premier teddy</p>
-            <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 border-primary shadow">
-          <img src="./cours/js.jpeg" alt="Teddy" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">Teddy 2</h5>
-            <p class="card-text">Deuxième teddy</p>
-            <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 border-primary shadow">
-          <img src="./cours/swift.jpeg" alt="Teddy" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">Teddy 3</h5>
-            <p class="card-text">Troisième teddy</p>
-            <a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a>
-          </div>
-        </div>
-      </div>
+    <!--Location of the teddy's cards, dynamically created by JS-->
     </div>
   </div>
   <div class="footer bg-light">
     <div class="container">
       <div class="row">
-        <div class="col">
+        <div class="col m-3">
           <ul class="list-inline text-center">
             <li class="list-inline-item"><a href="#" class="link-anim">À propos</a></li>
             <li class="list-inline-item">&middot;</li>
@@ -89,7 +62,7 @@
             <li class="list-inline-item">&middot;</li>
             <li class="list-inline-item"><a href="mailto:orinoco.contact@outlook.fr"
                 class="link-anim">Contactez-nous</a></li>
-          </ul>
+            </ul>
         </div>
       </div>
     </div>
