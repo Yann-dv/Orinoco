@@ -14,30 +14,18 @@ const mainContainer = document.getElementById('teddyList')
    addArticles(5)
   });
 
-  const searchInput = document.getElementById("searchInput");
 
-  searchInput.addEventListener("keyup", function() {
-    var value = document.querySelector(this).val().toLowerCase();
-    document.querySelector("#lessonList .col-12").filter(function() {
-       document.querySelector(this).toggle(document.querySelector(this).text().toLowerCase().indexOf(value) > -1)
-    });
- });
+
+ // Barre de recherche dynamique, fonctionnant par filtre, évolutive en fonction des produits proposés //   
+ document.querySelector('#searchInput').addEventListener('keyup', function(e) {
+   var recherche = this.value.toLowerCase();
+   var documents = document.querySelectorAll('#teddyList'); // Evolutif si l'on souhaite rajouter par la suite des listes de produits //
     
-
-   /* $(document).ready(function(){
-      $("#searchInput").on("keyup", function() {
-         var value = $(this).val().toLowerCase();
-         $("#lessonList .col-12").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-         });
-      });
-   });*/
-
-     /* $(document).ready(function(){
-      searchInput.on("keyup", function() {
-         var value = document.querySelector(this).val().toLowerCase();
-         document.querySelector("#lessonList .col-12").filter(function() {
-            document.querySelector(this).toggle(document.querySelector(this).text().toLowerCase().indexOf(value) > -1)
-         });
-      });
-   });*/
+   Array.prototype.forEach.call(documents, function(document) {
+     if (document.innerHTML.toLowerCase().indexOf(recherche) > -1) {
+       document.style.display = 'flex'; // Display flex afin de conserver la mise ne page //
+     } else {
+       document.style.display = 'none'; // Display none, rendu visuel plus pertinent //
+     }
+   });
+ });
