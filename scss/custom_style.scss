@@ -35,3 +35,8 @@
       transform: scale(0.8);
       transition: 350ms ease-in-out;
 }
+
+.scale-up:hover {
+    transform: scale(1.05);
+      transition: 350ms ease-in-out;
+}

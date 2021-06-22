@@ -33,6 +33,11 @@
   transition: 350ms ease-in-out;
 }
 
+.scale-up:hover {
+  transform: scale(1.05);
+  transition: 350ms ease-in-out;
+}
+
 /*!
  * Bootstrap v5.0.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
