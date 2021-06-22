@@ -1,3 +1,20 @@
+const local = JSON.parse(localStorage.getItem('teddiesList'));
+
+fetch('http://localhost:3000/api/teddies')
+  .then(function(res) {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then(function(value) {
+    const localTeddies = localStorage.setItem("teddiesList", JSON.stringify(value));
+    console.log(`Donnée stockée -> trouver comment récupérer un donnée précise`);
+  })
+  .catch(function(err) {
+    // Une erreur est survenue
+  });
+
+
 window.addEventListener("DOMContentLoaded", (event) => {
     console.log("DOM entièrement chargé et analysé");
 
