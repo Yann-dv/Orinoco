@@ -1,4 +1,5 @@
 const local = JSON.parse(localStorage.getItem('teddiesList'));
+let norbert = local [0];
 
 fetch('http://localhost:3000/api/teddies')
   .then(function(res) {
@@ -8,7 +9,7 @@ fetch('http://localhost:3000/api/teddies')
   })
   .then(function(value) {
     const localTeddies = localStorage.setItem("teddiesList", JSON.stringify(value));
-    console.log(`Donnée stockée -> trouver comment récupérer un donnée précise`);
+    console.log(ted.colors);
   })
   .catch(function(err) {
     // Une erreur est survenue
@@ -23,7 +24,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       const item = document.createElement('div')
       item.setAttribute('class', 'teddy col-12 col-lg-4')
       //InsertAdjacentHTML -> cartes des différents Teddy's
-      mainContainer.insertAdjacentHTML('afterbegin', '<div class="col-12 col-lg-4"><div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow"><img src="./images/teddy_1.jpg" alt="Teddy" class="card-img-top"><div class="card-body"><h5 class="card-title">Teddy 1</h5><p class="card-text">Premier teddy</p><a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a></div></div>')
+      mainContainer.insertAdjacentHTML('afterbegin', '<div class="col-12 col-lg-4"><div class="card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow"><img src="'+ norbert.imageUrl +'" alt="Teddy" class="card-img-top"><div class="card-body"><h5 class="card-title">'+ norbert.name +'</h5><p class="card-text">'+ norbert.description +'</p><a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a></div></div>')
       }
   }
 
