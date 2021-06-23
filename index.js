@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       const item = document.createElement('div')
       item.setAttribute('class', 'teddy col-12 col-lg-4')
       //Créations des cartes des différents Teddy's en utilisant l'index des produits stockées en local, ceci permet de rajouter facilement des produits sans rajouter de code
-      mainContainer.insertAdjacentHTML('beforeend', '<div class="col-12 col-lg-4"><div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow"><img src="'+ iteddy.imageUrl +'" alt="Teddy" class="card-img-top main-color"><div class="card-body main-color"><h5 class="card-title">'+ iteddy.name +'</h5><p class="card-text">'+ iteddy.description +'</p><a class="btn btn-primary stretched-link" href="lessons-1.html" role="button">Lien vers le produit</a></div></div>')
+      mainContainer.insertAdjacentHTML('beforeend', '<div class="teddy col-12 col-lg-4"><div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow"><div class="card-body main-color position-relative"><img src="'+ iteddy.imageUrl +'" alt="Teddy" class="card-img-top main-color" style="height: 15rem"><h4 class="card-title fw-bold">'+ iteddy.name +'</h4><p class="card-text">'+ iteddy.description +'</p><a class="btn btn-primary rounded-pill stretched-link" href="lessons-1.html" role="button">Voir ce produit</a><h6 class="card-subtitle btn rounded-pill fw-bold text-dark bg-success bg-gradient position-absolute  end-0 mx-2">' + iteddy.price +' €</h6></div></div>')
       }
   }
 
@@ -39,13 +39,13 @@ const mainContainer = document.getElementById('teddyList')
  // Barre de recherche dynamique, fonctionnant par filtre, évolutive en fonction des produits proposés //   
  document.querySelector('#searchInput').addEventListener('keyup', function(e) {
    var recherche = this.value.toLowerCase();
-   var documents = document.querySelectorAll('#teddyList'); // Evolutif si l'on souhaite rajouter par la suite des listes de produits //
+   var documents = document.querySelectorAll('.teddy'); // Evolutif si l'on souhaite rajouter par la suite des listes de produits //
     
    Array.prototype.forEach.call(documents, function(document) {
      if (document.innerHTML.toLowerCase().indexOf(recherche) > -1) {
        document.style.display = 'flex'; // Display flex afin de conserver la mise ne page //
      } else {
-       document.style.display = 'none'; // Display none, rendu visuel plus pertinent //
+       document.style.display = 'none'; // Display none, rendu centré sur les produits recherchés //
      }
    });
  });
