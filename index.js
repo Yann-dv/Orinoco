@@ -1,5 +1,5 @@
  // Variable pour aller chercher dans le stockage local et parser
-const local= JSON.parse(localStorage.getItem('teddiesList'));
+// const local= JSON.parse(localStorage.getItem('teddiesList'));
 
 fetch('http://localhost:3000/api/teddies')
   .then(function(res) {
@@ -9,31 +9,33 @@ fetch('http://localhost:3000/api/teddies')
   })
   .then(function(value) {
     // Stockage en local des listes de produits récupérés via l'API
-    const localTeddies = localStorage.setItem("teddiesList", JSON.stringify(value));
-    console.log(ted.colors);
+    // const localTeddies = localStorage.setItem("teddiesList", JSON.stringify(value));//
+    addArticles(value); 
   })
   .catch(function(err) {
     // Une erreur est survenue
   });
 
-
-window.addEventListener("DOMContentLoaded", (event) => {
-    console.log("DOM entièrement chargé et analysé");
-
-    const addArticles = index => {
-      for(let i = 0; i < index; i++) {
-      let iteddy = local [i];
-      const item = document.createElement('div')
-      item.setAttribute('class', 'teddy col-12 col-lg-4')
-      //Créations des cartes des différents Teddy's en utilisant l'index des produits stockées en local, ceci permet de rajouter facilement des produits sans rajouter de code
-      mainContainer.insertAdjacentHTML('beforeend', '<div class="teddy col-12 col-lg-4"><div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow"><div class="card-body main-color position-relative"><img src="'+ iteddy.imageUrl +'" alt="Teddy" class="card-img-top main-color" style="height: 15rem"><h4 class="card-title fw-bold">'+ iteddy.name +'</h4><p class="card-text">'+ iteddy.description +'</p><a class="btn btn-primary rounded-pill stretched-link" href="lessons-1.html" role="button">Voir ce produit</a><h6 class="card-subtitle btn rounded-pill fw-bold text-dark bg-success bg-gradient position-absolute  end-0 mx-2">' + iteddy.price +' €</h6></div></div>')
-      }
-  }
-
-const mainContainer = document.getElementById('teddyList')
-   addArticles(5)
-  });
-
+  const addArticles = teddies => {
+    const mainContainer = document.getElementById('teddyList')
+    for(let i = 0; i < teddies.length; i++) {
+    let iteddy = teddies[i];
+    //Créations des cartes des différents Teddy's en utilisant l'index des produits stockées en local, ceci permet de rajouter facilement des produits sans rajouter de code
+    mainContainer.insertAdjacentHTML('beforeend', `
+      <div class="teddy col-12 col-lg-4">
+        <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+        <div class="card-body main-color position-relative">
+        <img src="${iteddy.imageUrl}" alt="Teddy" class="card-img-top main-color" style="height: 15rem">
+        <h4 class="card-title fw-bold">${iteddy.name}</h4>
+        <p class="card-text">${iteddy.description}</p>
+        <a class="btn btn-primary rounded-pill stretched-link" href="lessons-1.html" role="button">
+        Voir ce produit
+        </a>
+        <h6 class="card-subtitle btn rounded-pill fw-bold text-dark bg-success bg-gradient position-absolute  end-0 mx-2">${iteddy.price/100} €</h6></div></div>
+        `
+      )
+    }
+}
 
 
  // Barre de recherche dynamique, fonctionnant par filtre, évolutive en fonction des produits proposés //   
