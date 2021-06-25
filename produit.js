@@ -1,5 +1,8 @@
  // Variable pour aller chercher les informations à afficher dans le localStorage et parser
 const ted= JSON.parse(localStorage.getItem('teddiesList'));
+//const tedColor= JSON.parse(localStorage.getItem('colors'));
+
+var selected= 0; // Variable de stockage du teddy séléctionné
 
 fetch('http://localhost:3000/api/teddies')
   .then(function(res) {
@@ -13,6 +16,7 @@ fetch('http://localhost:3000/api/teddies')
     const localTeddies = localStorage.setItem("teddiesList", JSON.stringify(value));
     }
     createTeddy(value); 
+    teddyColors(value);
   })
   .catch(function(err) {
     // Une erreur est survenue
@@ -22,29 +26,36 @@ fetch('http://localhost:3000/api/teddies')
     const mainContainer = document.getElementById('products')
     mainContainer.insertAdjacentHTML('beforeend', `
       <div class="teddy col-12 col-lg-6">
-        <div class="product-image main-color p-3">
-            <img src="${ted[1].imageUrl}" alt="Teddy" class="card-img-top main-color" style="height: 70vh">
+        <div class="product-image main-color">
+            <img src="${ted[selected].imageUrl}" alt="Teddy" class="img-fluid p-3">
         </div>
       </div>
       <div class="teddy col-12 col-lg-6 main-color ms-3 d-flex">
-        <div class="product-desc p-4 style="height: 70vh">
-            <h3 class="fw-bold text-center">${ted[1].name}</h3>
-            <p class="my-3">${ted[1].description}</p>
-            <h5 class="text-bold font-lg font-bold">Choisissez une couleur pour votre teddy :</h5>
-            <div id="product-colors" class="container">
-              <div class="row">
-                <div class="col btn btn-outline-secondary scale-up color-choice" type="button" style="background-color: ${ted[2].colors}">
+        <div class="product-desc">
+            <h2 class="fw-bold text-center pt-2">${ted[selected].name}</h2>
+            <p class="my-3 fs-5 p-2">${ted[selected].description}</p>
+            <h5 class="text-bold p-2 font-lg font-bold">Choisissez une couleur pour votre teddy :</h5>
+            <div class="container colors-container">
+                <div class="d-flex m-auto" id="product-colors">
                 </div>
-                <div class="col btn btn-outline-secondary scale-up color-choice" type="button" style="background-color: tan">
-                </div>
-                <div class="col btn btn-outline-secondary scale-up color-choice" type="button" style="background-color: white">
-                </div>
-              </div>
             </div>
-            <button class="w-full bg-secondary text-white fw-bold rounded p-2 mt-2" type="button">Ajouter au panier pour 
-            <span id="productPrice">${ted[1].price/100} €</span>
+            <button class="w-full bg-secondary text-white fw-bold rounded p-2 m-2" type="button">Ajouter au panier pour 
+            <span id="productPrice">${ted[selected].price/100} €</span>
             </button>
         </div>
       </div>
         `)
     };
+
+// Créations des boutons de choix de couleurs en fonction du teddy séléctionné
+    const teddyColors = ted => {
+    const colorContainer = document.getElementById('product-colors')
+    for(let i = 0; i < ted[selected].colors.length; i++) {
+    let color = ted[selected];
+    colorContainer.insertAdjacentHTML('beforeend', `
+        <div class="btn scale-up color-choice" type="button" width:"4rem" style="background-color: ${color.colors[i]}">
+        </div>
+        `)
+        
+    }
+};

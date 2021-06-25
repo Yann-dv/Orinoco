@@ -10,7 +10,7 @@
   }
 
 * { // default font-family for all
-    font-family: 'belligerent';
+    font-family: 'belligerent'!important;
 }
 
 .hidden {
@@ -42,7 +42,7 @@
 }
 
 .color-choice {
-    width: 10rem;
-    height: 8rem;
+    width: 8rem;
+    height: 6rem;
     margin: .5rem;
 }
