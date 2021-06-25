@@ -14,7 +14,7 @@ fetch('http://localhost:3000/api/teddies')
     if(localStorage.getItem("teddiesList") === null) {
     const localTeddies = localStorage.setItem("teddiesList", JSON.stringify(value));
     }
-    createTeddy(value); 
+    createTeddy(value);
     teddyColors(value);
   })
   .catch(function(err) {
@@ -61,8 +61,7 @@ fetch('http://localhost:3000/api/teddies')
 
 document.body.addEventListener( 'click', function (e) {
   if(e.target && e.target.classList.contains('color-choice')){
-    e.target.classList.toggle("active");
-
+    e.target.classList.toggle("active"); 
   console.log("Test");  
   };
 } );
