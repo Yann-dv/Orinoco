@@ -1,6 +1,3 @@
- // Variable pour aller chercher dans le stockage local et parser
-// const local= JSON.parse(localStorage.getItem('teddiesList'));
-
 fetch('http://localhost:3000/api/teddies')
   .then(function(res) {
     if (res.ok) {
@@ -28,10 +25,10 @@ fetch('http://localhost:3000/api/teddies')
         <img src="${iteddy.imageUrl}" alt="Teddy" class="card-img-top main-color" style="height: 15rem">
         <h4 class="card-title fw-bold">${iteddy.name}</h4>
         <p class="card-text">${iteddy.description}</p>
-        <a class="btn btn-primary rounded-pill stretched-link" href="lessons-1.html" role="button">
+        <a class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="lessons-1.html" role="button">
         Voir ce produit
         </a>
-        <h6 class="card-subtitle btn rounded-pill fw-bold text-dark bg-success bg-gradient position-absolute  end-0 mx-2">${iteddy.price/100} €</h6></div></div>
+        <h6 class="card-subtitle btn rounded-pill fw-bolder fs-5 text-dark bg-light bg-gradient position-absolute end-0 mx-2">${iteddy.price/100} €</h6></div></div>
         `
       )
     }

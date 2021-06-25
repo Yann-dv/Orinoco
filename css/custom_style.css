@@ -37,4 +37,10 @@
   transition: 350ms ease-in-out;
 }
 
+.color-choice {
+  width: 10rem;
+  height: 8rem;
+  margin: 0.5rem;
+}
+
 /*# sourceMappingURL=custom_style.css.map */
