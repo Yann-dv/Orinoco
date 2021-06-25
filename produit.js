@@ -1,7 +1,6 @@
  // Variable pour aller chercher les informations à afficher dans le localStorage et parser
 const ted= JSON.parse(localStorage.getItem('teddiesList'));
 //const tedColor= JSON.parse(localStorage.getItem('colors'));
-
 var selected= 0; // Variable de stockage du teddy séléctionné
 
 fetch('http://localhost:3000/api/teddies')
@@ -58,4 +57,12 @@ fetch('http://localhost:3000/api/teddies')
         `)
         
     }
-};
+}
+
+document.body.addEventListener( 'click', function (e) {
+  if(e.target && e.target.classList.contains('color-choice')){
+    e.target.classList.toggle("active");
+
+  console.log("Test");  
+  };
+} );

@@ -36,7 +36,7 @@
       transition: 250ms ease-in-out;
 }
 
-.scale-up:hover {
+.scale-up:hover, .scale-up:focus {
     transform: scale(1.05);
     transition: 350ms ease-in-out;
 }
@@ -45,4 +45,8 @@
     width: 8rem;
     height: 6rem;
     margin: .5rem;
+}
+
+.active {
+    border: .25rem solid red;
 }

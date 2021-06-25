@@ -17,7 +17,8 @@ fetch('http://localhost:3000/api/teddies')
     const mainContainer = document.getElementById('teddyList')
     for(let i = 0; i < teddies.length; i++) {
     let iteddy = teddies[i];
-    //Créations des cartes des différents Teddy's en utilisant l'index des produits stockées en local, ceci permet de rajouter facilement des produits sans rajouter de code
+    /*Créations des cartes des différents Teddy's en utilisant l'index des produits stockées en local, 
+    ceci permet de rajouter facilement des produits sans rajouter de code*/
     mainContainer.insertAdjacentHTML('beforeend', `
       <div class="teddy col-12 col-lg-4">
         <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
@@ -25,7 +26,7 @@ fetch('http://localhost:3000/api/teddies')
         <img src="${iteddy.imageUrl}" alt="Teddy" class="card-img-top main-color" style="height: 15rem">
         <h4 class="card-title fw-bold">${iteddy.name}</h4>
         <p class="card-text">${iteddy.description}</p>
-        <a class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="lessons-1.html" role="button">
+        <a class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="produit.html" role="button">
         Voir ce produit
         </a>
         <h6 class="card-subtitle btn rounded-pill fw-bolder fs-5 text-dark bg-light bg-gradient position-absolute end-0 mx-2">${iteddy.price/100} €</h6></div></div>
