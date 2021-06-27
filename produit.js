@@ -1,6 +1,5 @@
  // Variable pour aller chercher les informations à afficher dans le localStorage et parser
 const ted= JSON.parse(localStorage.getItem('teddiesList'));
-//const tedColor= JSON.parse(localStorage.getItem('colors'));
 var selected= 0; // Variable de stockage du teddy séléctionné
 
 fetch('http://localhost:3000/api/teddies')
@@ -52,16 +51,9 @@ fetch('http://localhost:3000/api/teddies')
     for(let i = 0; i < ted[selected].colors.length; i++) {
     let color = ted[selected];
     colorContainer.insertAdjacentHTML('beforeend', `
-        <div class="btn scale-up color-choice" type="button" width:"4rem" style="background-color: ${color.colors[i]}">
-        </div>
+        <button class="btn btn-outline-primary scale-up color-choice" type="button" width:"4rem" style="background-color: ${color.colors[i]}">
+        </button>
         `)
         
     }
 }
-
-document.body.addEventListener( 'click', function (e) {
-  if(e.target && e.target.classList.contains('color-choice')){
-    e.target.classList.toggle("active"); 
-  console.log("Test");  
-  };
-} );
