@@ -15,25 +15,13 @@ fetch("http://localhost:3000/api/teddies")
         JSON.stringify(value)
       );
     }
+    teddySendUrl(value);
     addArticles(value);
-    teddyChoice(value);
+    
   })
   .catch(function (err) {
     // Une erreur est survenue
   });
-
-function teddyChoice() {
-  // Envoi des paramètres des teddies selectionnés dans l'url, selon selection locale
-  document.querySelector(".logo-img").addEventListener("click", function (e) {
-    e.preventDefault();
-    var str = window.location.href;
-    var url = new URL(str);
-    var urlParams = new URLSearchParams(window.location.search);
-    urlParams.set("teddy", `${ted[selected]._id}`);
-    window.location.search = urlParams;
-    console.log(urlParams);
-  });
-}
 
 const addArticles = (teddies) => {
   const mainContainer = document.getElementById("teddyList");
@@ -45,12 +33,12 @@ const addArticles = (teddies) => {
       "beforeend",
       `
       <div class="teddy col-12 col-lg-4">
-        <div id="${iteddy._id}"class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+        <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
         <div class="card-body main-color position-relative">
         <img src="${iteddy.imageUrl}" alt="Teddy" class="card-img-top main-color" style="height: 15rem">
         <h4 class="card-title fw-bold">${iteddy.name}</h4>
         <p class="card-text">${iteddy.description}</p>
-        <a class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="produit.html" role="button">
+        <a id="${iteddy._id}" class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="produit.html" role="button">
         Voir ce produit
         </a>
         <h6 class="card-subtitle btn rounded-pill fw-bolder fs-5 text-dark bg-light bg-gradient position-absolute end-0 mx-2">${iteddy.price / 100} €</h6></div></div>
@@ -72,6 +60,20 @@ document.querySelector("#searchInput").addEventListener("keyup", function (e) {
     }
   });
 });
+
+function teddySendUrl() {
+  // Envoi des paramètres des teddies selectionnés dans l'url, selon selection locale
+  teddyList.addEventListener("click", function (e) {
+    var str = window.location.href;
+    var url = new URL(str);
+    
+    var urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("teddy", e.target.id);
+    window.location.search = urlParams;
+    console.log(e.target.id);
+  });
+}
+
 
 /*
 var str = window.location.href;

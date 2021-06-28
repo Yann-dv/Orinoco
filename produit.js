@@ -15,6 +15,7 @@ fetch('http://localhost:3000/api/teddies')
     }
     createTeddy(value);
     teddyColors(value);
+    teddyReceiveUrl(value);
   })
   .catch(function(err) {
     // Une erreur est survenue
@@ -73,15 +74,30 @@ fetch('http://localhost:3000/api/teddies')
 }
 
 // Méthode d'écoute des évènements crées dynamiquement - under construction
-  document.addEventListener('change', function(e){
+  products.addEventListener('change', function(e){
     const tedPrice = document.getElementById('productPrice');
     tedPrice.textContent = `${(ted[selected].price/100)*e.target.value} €`;
-    /*
-    if(e.target && e.target.id == 'tedQuantity'){
-      tedPrice.textContent = `${(ted[selected].price/100)*e.target.value} €`;
-     }*/
-     /*console.log(e.target.value);
-     console.log(tedPrice.innerHTML);
-     console.log(document.getElementById('productPrice'));
-     console.log((ted[selected].price/100)*e.target.value);*/
 });
+
+
+
+function teddyReceiveUrl() {
+  // Réception des params url
+    var post =  window.location.search.substring(1);
+    var urlParams = new URLSearchParams(post);
+    var tedId = parseInt(params.get("teddy"), 10);
+    //urlParams.get("teddy", e.target.id);
+    window.location.search = tedId;
+    console.log(tedId);
+  };
+
+
+/*   
+ var $_GET = [];
+    var parts = window.location.search.substr(1).split("&");
+    for (var i = 0; i < parts.length; i++) {
+        var temp = parts[i].split("=");
+        $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+    }
+    console.log($_GET);
+    */
