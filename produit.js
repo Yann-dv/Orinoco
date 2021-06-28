@@ -1,6 +1,6 @@
  // Variable pour aller chercher les informations à afficher dans le localStorage et parser
 const ted= JSON.parse(localStorage.getItem('teddiesList'));
-var selected= 0; // Variable de stockage du teddy séléctionné
+var selected= 3; // Variable de stockage du teddy séléctionné
 
 fetch('http://localhost:3000/api/teddies')
   .then(function(res) {
@@ -50,12 +50,13 @@ fetch('http://localhost:3000/api/teddies')
             <option value="7">7</option>
             <option value="8">8</option>
             <option value="9">9</option>
-            <option value="9">10</option>
+            <option value="10">10</option>
             </select>
             </label>
         </div>
       </div>
         `)
+       
     };
 
 // Créations des boutons de choix de couleurs en fonction du teddy séléctionné
@@ -73,9 +74,14 @@ fetch('http://localhost:3000/api/teddies')
 
 // Méthode d'écoute des évènements crées dynamiquement - under construction
   document.addEventListener('change', function(e){
+    const tedPrice = document.getElementById('productPrice');
+    tedPrice.textContent = `${(ted[selected].price/100)*e.target.value} €`;
+    /*
     if(e.target && e.target.id == 'tedQuantity'){
-      const price = document.getElementById('productPrice') + option;
-      e.target*price;
-      console.log(price);
-     }
+      tedPrice.textContent = `${(ted[selected].price/100)*e.target.value} €`;
+     }*/
+     /*console.log(e.target.value);
+     console.log(tedPrice.innerHTML);
+     console.log(document.getElementById('productPrice'));
+     console.log((ted[selected].price/100)*e.target.value);*/
 });
