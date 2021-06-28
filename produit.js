@@ -40,6 +40,19 @@ fetch('http://localhost:3000/api/teddies')
             <button class="w-full bg-secondary text-white fw-bold rounded p-2 m-2" type="button">Ajouter au panier pour 
             <span id="productPrice">${ted[selected].price/100} €</span>
             </button>
+            <label  id="tedQuantity" class="mx-5 selectQuantity">Quantité : <select name="quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="9">10</option>
+            </select>
+            </label>
         </div>
       </div>
         `)
@@ -51,9 +64,18 @@ fetch('http://localhost:3000/api/teddies')
     for(let i = 0; i < ted[selected].colors.length; i++) {
     let color = ted[selected];
     colorContainer.insertAdjacentHTML('beforeend', `
-        <button class="btn btn-outline-primary scale-up color-choice" type="button" width:"4rem" style="background-color: ${color.colors[i]}">
+        <button class="btn btn-outline-secondary scale-up color-choice" type="button" width:"4rem" style="background-color: ${color.colors[i]}">
         </button>
         `)
         
     }
 }
+
+// Méthode d'écoute des évènements crées dynamiquement - under construction
+  document.addEventListener('change', function(e){
+    if(e.target && e.target.id == 'tedQuantity'){
+      const price = document.getElementById('productPrice') + option;
+      e.target*price;
+      console.log(price);
+     }
+});
