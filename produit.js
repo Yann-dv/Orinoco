@@ -1,6 +1,6 @@
  // Variable pour aller chercher les informations à afficher dans le localStorage et parser
 const ted= JSON.parse(localStorage.getItem('teddiesList'));
-var selected= 3; // Variable de stockage du teddy séléctionné
+var selected= 0; // Variable de stockage du teddy séléctionné
 
 fetch('http://localhost:3000/api/teddies')
   .then(function(res) {
