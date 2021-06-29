@@ -1,5 +1,4 @@
 const ted = JSON.parse(localStorage.getItem("teddiesList"));
-var selected = 0; // Variable de stockage du teddy séléctionné
 
 fetch("http://localhost:3000/api/teddies")
   .then(function (res) {
@@ -38,7 +37,7 @@ const addArticles = (teddies) => {
         <img src="${iteddy.imageUrl}" alt="Teddy" class="card-img-top main-color" style="height: 15rem">
         <h4 class="card-title fw-bold">${iteddy.name}</h4>
         <p class="card-text">${iteddy.description}</p>
-        <a id="${iteddy._id}" class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="produit.html" role="button">
+        <a id="${iteddy._id}" class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="produit.html?teddy=${iteddy._id}" role="button">
         Voir ce produit
         </a>
         <h6 class="card-subtitle btn rounded-pill fw-bolder fs-5 text-dark bg-light bg-gradient position-absolute end-0 mx-2">${iteddy.price / 100} €</h6></div></div>
@@ -70,7 +69,6 @@ function teddySendUrl() {
     var urlParams = new URLSearchParams(window.location.search);
     urlParams.set("teddy", e.target.id);
     window.location.search = urlParams;
-    console.log(e.target.id);
   });
 }
 
