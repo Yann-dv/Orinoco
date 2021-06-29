@@ -16,6 +16,7 @@ fetch('http://localhost:3000/api/teddies')
     createTeddy(value);
     teddyColors(value);
     teddyReceiveUrl(value);
+    extractUrlParams(value)
   })
   .catch(function(err) {
     // Une erreur est survenue
@@ -81,16 +82,30 @@ fetch('http://localhost:3000/api/teddies')
 
 
 
-function teddyReceiveUrl() {
+/*function teddyReceiveUrl() {
   // Réception des params url
     var post =  window.location.search.substring(1);
     var urlParams = new URLSearchParams(post);
-    var tedId = parseInt(params.get("teddy"), 10);
+    var tedId = parseInt(params.get("teddy"));
     //urlParams.get("teddy", e.target.id);
     window.location.search = tedId;
     console.log(tedId);
-  };
+  };*/
 
+  /**
+ * Fonction de récupération des paramètres GET de la page
+ * @return Array Tableau associatif contenant les paramètres GET
+ */
+/*function extractUrlParams(){	
+	var t = location.search.substring(1).split('&');
+	var f = [];
+	for (var i=0; i<t.length; i++){
+		var x = t[ i ].split('=');
+		f[x[0]]=x[1];
+    console.log(f);
+	}
+	return f;
+}*/
 
 /*   
  var $_GET = [];
