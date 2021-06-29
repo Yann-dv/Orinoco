@@ -10,7 +10,7 @@
   }
 
 * { // default font-family for all
-    font-family: 'belligerent';
+    font-family: 'belligerent'!important;
 }
 
 .hidden {
@@ -18,7 +18,7 @@
 }
 
 .link-anim{
-    background: linear-gradient(to top, (#8f5bfd) 0%, (#8f5bfd) 5%, transparent 5.01%) no-repeat left bottom / 0 100%;
+    background: linear-gradient(to top, ($second-theme-color) 0%, ($second-theme-color) 5%, transparent 5.01%) no-repeat left bottom / 0 100%;
     transition: background-size .3s;
     font-size: 1.5rem;
 }
@@ -32,6 +32,17 @@
 }
 
 .logo-img:hover, #return:hover {
-      transform: scale(0.8);
-      transition: 350ms ease-in-out;
+      transform: scale(0.9);
+      transition: 250ms ease-in-out;
+}
+
+.scale-up:hover, .scale-up:focus {
+    transform: scale(1.05);
+    transition: 350ms ease-in-out;
+}
+
+.color-choice {
+    width: 8rem;
+    height: 6rem;
+    margin: .5rem;
 }

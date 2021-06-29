@@ -6,7 +6,7 @@
   font-display: swap;
 }
 * {
-  font-family: "belligerent";
+  font-family: "belligerent" !important;
 }
 
 .hidden {
@@ -28,8 +28,19 @@
 }
 
 .logo-img:hover, #return:hover {
-  transform: scale(0.8);
+  transform: scale(0.9);
+  transition: 250ms ease-in-out;
+}
+
+.scale-up:hover, .scale-up:focus {
+  transform: scale(1.05);
   transition: 350ms ease-in-out;
+}
+
+.color-choice {
+  width: 8rem;
+  height: 6rem;
+  margin: 0.5rem;
 }
 
 /*# sourceMappingURL=custom_style.css.map */
