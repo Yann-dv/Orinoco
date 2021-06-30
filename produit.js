@@ -100,11 +100,9 @@ const teddyColors = ted => {
   for(let i = 0; i < selected.colors.length; i++) {
   let color = selected.colors;
     colorContainer.insertAdjacentHTML('beforeend', `
-      <input type="radio" class="btn-check" name="colorChoice" id="color-${color[i]}" autocomplete="off">
-      <label class="btn btn-secondary" for="color-${color[i]}" style="background-color: ${color[i]}; width:8rem; height:5rem"></label>
+      <input type="radio" class="color-option btn-check" name="colorChoice" id="color-${color[i]}" autocomplete="off">
+      <label class="btn scale-up" for="color-${color[i]}" style="background-color: ${color[i]}; width:8rem; height:5rem"></label>
         `)
-        document.getElementById(`color-${color[i]}`).width = "6rem"; 
-        
     }
 }
 

@@ -44,6 +44,11 @@
   margin: 0.5rem;
 }
 
+input[type=radio].btn-check.color-option:checked + label {
+  outline: 0.35rem solid #8f5bfd;
+  transform: scale(1.08);
+}
+
 /*!
  * Bootstrap v5.0.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

@@ -46,3 +46,8 @@
     height: 6rem;
     margin: .5rem;
 }
+
+input[type="radio"].btn-check.color-option:checked+label {
+    outline: .35rem solid $secondary;
+    transform: scale(1.08);
+    }

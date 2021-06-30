@@ -1,46 +1,17 @@
-@font-face {
-  font-family: "belligerent";
-  src: url("../font/belligerent-webfont.woff") format("woff"), url("../font/belligerent-webfont.eot") format("eot"), url("../font/belligerent-webfont.ttf") format("ttf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-* {
-  font-family: "belligerent" !important;
-}
+/* Error: Undefined variable.
+ *    ,
+ * 51 |     outline: .35rem solid $secondary;
+ *    |                           ^^^^^^^^^^
+ *    '
+ *   scss\custom_style.scss 51:27  root stylesheet */
 
-.hidden {
-  visibility: hidden;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a    \2577 \a 51 \2502      outline: .35rem solid $secondary;\d\a    \2502                            ^^^^^^^^^^\a    \2575 \a   scss\\custom_style.scss 51:27  root stylesheet";
 }
-
-.link-anim {
-  background: linear-gradient(to top, #8f5bfd 0%, #8f5bfd 5%, transparent 5.01%) no-repeat left bottom/0 100%;
-  transition: background-size 0.3s;
-  font-size: 1.5rem;
-}
-
-.link-anim:hover {
-  background-size: 100% 100%;
-}
-
-.main-color {
-  background-color: #f3e9f1;
-}
-
-.logo-img:hover, #return:hover {
-  transform: scale(0.9);
-  transition: 250ms ease-in-out;
-}
-
-.scale-up:hover, .scale-up:focus {
-  transform: scale(1.05);
-  transition: 350ms ease-in-out;
-}
-
-.color-choice {
-  width: 8rem;
-  height: 6rem;
-  margin: 0.5rem;
-}
-
-/*# sourceMappingURL=custom_style.css.map */
