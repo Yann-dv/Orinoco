@@ -2,7 +2,8 @@
 const ted= JSON.parse(localStorage.getItem('teddiesList'));
 
 // Recherche de l'objet local correspondant à l'id du teddy passée en URL sur page index
-var selected =  ted.find(which => which._id === (window.location.search.substring(7)));
+//var selected =  ted.find(which => which._id === (window.location.search.substring(7)));
+var selected =  ted.find(which => which._id === new URLSearchParams(document.location.search.substring(1)).get('teddy'));
 
 fetch('http://localhost:3000/api/teddies')
   .then(function(res) {
