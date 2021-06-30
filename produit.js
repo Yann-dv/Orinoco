@@ -33,18 +33,15 @@ fetch('http://localhost:3000/api/teddies')
         </div>
       </div>
       <div class="teddy col-12 col-lg-6 main-color ms-3 d-flex">
-        <div class="product-desc">
+        <div class="product-desc d-flex flex-column">
             <h2 class="fw-bold text-center pt-2">${selected.name}</h2>
-            <p class="my-3 fs-5 p-2">${selected.description}</p>
+            <p class="fs-5 p-2">${selected.description}</p>
             <h5 class="text-bold p-2 font-lg font-bold">Choisissez une couleur pour votre teddy :</h5>
             <div class="container colors-container">
               <div class="d-flex m-auto justify-content-around" id="productColors">
               </div>
             </div>
-            <button id="productPrice" class="w-full bg-secondary text-white fw-bold rounded p-2 m-2" type="button">Ajouter au panier pour 
-            <span>${selected.price/100} €</span>
-            </button>
-            <label class="mx-5 selectQuantity">Quantité : 
+            <label class="m-2 fs-5 selectQuantity">Quantité : 
             <select id="tedQuantity">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -58,6 +55,9 @@ fetch('http://localhost:3000/api/teddies')
             <option value="10">10</option>
             </select>
             </label>
+            <button id="productPrice" class="w-full bg-secondary text-white fw-bold rounded p-2 m-2" type="button">Ajouter au panier pour 
+            <span>${selected.price/100} €</span>
+            </button>
         </div>
       </div>
         `)
@@ -100,9 +100,10 @@ const teddyColors = ted => {
   for(let i = 0; i < selected.colors.length; i++) {
   let color = selected.colors;
     colorContainer.insertAdjacentHTML('beforeend', `
-      <input type="radio" class="btn-check name="options" id="color-${color[i]}" autocomplete="off">
-      <label class="btn btn-secondary" width="4rem" height="10rem" for="color-${color[i]}" style="background-color: ${color[i]}">EMPTY</label>
+      <input type="radio" class="btn-check" name="colorChoice" id="color-${color[i]}" autocomplete="off">
+      <label class="btn btn-secondary" for="color-${color[i]}" style="background-color: ${color[i]}; width:8rem; height:5rem"></label>
         `)
+        document.getElementById(`color-${color[i]}`).width = "6rem"; 
         
     }
 }
