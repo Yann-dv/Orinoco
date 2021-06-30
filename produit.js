@@ -38,8 +38,8 @@ fetch('http://localhost:3000/api/teddies')
             <p class="my-3 fs-5 p-2">${selected.description}</p>
             <h5 class="text-bold p-2 font-lg font-bold">Choisissez une couleur pour votre teddy :</h5>
             <div class="container colors-container">
-                <div class="d-flex m-auto" id="product-colors">
-                </div>
+              <div class="d-flex m-auto justify-content-around" id="productColors">
+              </div>
             </div>
             <button id="productPrice" class="w-full bg-secondary text-white fw-bold rounded p-2 m-2" type="button">Ajouter au panier pour 
             <span>${selected.price/100} €</span>
@@ -65,26 +65,55 @@ fetch('http://localhost:3000/api/teddies')
         productPrice.addEventListener('click', function(e) {
           var urlParams = new URLSearchParams(window.location.search);
           var qty = document.getElementById('tedQuantity');
+          if (urlParams.has("price")) { 
+            // Récupération des paramètres existants et ajouts des nouveaux
+              urlParams.set("price", parseInt(urlParams.get('price'), 10)+(qty.value*(selected.price/100)));
+              urlParams.set("quantity", qty.value+parseInt(urlParams.get('quantity'), 10));
+              window.location.search = urlParams;
+          }
+          else { 
           urlParams.set("price", (qty.value*(selected.price/100)));
+          urlParams.set("quantity", qty.value);
           window.location.search = urlParams;
+          }
       });
-    };
+
+      var oParametre = {};
+
+if (window.location.search.length > 1) {
+  for (var aItKey, nKeyId = 0, aCouples = window.location.search.substr(1).split("&"); nKeyId < aCouples.length; nKeyId++) {
+    aItKey = aCouples[nKeyId].split("=");
+    oParametre[unescape(aItKey[0])] = aItKey.length > 1 ? unescape(aItKey[1]) : "";
+  }
+  console.log(oParametre);
+}
+// Ecoute du choix de la quantité
+tedQuantity.addEventListener('change', function(e){
+  const tedPrice = document.getElementById('productPrice');
+  tedPrice.textContent = `Ajouter au panier pour ${(selected.price/100)*e.target.value} €`;
+});
+    };/////// Fin de create Teddy //////
 
 // Créations des boutons de choix de couleurs en fonction du teddy séléctionné
 const teddyColors = ted => {
-  const colorContainer = document.getElementById('product-colors')
+  const colorContainer = document.getElementById('productColors')
   for(let i = 0; i < selected.colors.length; i++) {
   let color = selected.colors;
     colorContainer.insertAdjacentHTML('beforeend', `
-        <button id="color ${color[i]}" class="btn btn-outline-secondary scale-up color-choice" type="button" width:"4rem" style="background-color: ${color[i]}">
-        </button>
+      <input type="radio" class="btn-check name="options" id="color-${color[i]}" autocomplete="off">
+      <label class="btn btn-secondary" width="4rem" height="10rem" for="color-${color[i]}" style="background-color: ${color[i]}">EMPTY</label>
         `)
         
     }
 }
 
-// Méthode d'écoute des évènements crées dynamiquement
-  products.addEventListener('change', function(e){
-    const tedPrice = document.getElementById('productPrice');
-    tedPrice.textContent = `Ajouter au panier pour ${(selected.price/100)*e.target.value} €`;
+
+/*function teddySendColorChoice() {
+//const colorSelected = document.getElementsByClassName('btn color-choice');
+ document.querySelectorAll('.btn.color-choice').addEventListener("click", function(e) {
+  e.target.setAttribute('selected', "");
+  console.log(document.querySelectorAll('.btn.color-choice'));
 });
+};*/
+/* <button id="color-${color[i]}" value="${color[i]}"class="scale-up color-choice btn btn-outline-secondary" type="button" width:"4rem" style="background-color: ${color[i]}">
+</button>*/
