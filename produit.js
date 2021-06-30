@@ -41,10 +41,11 @@ fetch('http://localhost:3000/api/teddies')
                 <div class="d-flex m-auto" id="product-colors">
                 </div>
             </div>
-            <button class="w-full bg-secondary text-white fw-bold rounded p-2 m-2" type="button">Ajouter au panier pour 
-            <span id="productPrice">${selected.price/100} €</span>
+            <button id="productPrice" class="w-full bg-secondary text-white fw-bold rounded p-2 m-2" type="button">Ajouter au panier pour 
+            <span>${selected.price/100} €</span>
             </button>
-            <label  id="tedQuantity" class="mx-5 selectQuantity">Quantité : <select name="quantity">
+            <label class="mx-5 selectQuantity">Quantité : 
+            <select id="tedQuantity">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -60,7 +61,13 @@ fetch('http://localhost:3000/api/teddies')
         </div>
       </div>
         `)
-       
+        // Ecoute du bouton d'envoi de commande
+        productPrice.addEventListener('click', function(e) {
+          var urlParams = new URLSearchParams(window.location.search);
+          var qty = document.getElementById('tedQuantity');
+          urlParams.set("price", (qty.value*(selected.price/100)));
+          window.location.search = urlParams;
+      });
     };
 
 // Créations des boutons de choix de couleurs en fonction du teddy séléctionné
@@ -76,8 +83,8 @@ const teddyColors = ted => {
     }
 }
 
-// Méthode d'écoute des évènements crées dynamiquement - under construction
+// Méthode d'écoute des évènements crées dynamiquement
   products.addEventListener('change', function(e){
     const tedPrice = document.getElementById('productPrice');
-    tedPrice.textContent = `${(selected.price/100)*e.target.value} €`;
+    tedPrice.textContent = `Ajouter au panier pour ${(selected.price/100)*e.target.value} €`;
 });
