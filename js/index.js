@@ -64,8 +64,6 @@ function teddySendUrl() {
   // Envoi des paramètres des teddies selectionnés dans l'url, selon selection locale
   teddyList.addEventListener("click", function (e) {
     var str = window.location.href;
-    var url = new URL(str);
-    
     var urlParams = new URLSearchParams(window.location.search);
     urlParams.set("teddy", e.target.id);
     window.location.search = urlParams;

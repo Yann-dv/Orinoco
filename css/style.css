@@ -14,6 +14,18 @@
   visibility: hidden;
 }
 
+.secondary-border {
+  border-bottom: 0.25rem solid #8f5bfd;
+}
+
+.title-border {
+  width: 8rem;
+}
+
+.mini-card {
+  height: 8rem;
+}
+
 .link-anim {
   background: linear-gradient(to top, #8f5bfd 0%, #8f5bfd 5%, transparent 5.01%) no-repeat left bottom/0 100%;
   transition: background-size 0.3s;
@@ -42,6 +54,11 @@
   width: 8rem;
   height: 6rem;
   margin: 0.5rem;
+}
+
+input[type=radio].btn-check.color-option:checked + label {
+  outline: 0.35rem solid #8f5bfd;
+  transform: scale(1.08);
 }
 
 /*!
