@@ -66,7 +66,6 @@ fetch('http://localhost:3000/api/teddies')
           var urlParams = new URLSearchParams(window.location.search);
           var qty = document.getElementById('tedQuantity');
           var choosenColor = document.getElementsByName('colorChoice');
-          var checked = choosenColor.checked=true;
           // Boucle pour détecter quelle couleur est checked
           var valeur;
             for(var i = 0; i < choosenColor.length; i++){
@@ -80,7 +79,6 @@ fetch('http://localhost:3000/api/teddies')
             // Récupération des paramètres existants et ajouts des nouveaux
               urlParams.set("price", parseInt(urlParams.get('price'), 10)+qty.value*((selected.price/100)));
               urlParams.set("quantity", parseInt(qty.value,10)+parseInt(urlParams.get('quantity'), 10));
-              //urlParams.set("color", choosenColor[i].id); 
               window.location.search = urlParams;
           }
           else { 
@@ -88,6 +86,12 @@ fetch('http://localhost:3000/api/teddies')
           urlParams.set("quantity", qty.value);
           window.location.search = urlParams;
           }
+
+          var qtyAdd = urlParams.get("quantity");
+          var priceAdd = urlParams.get("price");
+          var colorAdd = urlParams.get("color");
+          const basketAdd = localStorage.setItem("basket", JSON.stringify(value));
+          
       });
 
       var oParametre = {};
