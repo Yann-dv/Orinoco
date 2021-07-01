@@ -1,31 +1,39 @@
 ////////////////////////////////////// DATAS ////////////////////////////////////////
-// CLASSE produit //
-class product {
-    constructor(_id, name, quantity, color, price) {
-        this._id= _id;
-        this.name= name;
-        this.quantity= quantity;
-        this.color= color;
-        this.price= price;
+// Objets produit //
+/*const teddiesBasket= [];
+const addProduct = () => {
+
+    const tedParams = {
+        _id: tedIdToCreate,
+        quantity: document.getElementById("tedQuantity").value,
+        color: choosenColor[i].id,
+        price: totalPrice,
     }
+    teddiesBasket.push(tedParams);
+    localStorage.setItem('basket', JSON.stringify(teddiesBasket));
+    //console.log(window.localStorage.getItem(teddiesBasket));
+    //new tedParams("_id_1", "Name_1", "navy", 400);
+}*/
+//let addProduct = new tedParams("_id_1", "Name_1", "navy", 400);
+//console.log(JSON.stringify(addProduct));
 
-    setColor(color) {
-        this.color = color;
+
+/*////////////////////////////////////// DATAS ////////////////////////////////////////
+// Objets produit // Version de théo
+
+/*const teddiesBasket= [];
+const addProduct = () => {
+
+    const tedParams = {
+        _id: tedIdToCreate,
+        quantity: document.getElementById("tedQuantity").value,
+        color: choosenColor[i].id,
+        price: totalPrice,
     }
-}
-// New instance //
-
-
-const teddiesFromLocalStorage = [];
-const addTeddy = () => {
-    const tmpTeddy = {
-        _id: teddyId,
-        quantity: document.getElementById('ffdsf').value,
-    }
-    teddiesFromLocalStorage.push(tmpTeddy)
-    localStorage.set(... JSON.stringify(teddiesFromLocalStorage))
-}
-
-
-let addProduct = new product("_id_1", "Name_1", 3, "red", 350);
-console.log(JSON.stringify(addProduct));
+    teddiesBasket.push(tedParams);
+    localStorage.setItem('basket', JSON.stringify(teddiesBasket));
+    //console.log(window.localStorage.getItem(teddiesBasket));
+    //new tedParams("_id_1", "Name_1", "navy", 400);
+}*/
+//let addProduct = new tedParams("_id_1", "Name_1", "navy", 400);
+//console.log(JSON.stringify(addProduct));*/

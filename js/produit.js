@@ -1,6 +1,3 @@
-// Variable pour aller chercher les informations à afficher dans le localStorage et parser
-//const ted= JSON.parse(localStorage.getItem('teddiesList'));
-
 // Recherche de l'objet local correspondant à l'id du teddy passée en URL sur page index
 var tedIdToCreate = new URLSearchParams(document.location.search.substring(1)).get("teddy");
 
@@ -72,9 +69,41 @@ function createTeddy(tedFinder) {
       </div>
         `
   );
-  // Ecoute du bouton d'envoi de commande
-  productPrice.addEventListener("click", function (e) {
-    var urlParams = new URLSearchParams(window.location.search);
+
+   // Ecoute du bouton d'envoi de commande
+    productPrice.addEventListener("click", function (e) {
+      // Boucle pour détecter quelle couleur est checked 
+      //addProduct(tedParams); where ?
+      var qtyValue = document.getElementById("tedQuantity").value;
+      var choosenColor = document.getElementsByName("colorChoice");
+      var totalPrice = qtyValue* (tedFinder.price / 100);
+      for (var i = 0; i < choosenColor.length; i++) {
+        var coloring;
+        if (choosenColor[i].checked) {
+          let coloring = choosenColor[i].id;
+/////// Création et envoi des objets products dans le localStorage ////////////
+const teddiesBasket= [];
+  const tedParams = {
+      _id: tedIdToCreate,
+      quantity: document.getElementById("tedQuantity").value,
+      color: choosenColor[i].id,
+      price: totalPrice,
+  }
+  teddiesBasket.push(tedParams);
+  localStorage.setItem('basket', JSON.stringify(teddiesBasket));
+  //console.log(window.localStorage.getItem(teddiesBasket));
+  //new tedParams("_id_1", "Name_1", "navy", 400);
+
+////
+          
+          console.log(tedIdToCreate);
+          console.log(qtyValue);
+          console.log(coloring);// to change
+          console.log(totalPrice);
+        }
+      }
+  }); 
+    /*var urlParams = new URLSearchParams(window.location.search);
     var qty = document.getElementById("tedQuantity");
     var choosenColor = document.getElementsByName("colorChoice");
     // Boucle pour détecter quelle couleur est checked
@@ -102,13 +131,12 @@ function createTeddy(tedFinder) {
       urlParams.set("price", qty.value * (tedFinder.price / 100));
       urlParams.set("quantity", qty.value);
       window.location.search = urlParams;
-    }
+    }*/
 
     /*var qtyAdd = urlParams.get("quantity");
           var priceAdd = urlParams.get("price");
           var colorAdd = urlParams.get("color");
           const basketAdd = localStorage.setItem("basket", JSON.stringify(value));*/
-  });
 
   // Fonction de recherche des paramètres passés en URL
   var oParametre = {};

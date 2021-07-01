@@ -1,5 +1,3 @@
-const ted = JSON.parse(localStorage.getItem("teddiesList"));
-
 fetch("http://localhost:3000/api/teddies")
   .then(function (res) {
     if (res.ok) {
@@ -8,12 +6,7 @@ fetch("http://localhost:3000/api/teddies")
   })
   .then(function (value) {
     // Stockage en local des listes de produits récupérés via l'API
-    if (localStorage.getItem("teddiesList") === null) {
-      const localTeddies = localStorage.setItem(
-        "teddiesList",
-        JSON.stringify(value)
-      );
-    }
+    JSON.stringify(value)
     teddySendUrl(value);
     addArticles(value);
     
