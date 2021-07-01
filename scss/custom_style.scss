@@ -17,6 +17,18 @@
     visibility: hidden;
 }
 
+.secondary-border {
+    border-bottom: .25rem solid $second-theme-color;
+}
+
+.title-border {
+    width:8rem;
+}
+
+.mini-card {
+    height: 8rem;
+}
+
 .link-anim{
     background: linear-gradient(to top, ($second-theme-color) 0%, ($second-theme-color) 5%, transparent 5.01%) no-repeat left bottom / 0 100%;
     transition: background-size .3s;
@@ -47,6 +59,7 @@
     margin: .5rem;
 }
 
-.active {
-    border: .25rem solid red;
-}
+input[type="radio"].btn-check.color-option:checked+label {
+    outline: .35rem solid $second-theme-color;
+    transform: scale(1.08);
+    }
