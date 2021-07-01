@@ -83,14 +83,43 @@ function createTeddy(tedFinder) {
           let coloring = choosenColor[i].id;
 /////// Création et envoi des objets products dans le localStorage ////////////
 const teddiesBasket= [];
+let n = 1;
   const tedParams = {
+      label: `article n°${n}`,
       _id: tedIdToCreate,
       quantity: document.getElementById("tedQuantity").value,
       color: choosenColor[i].id,
       price: totalPrice,
   }
+
+  getStorage();
+
+function getStorage() {
+  if (localStorage.getItem(`panier`)) {
+  teddiesBasket.push(JSON.stringify(tedParams));
+  //localStorage.setItem(`panier`, JSON.stringify(teddiesBasket));
+  }
+  else {
   teddiesBasket.push(tedParams);
-  localStorage.setItem('basket', JSON.stringify(teddiesBasket));
+  localStorage.setItem(`panier`, JSON.stringify(teddiesBasket));
+
+  }
+}  
+  /*var tedJSON = localStorage.setItem('paniers');
+ var ted = JSON.parse(tedJSON);
+ ted.push(tedParams);*/
+
+  /*for (var n = 0; n < teddiesBasket.length; n++) {
+    if(n = 0){
+  teddiesBasket.push(tedParams);
+  localStorage.setItem(`article n°${0}`, JSON.stringify(teddiesBasket));
+      }
+    else {
+    teddiesBasket.push(tedParams);
+    localStorage.setItem(`article n°${++}`, JSON.stringify(teddiesBasket));
+    }
+  }*/
+  //console.log(localStorage.getItem('article', JSON.parse(article.index)));
   //console.log(window.localStorage.getItem(teddiesBasket));
   //new tedParams("_id_1", "Name_1", "navy", 400);
 
