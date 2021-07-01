@@ -65,15 +65,20 @@ fetch('http://localhost:3000/api/teddies')
         productPrice.addEventListener('click', function(e) {
           var urlParams = new URLSearchParams(window.location.search);
           var qty = document.getElementById('tedQuantity');
+          var choosenColor = document.getElementsByName('colorChoice');
+          var checked = choosenColor.checked=true;
           if (urlParams.has("price")) { 
             // Récupération des paramètres existants et ajouts des nouveaux
               urlParams.set("price", parseInt(urlParams.get('price'), 10)+(qty.value*(selected.price/100)));
-              urlParams.set("quantity", qty.value+parseInt(urlParams.get('quantity'), 10));
+              urlParams.set("quantity", parseInt(qty.value,10)+parseInt(urlParams.get('quantity'), 10));
               window.location.search = urlParams;
           }
           else { 
           urlParams.set("price", (qty.value*(selected.price/100)));
           urlParams.set("quantity", qty.value);
+          if(checked) {
+            urlParams.set("color", checked.id);   // working on
+          }
           window.location.search = urlParams;
           }
       });
@@ -100,8 +105,8 @@ const teddyColors = ted => {
   for(let i = 0; i < selected.colors.length; i++) {
   let color = selected.colors;
     colorContainer.insertAdjacentHTML('beforeend', `
-      <input type="radio" class="color-option btn-check" name="colorChoice" id="color-${color[i]}" autocomplete="off">
-      <label class="btn scale-up" for="color-${color[i]}" style="background-color: ${color[i]}; width:8rem; height:5rem"></label>
+      <input type="radio" class="color-option btn-check" name="colorChoice" id="${color[i]}" autocomplete="off" checked>
+      <label class="btn scale-up" for="${color[i]}" style="background-color: ${color[i]}; width:8rem; height:5rem"></label>
         `)
     }
 }
