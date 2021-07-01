@@ -87,10 +87,10 @@ fetch('http://localhost:3000/api/teddies')
           window.location.search = urlParams;
           }
 
-          var qtyAdd = urlParams.get("quantity");
+          /*var qtyAdd = urlParams.get("quantity");
           var priceAdd = urlParams.get("price");
           var colorAdd = urlParams.get("color");
-          const basketAdd = localStorage.setItem("basket", JSON.stringify(value));
+          const basketAdd = localStorage.setItem("basket", JSON.stringify(value));*/
           
       });
 
