@@ -119,12 +119,9 @@ const teddyColors = ted => {
 }
 
 
-/*function teddySendColorChoice() {
-//const colorSelected = document.getElementsByClassName('btn color-choice');
+function teddySendColorChoice() {
  document.querySelectorAll('.btn.color-choice').addEventListener("click", function(e) {
   e.target.setAttribute('selected', "");
   console.log(document.querySelectorAll('.btn.color-choice'));
 });
-};*/
-/* <button id="color-${color[i]}" value="${color[i]}"class="scale-up color-choice btn btn-outline-secondary" type="button" width:"4rem" style="background-color: ${color[i]}">
-</button>*/
+};
