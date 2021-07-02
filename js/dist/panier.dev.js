@@ -15,3 +15,4 @@
         aItKey.length > 1 ? unescape(aItKey[1]) : "";
     }
   } */
+"use strict";

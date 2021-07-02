@@ -16,7 +16,25 @@
 .hidden {
     visibility: hidden;
 }
+.return {
+    width:4rem;
+    height:3.5rem;
+}
 
+.panier-btn {
+    width:6rem;
+    height:3rem;
+}
+
+.logo-img {
+    width:16rem;
+    height:7rem;
+}
+
+.logo-img:hover, #return:hover {
+      transform: scale(0.9);
+      transition: 250ms ease-in-out;
+}
 .secondary-border {
     border-bottom: .25rem solid $second-theme-color;
 }
@@ -41,11 +59,6 @@
 
 .main-color {
     background-color: $theme-color;
-}
-
-.logo-img:hover, #return:hover {
-      transform: scale(0.9);
-      transition: 250ms ease-in-out;
 }
 
 .scale-up:hover, .scale-up:focus {
