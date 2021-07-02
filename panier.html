@@ -11,22 +11,32 @@
   <script src="./js/panier.js" defer></script>
 </head>
 
-<header class="main-color d-flex justify-content-between align-items-center rounded-lg w-full py-1 px-1">
-  <div id="return">
-    <a href="./index.html" class="header-return displayFlex" aria-label="Bouton vers page précédente">
-      <img class="return mx-5" src="./images/return.png" alt="Bouton retour page accueil" width="50" height=50>
-    </a>
+<header class="main-color py-1 px-1">
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex justify-content-between align-items-center">
+        <div id="return">
+          <a href="javascript:history.go(-1)" class="header-return" aria-label="Bouton vers page précédente">
+            <img class="return img-fluid" src="./images/return.png" alt="Bouton retour page accueil">
+          </a>
+        </div>
+        <h1><a href="./index.html"><img class="logo-img img-fluid" src="./images/logo.png" alt="Orinico"></a></h1>
+        <div>
+          <div class="panier-btn">
+            <button class="button button-mat btn--5">
+              <div class="panier-text">Panier</div>
+              <a class="stretched-link" href="panier.html" aria-label="Bouton d'accès page panier"></a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <a href="./index.html"><img class="logo-img m-3" src="./images/logo.png" width="240" height="120" alt="Orinico"></a>
-  <a class="panier-btn link-anim d-flex align-items-center mx-5" href="panier.html"
-    aria-label="Bouton d'accès page panier">
-    <img class="basket mx-1" src="./images/panier.jpg" width="30" height="25" alt="Image Panier"> Panier
-  </a>
 </header>
 
 <body>
   <main id="basket">
-    <h1 class="m-3 secondary-border title-border">Panier</h1>
+    <h1 class="m-3 secondary-border title-border">Mon panier</h1>
     <section id="emptyBasket" class="d-flex m-3 flex-column text-center align-items-center">
       <h2 class="secondary-border">Votre panier est vide !!!</h2>
       <p class="fs-4 my-3">Retrouvez tous nos produits ici : </p>
@@ -34,25 +44,28 @@
         Nos produits
       </a>
       <p class="fs-3 m-3">Ces produits pourraient vous plaire :</p>
-      <div id="suggestions" class="row mb-4 d-flex">
+      <div id="suggestions" class="row mb-4 d-flex justify-content-center">
         <article class="teddy col-12 col-lg-4">
-          <div class="main-color scale-up card mt-3 mt-lg-3 mb-lg-4 shadow">
-          <div class="card-body main-color position-relative d-flex flex-column text-center">
-          <img src="http://localhost:3000/images/teddy_2.jpg" alt="Garfunkel Arnold" title="Photo du teddy Arnold" class="card-img-top main-color mini-card">
-          <a class="stretched-link fs-3" href="./produit.html?teddy=5beaa8bf1c9d440000a57d94">Arnold</a>
-          </article>
-          <article class="teddy col-12 col-lg-4">
-            <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+          <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
             <div class="card-body main-color position-relative d-flex flex-column text-center">
-            <img src="http://localhost:3000/images/teddy_4.jpg" alt="Garfunkel Gustav" title="Photo du teddy Gustav" class="card-img-top main-color mini-card">
-            <a class="stretched-link fs-3" href="./produit.html?teddy=5beaabe91c9d440000a57d96">Gustav</a>
-            </article>                            
-            <article class="teddy col-12 col-lg-4">
-              <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
-              <div class="card-body main-color position-relative d-flex flex-column text-center">
-              <img src="http://localhost:3000/images/teddy_5.jpg" alt="Garfunkel Teddy" title="Photo du teddy Garfunkel" class="card-img-top main-color mini-card">
+              <img src="http://localhost:3000/images/teddy_2.jpg" alt="Garfunkel Arnold" title="Photo du teddy Arnold"
+                class="card-img-top main-color mini-card">
+              <a class="stretched-link fs-3" href="./produit.html?teddy=5beaa8bf1c9d440000a57d94">Arnold</a>
+        </article>
+        <article class="teddy col-12 col-lg-4">
+          <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+            <div class="card-body main-color position-relative d-flex flex-column text-center">
+              <img src="http://localhost:3000/images/teddy_4.jpg" alt="Garfunkel Gustav" title="Photo du teddy Gustav"
+                class="card-img-top main-color mini-card">
+              <a class="stretched-link fs-3" href="./produit.html?teddy=5beaabe91c9d440000a57d96">Gustav</a>
+        </article>
+        <article class="teddy col-12 col-lg-4">
+          <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+            <div class="card-body main-color position-relative d-flex flex-column text-center">
+              <img src="http://localhost:3000/images/teddy_5.jpg" alt="Garfunkel Teddy" title="Photo du teddy Garfunkel"
+                class="card-img-top main-color mini-card">
               <a class="stretched-link fs-3" href="./produit.html?teddy=5beaacd41c9d440000a57d97">Garfunkel</a>
-            </article>
+        </article>
       </div>
     </section>
   </main>
