@@ -29,6 +29,11 @@
     width:8rem;
 }
 
+#searchInput {
+    height: 4rem; 
+    width: 50vw;
+}
+
 .mini-card {
     height: 8rem;
 }
@@ -42,6 +47,7 @@
 .link-anim:hover{
     background-size: 100% 100%;
 }
+
 
 .main-color {
     background-color: $theme-color;

@@ -26,6 +26,11 @@
   width: 8rem;
 }
 
+#searchInput {
+  height: 4rem;
+  width: 50vw;
+}
+
 .mini-card {
   height: 8rem;
 }
