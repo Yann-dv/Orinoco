@@ -28,7 +28,6 @@ function createTeddy(tedFinder) {
 
   productPrice.addEventListener("click", function (e) {
     // Boucle pour détecter quelle couleur est checked
-    //addProduct(tedParams); where ?
     var qtyValue = document.getElementById("tedQuantity").value;
     var choosenColor = document.getElementsByName("colorChoice");
     var totalPrice = qtyValue * (tedFinder.price / 100);

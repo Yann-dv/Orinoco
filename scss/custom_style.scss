@@ -71,25 +71,74 @@ input[type="radio"].btn-check.color-option:checked+label {
 // Basket style //
 .panier-btn {
     button {
-        border: none;
+    font-size: 3rem;
+    background: none;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    }
+   // Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
+button {  
+  position: relative;
+  color: var(--color);
+  transition: 0.25s;
+  &:hover,
+  &:focus { 
+    border-color: var(--hover);
+    color: #f3e9f1;
+  }
+}
+
+.panier-badge {
+  color: white;
+  padding: .2rem .5rem;
+  position: absolute;
+  top: -.5rem;
+  right: -.7rem;
+  font-size: 1.3rem;
+  background-color: red;
+  border-radius: 1rem;
+}
+  // Multiple shadows, one on the outside, another on the inside
+.offset {  
+  box-shadow: 
+    0.3em 0.3em 0 0 var(--color),
+    inset 0.3em 0.3em 0 0 var(--color);
+    font-size: 1.3rem;
+  
+  &:hover,
+  &:focus {
+    box-shadow: 
+      0 0 0 0 var(--hover),
+      inset 6em 3.5em 0 0 var(--hover);
+  }
+}
+
+$colors: (
+  offset: #8f5bfd
+);
+
+@each $button, $color in $colors {
+  .#{$button} {
+    --color: #{$color};
+    --hover: #{adjust-hue($color, 20deg)};
+  }
+}
+
+
+    /*button {
+        position: relative;
+        border: none
         text-decoration: none;
         color: rgba(255, 255, 255, 0.95);
         cursor: pointer;
       }
+
       
-      .panier-text {
-        color: $second-theme-color;
-        position: relative;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        display: inline;
-        height: auto;
-        font-size: 1.7rem;
-        font-size: 700;
-        transition: 0.25s ease-in;
-        transition-delay: 0.1s;
-      }
+      
+      
       
       .button {
         padding: .5rem 1rem;
@@ -135,11 +184,18 @@ input[type="radio"].btn-check.color-option:checked+label {
       }
       .btn--5:hover:before {
         transform: translate(-45%, -34%) translateZ(0);
-      }
+      }*/
 }
 // Media-queries for customized elements
 @media only screen and (max-width: 767px) {
     .panier-btn {
+        .panier-badge {
+          padding: .2rem .4rem;
+          font-size: 1rem;
+        }
+        button {
+          padding: .7rem 1rem;
+        }
         .button {
         padding: 0 .5rem;
         margin-left: .5rem;

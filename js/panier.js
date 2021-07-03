@@ -1,3 +1,23 @@
+/*productPrice.addEventListener("click", function (e)) {
+  // Boucle pour détecter quelle couleur est checked
+  var qtyValue = document.getElementById("tedQuantity").value;
+  var choosenColor = document.getElementsByName("colorChoice");
+  var totalPrice = qtyValue * (tedFinder.price / 100);
+  for (var i = 0; i < choosenColor.length; i++) {
+    var coloring;
+    if (choosenColor[i].checked) {
+      let coloring = choosenColor[i].id;
+      addToBasket(); //
+    }
+  }
+}*/
+
+
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////
 
 /*  // check paramètres en URL
