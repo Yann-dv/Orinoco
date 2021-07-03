@@ -61,6 +61,7 @@ function createTeddy(tedFinder) {
 
           var coloring = choosenColor[i].id;
           addToBasket();
+          window.location.reload(); // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
         })();
       }
     }

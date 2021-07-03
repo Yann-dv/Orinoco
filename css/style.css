@@ -87,10 +87,10 @@ input[type=radio].btn-check.color-option:checked + label {
 }
 .panier-btn .panier-badge {
   color: white;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   position: absolute;
   top: -0.5rem;
-  right: -0.7rem;
+  right: -1rem;
   font-size: 1.3rem;
   background-color: red;
   border-radius: 1rem;

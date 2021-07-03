@@ -102,6 +102,8 @@ function createTeddy(tedFinder) {
           }
         }
         //////////////////////////////////////////////////////////////////////////////////////
+        window.location.reload(); 
+        // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
       }
     }
   });

@@ -1,17 +1,28 @@
-/*productPrice.addEventListener("click", function (e)) {
-  // Boucle pour détecter quelle couleur est checked
-  var qtyValue = document.getElementById("tedQuantity").value;
-  var choosenColor = document.getElementsByName("colorChoice");
-  var totalPrice = qtyValue * (tedFinder.price / 100);
-  for (var i = 0; i < choosenColor.length; i++) {
-    var coloring;
-    if (choosenColor[i].checked) {
-      let coloring = choosenColor[i].id;
-      addToBasket(); //
+"use strict";
+
+checkArticles();
+emptyBasketHide();
+
+function checkArticles() {
+  var getPanier = JSON.parse(localStorage.getItem("panier"));
+
+  if (getPanier != null && document.getElementById('panierBadge') != undefined) {
+    var getArticles = JSON.stringify(getPanier.length);
+    panierBadge.textContent = getArticles;
+    panierBadge.style.visibility = "visible";
+  }
+}
+
+function emptyBasketHide() {
+  var getPanier = JSON.parse(localStorage.getItem("panier"));
+
+  if (document.getElementById('emptyBasket') != undefined) {
+    if (getPanier != null) {
+      emptyBasket.classList.remove('d-flex');
+      emptyBasket.style.display = "none";
     }
   }
-}*/
-//////////////////////////////////////////////////////////////////////////////////
+} //////////////////////////////////////////////////////////////////////////////////
 
 /*  // check paramètres en URL
   var oParametre = {};
@@ -28,4 +39,3 @@
         aItKey.length > 1 ? unescape(aItKey[1]) : "";
     }
   } */
-"use strict";
