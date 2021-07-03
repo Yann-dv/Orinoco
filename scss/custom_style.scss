@@ -1,162 +1,182 @@
 @import "custom_variables";
+
 @font-face {
-    font-family: 'belligerent';
-    src: url('../font/belligerent-webfont.woff') format('woff'),
+  font-family: 'belligerent';
+  src: url('../font/belligerent-webfont.woff') format('woff'),
     url('../font/belligerent-webfont.eot') format('eot'),
     url('../font/belligerent-webfont.ttf') format('ttf');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
-* { // default font-family for all
-    font-family: 'belligerent'!important;
+* {
+  // default font-family for all
+  font-family: 'belligerent' !important;
 }
 
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
-.logo-img:hover, #return:hover {
-      transform: scale(0.9);
-      transition: 250ms ease-in-out;
+.logo-img:hover,
+#return:hover {
+  transform: scale(0.9);
+  transition: 250ms ease-in-out;
 }
+
 .secondary-border {
-    border-bottom: .25rem solid $second-theme-color;
+  border-bottom: .25rem solid $second-theme-color;
 }
 
 .title-border {
-    width:12rem;
+  width: 12rem;
 }
 
 #searchInput {
-    height: 4rem; 
-    width: 50vw;
+  height: 4rem;
+  width: 50vw;
 }
 
 .mini-card {
-    height: 8rem;
+  height: 8rem;
 }
 
-.link-anim{
-    background: linear-gradient(to top, ($second-theme-color) 0%, ($second-theme-color) 5%, transparent 5.01%) no-repeat left bottom / 0 100%;
-    transition: background-size .3s;
-    font-size: 1.5rem;
+.link-anim {
+  background: linear-gradient(to top, ($second-theme-color) 0%, ($second-theme-color) 5%, transparent 5.01%) no-repeat left bottom / 0 100%;
+  transition: background-size .3s;
+  font-size: 1.5rem;
 }
 
-.link-anim:hover{
-    background-size: 100% 100%;
+.link-anim:hover {
+  background-size: 100% 100%;
 }
 
 
 .main-color {
-    background-color: $theme-color;
+  background-color: $theme-color;
 }
 
-.scale-up:hover, .scale-up:focus {
-    transform: scale(1.05);
-    transition: 350ms ease-in-out;
+.scale-up:hover,
+.scale-up:focus {
+  transform: scale(1.05);
+  transition: 350ms ease-in-out;
 }
 
 .color-choice {
-    width: 8rem;
-    height: 6rem;
-    margin: .5rem;
+  width: 8rem;
+  height: 6rem;
+  margin: .5rem;
 }
 
 input[type="radio"].btn-check.color-option:checked+label {
-    outline: .35rem solid $second-theme-color;
-    transform: scale(1.08);
-    }
+  outline: .35rem solid $second-theme-color;
+  transform: scale(1.08);
+}
+
 // Basket style //
 .panier-btn {
-    button {
-        border: none;
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.95);
-        cursor: pointer;
-      }
-      
-      .panier-text {
-        color: $second-theme-color;
-        position: relative;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        display: inline;
-        height: auto;
-        font-size: 1.7rem;
-        font-size: 700;
-        transition: 0.25s ease-in;
-        transition-delay: 0.1s;
-      }
-      
-      .button {
-        padding: .5rem 1rem;
-        background: #f8f9fa;
-        text-align: center;
-        display: inline-block;
-        font-size: 1.7rem;
-        text-transform: uppercase;
-        font-weight: 700;
-        position: relative;
-        will-change: transform;
-      }
-      
-      .button-mat {
-        color: $second-theme-color;
-        border: 0px transparent;
-        border-radius: 0.3rem;
-        transition: 0.3s ease-in-out;
-        transition-delay: 0.35s;
-        overflow: hidden;
-      }
-      .button-mat:before {
-        content: "";
-        display: block;
-        background: $second-theme-color;
-        position: absolute;
-        width: 200%;
-        height: 500%;
-        border-radius: 100%;
-        transition: 0.36s cubic-bezier(0.4, 0, 1, 1);
-      }
-      .button-mat:hover .panier-text {
-        color: white;
-      }
-      .button-mat:hover {
-        color: transparent;
-      }
-      .btn--5 {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-      }
-      .btn--5:before {
-        transform: translate(-120%, -50%) translateZ(0);
-      }
-      .btn--5:hover:before {
-        transform: translate(-45%, -34%) translateZ(0);
-      }
-}
+  button {
+    background: none;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: .8rem 1.5rem;
+  }
+
+  // Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
+  button {
+    position: relative;
+    color: var(--color);
+    transition: 0.25s;
+
+    &:hover,
+    &:focus {
+      border-color: var(--hover);
+      color: #f3e9f1;
+    }
+  }
+
+  .panier-badge {
+    color: white;
+    padding: .2rem .6rem;
+    position: absolute;
+    top: -.5rem;
+    right: -1rem;
+    font-size: 1.3rem;
+    background-color: red;
+    border-radius: 1rem;
+  }
+
+  // Multiple shadows, one on the outside, another on the inside
+  .offset {
+    box-shadow:
+      0.3em 0.3em 0 0 var(--color),
+      inset 0.3em 0.3em 0 0 var(--color);
+    font-size: 2rem;
+
+    &:hover,
+    &:focus {
+      box-shadow:
+        0 0 0 0 var(--hover),
+        inset 6em 3.5em 0 0 var(--hover);
+    }
+  }
+
+  $colors: (offset: #8f5bfd);
+
+  @each $button,
+  $color in $colors {
+    .#{$button} {
+      --color: #{$color};
+      --hover: #{adjust-hue($color, 20deg)};
+    }
+  }
+} // panier-btn
+
 // Media-queries for customized elements
 @media only screen and (max-width: 767px) {
-    .panier-btn {
-        .button {
-        padding: 0 .5rem;
-        margin-left: .5rem;
-        }
-        .panier-text {
-        font-size: 1.2rem;
-        }
+  #return .return {
+    height: 2rem;
+    margin-right: 3rem;
+  }
+  .panier-btn {
+    .panier-badge {
+      padding: .2rem .4rem;
+      font-size: 1rem;
     }
-    #searchInput {
-        width: 100%;
-    } 
-    .title-border {
-      width:10rem;
+    .offset {
+      margin-left: 1rem;
+      padding: .5rem .6rem;
+      box-shadow: 0.1em 0.1em 0 0 var(--color), inset 0.1em 0.1em 0 0 var(--color);
+      font-size: 1rem;
     }
-    #suggestions {
-      .teddy {
-        width: 80%;
-      }
+    button {
+      padding: .7rem 1rem;
     }
+
+    .button {
+      padding: 0 .5rem;
+      margin-left: .5rem;
+    }
+
+    .panier-text {
+      font-size: 1.2rem;
+    }
+  }
+
+  #searchInput {
+    width: 100%;
+  }
+
+  .title-border {
+    width: 10rem;
+  }
+
+  #suggestions {
+    .teddy {
+      width: 80%;
+    }
+  }
 }

@@ -28,7 +28,6 @@ function createTeddy(tedFinder) {
 
   productPrice.addEventListener("click", function (e) {
     // Boucle pour détecter quelle couleur est checked
-    //addProduct(tedParams); where ?
     var qtyValue = document.getElementById("tedQuantity").value;
     var choosenColor = document.getElementsByName("colorChoice");
     var totalPrice = qtyValue * (tedFinder.price / 100);
@@ -62,6 +61,7 @@ function createTeddy(tedFinder) {
 
           var coloring = choosenColor[i].id;
           addToBasket();
+          window.location.reload(); // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
         })();
       }
     }

@@ -75,7 +75,6 @@ function createTeddy(tedFinder) {
   ////////////////////// Ecoute du bouton d'envoi de commande //////////////////////
   productPrice.addEventListener("click", function (e) {
     // Boucle pour détecter quelle couleur est checked
-    //addProduct(tedParams); where ?
     var qtyValue = document.getElementById("tedQuantity").value;
     var choosenColor = document.getElementsByName("colorChoice");
     var totalPrice = qtyValue * (tedFinder.price / 100);
@@ -84,7 +83,7 @@ function createTeddy(tedFinder) {
       if (choosenColor[i].checked) {
         let coloring = choosenColor[i].id;
         addToBasket(); //
-  //////////////// Création et envoi des objets products dans le localStorage ///////////////
+        //////////////// Création et envoi des objets products dans le localStorage ///////////////
         function addToBasket() {
           const tedParams = {
             _id: tedIdToCreate,
@@ -103,6 +102,8 @@ function createTeddy(tedFinder) {
           }
         }
         //////////////////////////////////////////////////////////////////////////////////////
+        window.location.reload(); 
+        // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
       }
     }
   });

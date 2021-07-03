@@ -1,3 +1,27 @@
+checkArticles();
+emptyBasketHide();
+
+function checkArticles() {
+  let getPanier = JSON.parse(localStorage.getItem(`panier`));
+  if(getPanier != null && (document.getElementById('panierBadge')) != undefined) {
+  let getArticles = JSON.stringify(getPanier.length);
+    panierBadge.textContent = getArticles;
+    panierBadge.style.visibility = "visible";
+  }
+}
+
+function emptyBasketHide() {
+  let getPanier = JSON.parse(localStorage.getItem(`panier`));
+  if(document.getElementById('emptyBasket') != undefined) {
+    if(getPanier != null) {
+      emptyBasket.classList.remove('d-flex');
+      emptyBasket.style.display = "none";
+    }
+  }
+}
+
+
+
 //////////////////////////////////////////////////////////////////////////////////
 
 /*  // check paramètres en URL
