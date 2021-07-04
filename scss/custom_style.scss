@@ -76,9 +76,12 @@
 
 input[type="radio"].btn-check.color-option:checked+label {
   outline: .35rem solid $second-theme-color;
-  transform: scale(1.08);
 }
 
+.color-btn {
+  width:8rem; 
+  height:5rem;
+}
 
 // Basket style //
 .panier-btn {
@@ -142,7 +145,15 @@ input[type="radio"].btn-check.color-option:checked+label {
 } // panier-btn
 
 // Media-queries for customized elements
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
+  .color-btn {
+    width:5rem; 
+    height:5rem;
+    border-radius: 10rem !important;
+    font-size: 1rem !important;
+    overflow: hidden;
+  }
+
   #return .return {
     height: 2rem;
     margin-right: 3rem;

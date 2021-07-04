@@ -37,12 +37,12 @@ function createArticles() {
     <div id="cmdForm">
     <h2 class="link-anim">Formulaire de commande</h2>
     <form class="mt-4 py-3 px-5 main-color">
-    <div class="lh-1"><label for="firstname" class="form-label">Nom :</label> <input type="text" id="firstname" class="form-control" placeholder="John" required/><br /><br /></div>
-    <div class="lh-1"><label for="secondname" class="form-label">Prénom :</label> <input type="text" id="secondname" class="form-control" placeholder="Doe" required/><br /><br /></div>
-    <div class="lh-1"><label for="adresse" class="form-label">Adresse :</label> <input type="text" id="adresse" class="form-control" placeholder="1 rue des Cerisiers" required/><br/><br /></div>
-    <div class="lh-1"><label for="ville" class="form-label">Ville :</label> <input type="text" id="ville" class="form-control" placeholder="Paris" required/><br/><br /></div>
-    <div class="lh-1"><label for="cp" class="form-label">Code postal :</label> <input type="text" id="cp" class="form-control" placeholder="75005" required/><br/><br /></div>
-    <div class="lh-1"><label for="mail" class="form-label">E-mail :</label> <input type="text" id="mail""class="form-control" placeholder="jdoe@outlook.fr" required/><br/><br /></div>
+    <div class="lh-1"><label for="firstname" class="form-label fs-4">Nom :</label> <input type="text" id="firstname" class="form-control" placeholder="John" required/><br /><br /></div>
+    <div class="lh-1"><label for="secondname" class="form-label fs-4"">Prénom :</label> <input type="text" id="secondname" class="form-control" placeholder="Doe" required/><br /><br /></div>
+    <div class="lh-1"><label for="adresse" class="form-label fs-4"">Adresse :</label> <input type="text" id="adresse" class="form-control" placeholder="1 rue des Cerisiers" required/><br/><br /></div>
+    <div class="lh-1"><label for="ville" class="form-label fs-4"">Ville :</label> <input type="text" id="ville" class="form-control" placeholder="Paris" required/><br/><br /></div>
+    <div class="lh-1"><label for="cp" class="form-label fs-4"">Code postal :</label> <input type="text" id="cp" class="form-control" placeholder="75005" required/><br/><br /></div>
+    <div class="lh-1"><label for="mail" class="form-label fs-4"">E-mail :</label> <input type="text" id="mail""class="form-control" placeholder="jdoe@outlook.fr" required/><br/><br /></div>
     <div><input type="submit" id="envoi" value="Envoyer"/> <input type="reset" id="rafraichir" value="Rafraîchir"/></div>
     </form>
     </div>

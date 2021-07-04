@@ -41,16 +41,16 @@ function createTeddy(tedFinder) {
             <img src="${tedFinder.imageUrl}" alt="Teddy" class="img-fluid p-3">
         </div>
       </div>
-      <div class="teddy col-12 col-lg-6 main-color ms-3 px-3 d-flex">
-        <div class="product-desc d-flex flex-column">
+      <div class="teddy col-12 col-lg-6 main-color px-3 d-flex">
+        <div class="product-desc">
             <h2 class="fw-bold text-center pt-2">${tedFinder.name}</h2>
             <p class="fs-5">${tedFinder.description}</p>
-            <h5 class="font-lg fw-bold">Choisissez une couleur pour votre teddy :</h5>
+            <h5 class="font-lg fw-bold py-3">Choisissez une couleur pour votre teddy :</h5>
             <div class="container colors-container">
-              <div class="d-flex m-auto justify-content-around py-1" id="productColors">
+              <div class="m-auto pb-2 d-flex flex-nowrap justify-content-between" id="productColors">
               </div>
             </div>
-            <label class="m-2 fs-5 selectQuantity">Quantité : 
+            <label class="m-2 fs-5 selectQuantity">Quantité :
             <select id="tedQuantity">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -64,8 +64,8 @@ function createTeddy(tedFinder) {
             <option value="10">10</option>
             </select>
             </label>
-            <button id="productPrice" class="w-full bg-secondary text-white fw-bold fs-4 rounded mx-5" type="button">Ajouter au panier pour 
-            <span>${tedFinder.price / 100} €</span>
+            <button id="productPrice" class="p-2 d-flex flex-nowrap w-full bg-secondary text-white fw-bold fs-4 rounded" type="button">Ajouter au panier pour 
+            <span class="ms-2">${tedFinder.price / 100}€</span>
             </button>
         </div>
       </div>
@@ -127,8 +127,8 @@ const teddyColorator = (tedFinder) => {
       "beforeend",
       `
       <input type="radio" class="color-option btn-check" name="colorChoice" id="${color[i]}" autocomplete="off" checked>
-      <label class="btn scale-up fs-4" for="${color[i]}" style="background-color: ${color[i]}; width:8rem; height:5rem">${color[i]}</label>
-        `
+      <label class="color-btn btn fs-4" for="${color[i]}" style="background-color: ${color[i]}">${color[i]}</label>
+      `
     );
   }
 };
