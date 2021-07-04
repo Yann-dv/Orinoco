@@ -33,7 +33,7 @@
 <body>
   <main id="basket">
     <h1 class="m-3 secondary-border title-border">Mon panier</h1>
-    <section id="emptyBasket" class="d-flex m-3 flex-column text-center align-items-center">
+    <section id="emptyBasket" class="d-flex m-3 text-center align-items-center flex-column">
       <h2 class="secondary-border">Votre panier est vide !!!</h2>
       <p class="fs-4 my-3">Retrouvez tous nos produits ici : </p>
       <a class="btn btn-secondary bg-gradient rounded-pill fs-3 px-5 py-2" href="./index.html">
@@ -64,9 +64,11 @@
         </article>
       </div>
     </section>
-    <section id="basketContent">
-      
-    </section>
+
+    <section id="panierWithArticles" class="d-flex justify-content-evenly">
+    <div id="basketContent" class="d-flex flex-column my-3"></div>
+    <div id="commandForm" class="d-flex my-3"></div>
+  </section>
   </main>
 </body>
 

@@ -37,6 +37,11 @@
   height: 8rem;
 }
 
+.basket-card {
+  width: 6rem;
+  height: 4rem;
+}
+
 .link-anim {
   background: linear-gradient(to top, #8f5bfd 0%, #8f5bfd 5%, transparent 5.01%) no-repeat left bottom/0 100%;
   transition: background-size 0.3s;
