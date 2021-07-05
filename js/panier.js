@@ -55,7 +55,7 @@ function createArticles() {
         </div>
         <div class="my-2 position-relative">
           <label for="ville" class="form-label fs-4 link-anim">Ville :</label> 
-          <input type="text" pattern="^[a-zA-Z]+$" id="ville" class="form-control" placeholder="Paris" required minlength="2"/>
+          <input type="text" pattern="^[a-zA-Z\\s\\-]+$" id="ville" class="form-control" placeholder="Paris" required minlength="2"/>
         </div>
         <div class="my-2 position-relative">
           <label for="cp" class="form-label fs-4 link-anim">Code postal :</label> 
@@ -63,7 +63,7 @@ function createArticles() {
         </div>
         <div class="my-2 position-relative">
           <label for="mail" class="form-label fs-4 link-anim">E-mail :</label>
-          <input type="text" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="mail" class="form-control" placeholder="jdoe@outlook.fr" required/>
+          <input type="email" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z.]{2,15}" id="mail" class="form-control" placeholder="jdoe@outlook.fr" required/>
         </div>
         <div>
           <input type="submit" class="btn btn-primary" id="envoi" value="Envoyer ma commande"/> 
