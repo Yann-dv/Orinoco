@@ -89,8 +89,23 @@ function createArticles() {
     </div>
   `
   );
+
+
+ // const arrayPrices = [1, 2, 3, 4];
+  //const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  
+  // 1 + 2 + 3 + 4
+  //console.log(array1.reduce(reducer));
+  // expected output: 10
+
+  /*getPanier.forEach(element => {
+    let prices = (JSON.parse(element).price);
+    console.log(prices);
+  });*/
+  
+
   for (let i = 0; i < getTotalPanier; i++) {
-    console.log(getTotalPanier);
+
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
