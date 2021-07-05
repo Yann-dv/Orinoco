@@ -90,6 +90,7 @@ function createArticles() {
   `
   );
   for (let i = 0; i < getTotalPanier; i++) {
+    console.log(getTotalPanier);
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
@@ -112,7 +113,6 @@ function createArticles() {
     );
   }
 }
-
 
 function deleteArticle() {
 //
