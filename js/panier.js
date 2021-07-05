@@ -28,6 +28,16 @@ function emptyBasketHide() {
 }
 
 function createArticles() {
+  ///// Création d'un tableau pour recueillir les prix des articles et créer un total /////
+  const arrayPrices = [0]; 
+  getPanier.forEach(element => {
+    let prices = (JSON.parse(element).price);
+    arrayPrices.push(prices);
+  });
+  let finalPrice = Object.values(arrayPrices).reduce((a, b) => a + b, 0);
+  console.log(arrayPrices);
+  console.log(Object.values(arrayPrices).reduce((a, b) => a + b, 0));
+/////////////////////////////////////////////////////////////////////////////////////////
   document.getElementById("panierBadge");
   basketContent.insertAdjacentHTML(
     "beforeend",
@@ -43,7 +53,7 @@ function createArticles() {
       <h5>Votre commande comprend :</h5>
       <ul>
         <li class="fs-3">${getPanier.length} articles</li>
-        <li class="fs-3"> Pour un prix total de : <span class="secondary-border">${JSON.parse(getPanier[getTotalPanier.length]).price}€</span></li>
+        <li class="fs-3"> Pour un prix total de : <span class="secondary-border">${JSON.parse(finalPrice)}€</span></li>
       </ul>
       <p class="fs-4">Remplissez le formulaire ci-contre pour finaliser votre commande -> -> -></p>
       </div>
@@ -91,22 +101,7 @@ function createArticles() {
   `
   );
 
-
- // const arrayPrices = [1, 2, 3, 4];
-  //const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  
-  // 1 + 2 + 3 + 4
-  //console.log(array1.reduce(reducer));
-  // expected output: 10
-
-  /*getPanier.forEach(element => {
-    let prices = (JSON.parse(element).price);
-    console.log(prices);
-  });*/
-  
-
   for (let i = 0; i < getTotalPanier; i++) {
-
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
