@@ -20,6 +20,10 @@
   transition: 250ms ease-in-out;
 }
 
+.secondary-text {
+  color: #8f5bfd;
+}
+
 .secondary-border {
   border-bottom: 0.25rem solid #8f5bfd;
 }

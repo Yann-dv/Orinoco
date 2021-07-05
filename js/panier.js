@@ -39,8 +39,13 @@ function createArticles() {
   );
   summary.insertAdjacentHTML(
     "beforeend",
-    `<div id="cmdForm">
-      <form class="mt-4 py-3 px-5 main-color">
+    `<div id="cmdSummary" class="main-color my-3 border border-dark px-3">
+      <h5>Votre commande comprend :</h5>
+      <ul>
+        <li class="fs-3">${getPanier.length} articles</li>
+        <li class="fs-3"> Pour un prix total de : ${JSON.parse(getPanier[getTotalPanier.length]).price}€></li>
+      </ul>
+      </div>
       `
   );
   commandForm.insertAdjacentHTML(
@@ -50,8 +55,8 @@ function createArticles() {
         <p>Il manque encore quelques informations pour pouvoir valider votre commande !</p>
     </div>
     <div id="cmdForm">
-    <h2 class="link-anim">Formulaire de commande</h2>
-      <form class="mt-4 py-3 px-5 main-color">
+    <h2 class="link-anim mb-3">Formulaire de commande</h2>
+      <form class="py-3 px-5 main-color">
         <div class="my-2 position-relative">
           <label for="firstname" class="form-label fs-4 link-anim">Nom :</label>
           <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required minlength="2"/>
@@ -94,10 +99,10 @@ function createArticles() {
               <div class="main-color position-relative d-flex">
               <img src="${JSON.parse(getPanier[i]).imageUrl}" class="main-color img-fluid p-3 basket-card">
               <div class="article-content d-flex flex-column px-2 py-2">
-                <h5>${JSON.parse(getPanier[i]).name}</h5
-                <span class="articleQty">Quantité : ${JSON.parse(getPanier[i]).quantity}</span>
-                <span class="articleColor">Couleur : ${JSON.parse(getPanier[i]).color}</span>
-                <span class="articlePrice">Prix : ${JSON.parse(getPanier[i]).price}</span>
+                <h5 class="secondary-text">${JSON.parse(getPanier[i]).name}</h5>
+                <span class="articleQty fs-5">Quantité : ${JSON.parse(getPanier[i]).quantity}</span>
+                <span class="articleColor fs-5">Couleur : ${JSON.parse(getPanier[i]).color}</span>
+                <span class="articlePrice fs-5">Prix : ${JSON.parse(getPanier[i]).price}€</span>
               </div>
             </div>
             <button id="delete" class="btn btn-outline-warning">Supprimer</button>

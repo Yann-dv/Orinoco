@@ -25,6 +25,10 @@
   transition: 250ms ease-in-out;
 }
 
+.secondary-text {
+  color: $second-theme-color;
+}
+
 .secondary-border {
   border-bottom: .25rem solid $second-theme-color;
 }
