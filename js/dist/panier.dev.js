@@ -4,7 +4,7 @@ var getPanier = JSON.parse(localStorage.getItem("panier"));
 var getArticles = JSON.stringify(getPanier.length); //let idFinder = ;
 
 checkArticles();
-emptyBasketHide();
+emptyBasketHide(); //formControl();
 
 function checkArticles() {
   if (getPanier != null && document.getElementById("panierBadge") != undefined) {
@@ -26,12 +26,36 @@ function emptyBasketHide() {
 function createArticles() {
   document.getElementById("panierBadge");
   basketContent.insertAdjacentHTML("beforeend", "<h2 class=\"link-anim\">Tous mes articles</h2>");
-  commandForm.insertAdjacentHTML("beforeend", "\n    <div class=\"error d-none\">\n        <p>Il manque encore quelques informations pour pouvoir valider votre commande !</p>\n    </div>\n    <div id=\"cmdForm\">\n    <h2 class=\"link-anim\">Formulaire de commande</h2>\n    <form class=\"mt-4 py-3 px-5 main-color\">\n    <div class=\"lh-1\"><label for=\"firstname\" class=\"form-label fs-4\">Nom :</label> <input type=\"text\" id=\"firstname\" class=\"form-control\" placeholder=\"John\" required/><br /><br /></div>\n    <div class=\"lh-1\"><label for=\"secondname\" class=\"form-label fs-4\"\">Pr\xE9nom :</label> <input type=\"text\" id=\"secondname\" class=\"form-control\" placeholder=\"Doe\" required/><br /><br /></div>\n    <div class=\"lh-1\"><label for=\"adresse\" class=\"form-label fs-4\"\">Adresse :</label> <input type=\"text\" id=\"adresse\" class=\"form-control\" placeholder=\"1 rue des Cerisiers\" required/><br/><br /></div>\n    <div class=\"lh-1\"><label for=\"ville\" class=\"form-label fs-4\"\">Ville :</label> <input type=\"text\" id=\"ville\" class=\"form-control\" placeholder=\"Paris\" required/><br/><br /></div>\n    <div class=\"lh-1\"><label for=\"cp\" class=\"form-label fs-4\"\">Code postal :</label> <input type=\"text\" id=\"cp\" class=\"form-control\" placeholder=\"75005\" required/><br/><br /></div>\n    <div class=\"lh-1\"><label for=\"mail\" class=\"form-label fs-4\"\">E-mail :</label> <input type=\"text\" id=\"mail\"\"class=\"form-control\" placeholder=\"jdoe@outlook.fr\" required/><br/><br /></div>\n    <div><input type=\"submit\" id=\"envoi\" value=\"Envoyer\"/> <input type=\"reset\" id=\"rafraichir\" value=\"Rafra\xEEchir\"/></div>\n    </form>\n    </div>\n  ");
+  commandForm.insertAdjacentHTML("beforeend", "\n    <div class=\"error d-none\">\n        <p>Il manque encore quelques informations pour pouvoir valider votre commande !</p>\n    </div>\n    <div id=\"cmdForm\">\n    <h2 class=\"link-anim\">Formulaire de commande</h2>\n      <form class=\"mt-4 py-3 px-5 main-color\">\n        <div class=\"my-2 position-relative\">\n          <label for=\"firstname\" class=\"form-label fs-4 link-anim\">Nom :</label>\n          <input type=\"text\" pattern=\"^[a-zA-Z\\-]+$\" id=\"firstname\" class=\"form-control is-valide\" placeholder=\"John\" required minlength=\"2\"/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"secondname\" class=\"form-label fs-4 link-anim\">Pr\xE9nom :</label> \n          <input type=\"text\" pattern=\"^[a-zA-Z\\-]+$\" id=\"secondname\" class=\"form-control\" placeholder=\"Doe\" required minlength=\"2\"/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"adresse\" class=\"form-label fs-4 link-anim\">Adresse :</label> \n          <input type=\"text\" pattern=\"^[a-zA-Z0-9-\\s]+$\" id=\"adresse\" class=\"form-control\" placeholder=\"1 rue des Cerisiers\" required/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"ville\" class=\"form-label fs-4 link-anim\">Ville :</label> \n          <input type=\"text\" pattern=\"^[a-zA-Z]+$\" id=\"ville\" class=\"form-control\" placeholder=\"Paris\" required minlength=\"2\"/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"cp\" class=\"form-label fs-4 link-anim\">Code postal :</label> \n          <input type=\"text\" pattern=\"[0-9]{5}\" id=\"cp\" class=\"form-control\" placeholder=\"75005\" required/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"mail\" class=\"form-label fs-4 link-anim\">E-mail :</label>\n          <input type=\"text\" pattern=\"(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" id=\"mail\" class=\"form-control\" placeholder=\"jdoe@outlook.fr\" required/>\n        </div>\n        <div>\n          <input type=\"submit\" class=\"btn btn-primary\" id=\"envoi\" value=\"Envoyer ma commande\"/> \n          <input type=\"reset\" id=\"refresh\" class=\"btn btn-danger\" value=\"Effacer ma saisie\"/>\n        </div>\n    </form>\n    </div>\n  ");
 
   for (var i = 0; i < getArticles; i++) {
-    basketContent.insertAdjacentHTML("beforeend", "\n        <div class=\"selectedArticles d-flex\">\n        <article class=\"choosenTeddy\">\n        <div class=\"main-color card my-3 shadow\">\n          <div class=\"card-body main-color position-relative d-flex\">\n          <img src=\"./images/teddy_2.jpg\" class=\"main-color p-3 basket-card\">\n            <a class=\"stretched-link fs-4\" href=\"./produit.html?teddy=5beaa8bf1c9d440000a57d94\">Arnold</a>\n        </article>\n        </div>\n        </div>\n      ");
+    basketContent.insertAdjacentHTML("beforeend", "\n        <div class=\"selectedArticles d-flex\">\n          <article class=\"choosenTeddy\">\n            <div class=\"main-color card my-2 shadow\">\n              <div class=\"main-color position-relative d-flex\">\n              <img src=\"./images/teddy_2.jpg\" class=\"main-color img-fluid p-3 basket-card\">\n              <div class=\"article-content d-flex flex-column px-2 py-2\">\n                <a class=\"stretched-link fs-4\" href=\"./produit.html?teddy=5beaa8bf1c9d440000a57d94\">Arnold</a>\n                <span class=\"articleQty\">Quantit\xE9 :</span>\n                <span class=\"articleColor\">Couleur :</span>\n              </div>\n            </div>\n          </article>  \n        </div>\n      ");
   }
-} //<img src="${idFinder.imageUrl}" alt="Teddy ${idFinder.name}" title="Photo de ${idFinder.name}"
+}
+/*function formControl () {
+let pseudo = document.getElementsById('firstname');
+let mdp = document.getElementsById('secondname');
+let adresse = document.getElementsById('adresse');
+let ville = document.getElementsById('ville');
+let cp = document.getElementsById('cp');
+let mail = document.getElementsById('mail');
+let refresh = document.getElementsById('refresh');
+let erreur = document.getElementsById('erreur');
+let form = document.getElementsById('form-control');
+
+form.keyup(function(){
+  if(this.val().length<2) {
+  this.css({'border-color':'red', 'color':'red'});
+  }
+    else{
+      this.css({
+	     borderColor : 'green',
+	     color : 'green'
+	 });
+  }
+});
+}*/
+//<img src="${idFinder.imageUrl}" alt="Teddy ${idFinder.name}" title="Photo de ${idFinder.name}"
 //////////////////////////////////////////////////////////////////////////////////
 
 /*  // check paramètres en URL

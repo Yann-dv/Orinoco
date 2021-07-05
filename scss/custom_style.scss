@@ -43,8 +43,8 @@
 }
 
 .basket-card {
-  width: 6rem;
-  height: 4rem;
+  width: 8rem;
+  height: 10rem;
 }
 
 .link-anim {
@@ -81,6 +81,10 @@ input[type="radio"].btn-check.color-option:checked+label {
 .color-btn {
   width:8rem; 
   height:5rem;
+}
+
+.form-control  {
+  font-family:'Times New Roman', Times, serif !important;
 }
 
 // Basket style //

@@ -41,13 +41,13 @@ function createTeddy(tedFinder) {
             <img src="${tedFinder.imageUrl}" alt="Teddy" class="img-fluid p-3">
         </div>
       </div>
-      <div class="teddy col-12 col-lg-6 main-color px-3 d-flex">
+      <div class="teddy col-12 col-lg-6 main-color px-3">
         <div class="product-desc">
-            <h2 class="fw-bold text-center pt-2">${tedFinder.name}</h2>
+            <h2 class="fw-bold text-center">${tedFinder.name}</h2>
             <p class="fs-5">${tedFinder.description}</p>
-            <h5 class="font-lg fw-bold py-3">Choisissez une couleur pour votre teddy :</h5>
+            <h5 class="font-lg fw-bold">Choisissez une couleur pour votre teddy :</h5>
             <div class="container colors-container">
-              <div class="m-auto pb-2 d-flex flex-nowrap justify-content-between" id="productColors">
+              <div class="m-auto d-flex flex-nowrap justify-content-between" id="productColors">
               </div>
             </div>
             <label class="m-2 fs-5 selectQuantity">Quantité :
@@ -64,7 +64,7 @@ function createTeddy(tedFinder) {
             <option value="10">10</option>
             </select>
             </label>
-            <button id="productPrice" class="p-2 d-flex flex-nowrap w-full bg-secondary text-white fw-bold fs-4 rounded" type="button">Ajouter au panier pour 
+            <button id="productPrice" class="btn btn-secondary bg-gradientp-2 d-flex flex-nowrap w-full bg-secondary text-white fw-bold fs-4 rounded" type="button">Ajouter au panier pour 
             <span class="ms-2">${tedFinder.price / 100}€</span>
             </button>
         </div>

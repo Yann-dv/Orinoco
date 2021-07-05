@@ -4,6 +4,7 @@ let getArticles = JSON.stringify(getPanier.length);
 
 checkArticles();
 emptyBasketHide();
+//formControl();
 
 function checkArticles() {
   if (
@@ -27,7 +28,10 @@ function emptyBasketHide() {
 
 function createArticles() {
   document.getElementById("panierBadge");
-  basketContent.insertAdjacentHTML("beforeend", `<h2 class="link-anim">Tous mes articles</h2>`);
+  basketContent.insertAdjacentHTML(
+    "beforeend",
+    `<h2 class="link-anim">Tous mes articles</h2>`
+  );
   commandForm.insertAdjacentHTML(
     "beforeend",
     `
@@ -36,14 +40,35 @@ function createArticles() {
     </div>
     <div id="cmdForm">
     <h2 class="link-anim">Formulaire de commande</h2>
-    <form class="mt-4 py-3 px-5 main-color">
-    <div class="lh-1"><label for="firstname" class="form-label fs-4">Nom :</label> <input type="text" id="firstname" class="form-control" placeholder="John" required/><br /><br /></div>
-    <div class="lh-1"><label for="secondname" class="form-label fs-4"">Prénom :</label> <input type="text" id="secondname" class="form-control" placeholder="Doe" required/><br /><br /></div>
-    <div class="lh-1"><label for="adresse" class="form-label fs-4"">Adresse :</label> <input type="text" id="adresse" class="form-control" placeholder="1 rue des Cerisiers" required/><br/><br /></div>
-    <div class="lh-1"><label for="ville" class="form-label fs-4"">Ville :</label> <input type="text" id="ville" class="form-control" placeholder="Paris" required/><br/><br /></div>
-    <div class="lh-1"><label for="cp" class="form-label fs-4"">Code postal :</label> <input type="text" id="cp" class="form-control" placeholder="75005" required/><br/><br /></div>
-    <div class="lh-1"><label for="mail" class="form-label fs-4"">E-mail :</label> <input type="text" id="mail""class="form-control" placeholder="jdoe@outlook.fr" required/><br/><br /></div>
-    <div><input type="submit" id="envoi" value="Envoyer"/> <input type="reset" id="rafraichir" value="Rafraîchir"/></div>
+      <form class="mt-4 py-3 px-5 main-color">
+        <div class="my-2 position-relative">
+          <label for="firstname" class="form-label fs-4 link-anim">Nom :</label>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required minlength="2"/>
+        </div>
+        <div class="my-2 position-relative">
+          <label for="secondname" class="form-label fs-4 link-anim">Prénom :</label> 
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="secondname" class="form-control" placeholder="Doe" required minlength="2"/>
+        </div>
+        <div class="my-2 position-relative">
+          <label for="adresse" class="form-label fs-4 link-anim">Adresse :</label> 
+          <input type="text" pattern="^[a-zA-Z0-9-\\s]+$" id="adresse" class="form-control" placeholder="1 rue des Cerisiers" required/>
+        </div>
+        <div class="my-2 position-relative">
+          <label for="ville" class="form-label fs-4 link-anim">Ville :</label> 
+          <input type="text" pattern="^[a-zA-Z]+$" id="ville" class="form-control" placeholder="Paris" required minlength="2"/>
+        </div>
+        <div class="my-2 position-relative">
+          <label for="cp" class="form-label fs-4 link-anim">Code postal :</label> 
+          <input type="text" pattern="[0-9]{5}" id="cp" class="form-control" placeholder="75005" required/>
+        </div>
+        <div class="my-2 position-relative">
+          <label for="mail" class="form-label fs-4 link-anim">E-mail :</label>
+          <input type="text" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="mail" class="form-control" placeholder="jdoe@outlook.fr" required/>
+        </div>
+        <div>
+          <input type="submit" class="btn btn-primary" id="envoi" value="Envoyer ma commande"/> 
+          <input type="reset" id="refresh" class="btn btn-danger" value="Effacer ma saisie"/>
+        </div>
     </form>
     </div>
   `
@@ -53,18 +78,47 @@ function createArticles() {
       "beforeend",
       `
         <div class="selectedArticles d-flex">
-        <article class="choosenTeddy">
-        <div class="main-color card my-3 shadow">
-          <div class="card-body main-color position-relative d-flex">
-          <img src="./images/teddy_2.jpg" class="main-color p-3 basket-card">
-            <a class="stretched-link fs-4" href="./produit.html?teddy=5beaa8bf1c9d440000a57d94">Arnold</a>
-        </article>
-        </div>
+          <article class="choosenTeddy">
+            <div class="main-color card my-2 shadow">
+              <div class="main-color position-relative d-flex">
+              <img src="./images/teddy_2.jpg" class="main-color img-fluid p-3 basket-card">
+              <div class="article-content d-flex flex-column px-2 py-2">
+                <a class="stretched-link fs-4" href="./produit.html?teddy=5beaa8bf1c9d440000a57d94">Arnold</a>
+                <span class="articleQty">Quantité :</span>
+                <span class="articleColor">Couleur :</span>
+              </div>
+            </div>
+          </article>  
         </div>
       `
     );
   }
 }
+
+/*function formControl () {
+let pseudo = document.getElementsById('firstname');
+let mdp = document.getElementsById('secondname');
+let adresse = document.getElementsById('adresse');
+let ville = document.getElementsById('ville');
+let cp = document.getElementsById('cp');
+let mail = document.getElementsById('mail');
+let refresh = document.getElementsById('refresh');
+let erreur = document.getElementsById('erreur');
+let form = document.getElementsById('form-control');
+
+form.keyup(function(){
+  if(this.val().length<2) {
+  this.css({'border-color':'red', 'color':'red'});
+  }
+    else{
+      this.css({
+	     borderColor : 'green',
+	     color : 'green'
+	 });
+  }
+});
+}*/
+
 //<img src="${idFinder.imageUrl}" alt="Teddy ${idFinder.name}" title="Photo de ${idFinder.name}"
 //////////////////////////////////////////////////////////////////////////////////
 
