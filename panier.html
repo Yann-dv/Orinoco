@@ -31,7 +31,7 @@
 </header>
 
 <body>
-  <main id="basket">
+  <main id="basket" class="container">
     <h1 class="m-3 secondary-border title-border">Mon panier</h1>
     <section id="emptyBasket" class="d-flex m-3 text-center align-items-center flex-column">
       <h2 class="secondary-border">Votre panier est vide !!!</h2>
@@ -65,10 +65,10 @@
       </div>
     </section>
 
-    <section id="panierWithArticles" class="d-flex justify-content-evenly">
-    <div id="basketContent" class="d-flex flex-column my-3"></div>
-    <div id="summary" class="summary my-3"></div>
-    <div id="commandForm" class="d-flex my-3 needs-validation was-validated"></div>
+    <section id="panierWithArticles" class="row">
+        <div id="basketContent" class="col-md-4 col-12 d-flex flex-column mb-3"></div>
+        <div id="summary" class="col-md-4 col-12 summary mb-3"></div>
+        <div id="commandForm" class="col-md-4 col-12 d-flex needs-validation was-validated mb-3"></div>
   </section>
   </main>
 </body>

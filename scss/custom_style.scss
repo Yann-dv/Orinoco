@@ -46,11 +46,6 @@
   height: 8rem;
 }
 
-.basket-card {
-  width: 8rem;
-  height: 10rem;
-}
-
 .link-anim {
   background: linear-gradient(to top, ($second-theme-color) 0%, ($second-theme-color) 5%, transparent 5.01%) no-repeat left bottom / 0 100%;
   transition: background-size .3s;
@@ -154,6 +149,7 @@ input[type="radio"].btn-check.color-option:checked+label {
 
 // Media-queries for customized elements
 @media only screen and (max-width: 768px) {
+
   .color-btn {
     width:5rem; 
     height:5rem;

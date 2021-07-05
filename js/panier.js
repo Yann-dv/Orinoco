@@ -39,12 +39,13 @@ function createArticles() {
   );
   summary.insertAdjacentHTML(
     "beforeend",
-    `<div id="cmdSummary" class="main-color my-3 border border-dark px-3">
+    `<div id="cmdSummary" class="main-color my-3 border border-dark rounded shadow px-3">
       <h5>Votre commande comprend :</h5>
       <ul>
         <li class="fs-3">${getPanier.length} articles</li>
-        <li class="fs-3"> Pour un prix total de : ${JSON.parse(getPanier[getTotalPanier.length]).price}€></li>
+        <li class="fs-3"> Pour un prix total de : <span class="secondary-border">${JSON.parse(getPanier[getTotalPanier.length]).price}€</span></li>
       </ul>
+      <p class="fs-4">Remplissez le formulaire ci-contre pour finaliser votre commande -> -> -></p>
       </div>
       `
   );
@@ -56,7 +57,7 @@ function createArticles() {
     </div>
     <div id="cmdForm">
     <h2 class="link-anim mb-3">Formulaire de commande</h2>
-      <form class="py-3 px-5 main-color">
+      <form class="py-3 px-5 main-color border border-dark rounded shadow">
         <div class="my-2 position-relative">
           <label for="firstname" class="form-label fs-4 link-anim">Nom :</label>
           <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required minlength="2"/>
@@ -82,8 +83,8 @@ function createArticles() {
           <input type="email" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z.]{2,15}" id="mail" class="form-control" placeholder="jdoe@outlook.fr" required/>
         </div>
         <div>
-          <input type="submit" class="btn btn-primary" id="envoi" value="Envoyer ma commande"/> 
-          <input type="reset" id="refresh" class="btn btn-danger" value="Effacer ma saisie"/>
+          <input type="submit" class="btn btn-primary mt-2" id="envoi" value="Valider ma commande"/> 
+          <input type="reset" id="refresh" class="btn btn-danger mt-2" value="Effacer ma saisie"/>
         </div>
     </form>
     </div>
@@ -109,20 +110,21 @@ function createArticles() {
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
-        <div class="selectedArticles d-flex">
-          <article class="choosenTeddy">
-            <div class="main-color card my-2 shadow">
-              <div class="main-color position-relative d-flex">
-              <img src="${JSON.parse(getPanier[i]).imageUrl}" class="main-color img-fluid p-3 basket-card">
-              <div class="article-content d-flex flex-column px-2 py-2">
-                <h5 class="secondary-text">${JSON.parse(getPanier[i]).name}</h5>
-                <span class="articleQty fs-5">Quantité : ${JSON.parse(getPanier[i]).quantity}</span>
-                <span class="articleColor fs-5">Couleur : ${JSON.parse(getPanier[i]).color}</span>
-                <span class="articlePrice fs-5">Prix : ${JSON.parse(getPanier[i]).price}€</span>
+        <div class="selectedArticles my-2 card rounded shadow"> 
+            <article class="main-color row g-0">
+              <div class="main-color col-6">
+                <img src="${JSON.parse(getPanier[i]).imageUrl}" class="main-color img-fluid p-3">
               </div>
-            </div>
-            <button id="delete" class="btn btn-outline-warning">Supprimer</button>
+              <div class=" col-6">
+                <div class="card-body px-2 py-2">
+                  <h5 class="secondary-text card-title">${JSON.parse(getPanier[i]).name}</h5>
+                  <span class="articleQty card-text fs-5">Quantité : ${JSON.parse(getPanier[i]).quantity}</span></br>
+                  <span class="articleColor card-text fs-5">Couleur : ${JSON.parse(getPanier[i]).color}</span></br>
+                  <span class="articlePrice card-text fs-5">Prix : ${JSON.parse(getPanier[i]).price}€</span>
+                </div>
+              </div>
           </article>  
+          <button id="delete" class="btn btn-outline-warning" aria-label"Supprimer l'article">Supprimer</button>
         </div>
       `
     );
