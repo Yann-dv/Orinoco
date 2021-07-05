@@ -41,10 +41,12 @@ function createTeddy(tedFinder) {
           //////////////// Création et envoi des objets products dans le localStorage ///////////////
           var addToBasket = function addToBasket() {
             var tedParams = {
+              name: tedFinder.name,
               _id: tedIdToCreate,
               quantity: tedQuantity.value,
               color: coloring,
-              price: totalPrice
+              price: totalPrice,
+              imageUrl: tedFinder.imageUrl
             };
             var getPanier = JSON.parse(localStorage.getItem("panier"));
 

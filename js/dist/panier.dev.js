@@ -1,14 +1,16 @@
 "use strict";
 
 var getPanier = JSON.parse(localStorage.getItem("panier"));
-var getArticles = JSON.stringify(getPanier.length); //let idFinder = ;
+var getTotalPanier = JSON.stringify(getPanier.length); //let idFinder = ;
+// console.log(JSON.parse(getPanier[2]).color)
 
 checkArticles();
-emptyBasketHide(); //formControl();
+emptyBasketHide();
+deleteArticle();
 
 function checkArticles() {
   if (getPanier != null && document.getElementById("panierBadge") != undefined) {
-    panierBadge.textContent = getArticles;
+    panierBadge.textContent = getTotalPanier;
     panierBadge.style.visibility = "visible";
   }
 }
@@ -26,115 +28,14 @@ function emptyBasketHide() {
 function createArticles() {
   document.getElementById("panierBadge");
   basketContent.insertAdjacentHTML("beforeend", "<h2 class=\"link-anim\">Tous mes articles</h2>");
+  summary.insertAdjacentHTML("beforeend", "<h2 class=\"link-anim\">R\xE9sum\xE9 de ma commande</h2>");
+  summary.insertAdjacentHTML("beforeend", "<div id=\"cmdForm\">\n      <form class=\"mt-4 py-3 px-5 main-color\">\n      ");
   commandForm.insertAdjacentHTML("beforeend", "\n    <div class=\"error d-none\">\n        <p>Il manque encore quelques informations pour pouvoir valider votre commande !</p>\n    </div>\n    <div id=\"cmdForm\">\n    <h2 class=\"link-anim\">Formulaire de commande</h2>\n      <form class=\"mt-4 py-3 px-5 main-color\">\n        <div class=\"my-2 position-relative\">\n          <label for=\"firstname\" class=\"form-label fs-4 link-anim\">Nom :</label>\n          <input type=\"text\" pattern=\"^[a-zA-Z\\-]+$\" id=\"firstname\" class=\"form-control is-valide\" placeholder=\"John\" required minlength=\"2\"/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"secondname\" class=\"form-label fs-4 link-anim\">Pr\xE9nom :</label> \n          <input type=\"text\" pattern=\"^[a-zA-Z\\-]+$\" id=\"secondname\" class=\"form-control\" placeholder=\"Doe\" required minlength=\"2\"/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"adresse\" class=\"form-label fs-4 link-anim\">Adresse :</label> \n          <input type=\"text\" pattern=\"^[a-zA-Z0-9-\\s]+$\" id=\"adresse\" class=\"form-control\" placeholder=\"1 rue des Cerisiers\" required/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"ville\" class=\"form-label fs-4 link-anim\">Ville :</label> \n          <input type=\"text\" pattern=\"^[a-zA-Z\\s\\-]+$\" id=\"ville\" class=\"form-control\" placeholder=\"Paris\" required minlength=\"2\"/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"cp\" class=\"form-label fs-4 link-anim\">Code postal :</label> \n          <input type=\"text\" pattern=\"[0-9]{5}\" id=\"cp\" class=\"form-control\" placeholder=\"75005\" required/>\n        </div>\n        <div class=\"my-2 position-relative\">\n          <label for=\"mail\" class=\"form-label fs-4 link-anim\">E-mail :</label>\n          <input type=\"email\" pattern=\"[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z.]{2,15}\" id=\"mail\" class=\"form-control\" placeholder=\"jdoe@outlook.fr\" required/>\n        </div>\n        <div>\n          <input type=\"submit\" class=\"btn btn-primary\" id=\"envoi\" value=\"Envoyer ma commande\"/> \n          <input type=\"reset\" id=\"refresh\" class=\"btn btn-danger\" value=\"Effacer ma saisie\"/>\n        </div>\n    </form>\n    </div>\n  ");
 
-  for (var i = 0; i < getArticles; i++) {
-    basketContent.insertAdjacentHTML("beforeend", "\n        <div class=\"selectedArticles d-flex\">\n          <article class=\"choosenTeddy\">\n            <div class=\"main-color card my-2 shadow\">\n              <div class=\"main-color position-relative d-flex\">\n              <img src=\"./images/teddy_2.jpg\" class=\"main-color img-fluid p-3 basket-card\">\n              <div class=\"article-content d-flex flex-column px-2 py-2\">\n                <a class=\"stretched-link fs-4\" href=\"./produit.html?teddy=5beaa8bf1c9d440000a57d94\">Arnold</a>\n                <span class=\"articleQty\">Quantit\xE9 :</span>\n                <span class=\"articleColor\">Couleur :</span>\n              </div>\n            </div>\n          </article>  \n        </div>\n      ");
-  }
-}
-/*function formControl () {
-let pseudo = document.getElementsById('firstname');
-let mdp = document.getElementsById('secondname');
-let adresse = document.getElementsById('adresse');
-let ville = document.getElementsById('ville');
-let cp = document.getElementsById('cp');
-let mail = document.getElementsById('mail');
-let refresh = document.getElementsById('refresh');
-let erreur = document.getElementsById('erreur');
-let form = document.getElementsById('form-control');
-
-form.keyup(function(){
-  if(this.val().length<2) {
-  this.css({'border-color':'red', 'color':'red'});
-  }
-    else{
-      this.css({
-	     borderColor : 'green',
-	     color : 'green'
-	 });
-  }
-});
-}*/
-//<img src="${idFinder.imageUrl}" alt="Teddy ${idFinder.name}" title="Photo de ${idFinder.name}"
-//////////////////////////////////////////////////////////////////////////////////
-
-/*  // check paramètres en URL
-  var oParametre = {};
-  if (window.location.search.length > 1) {
-    for (
-      var aItKey,
-        nKeyId = 0,
-        aCouples = window.location.search.substr(1).split("&");
-      nKeyId < aCouples.length;
-      nKeyId++
-    ) {
-      aItKey = aCouples[nKeyId].split("=");
-      oParametre[unescape(aItKey[0])] =
-        aItKey.length > 1 ? unescape(aItKey[1]) : "";
-    }
-  } */
-
-/* var $pseudo = $('#pseudo'),
-     $mdp = $('#mdp'),
-     $confirmation =$('#confirmation'),
-     $mail = $('#mail'),
-     $envoi = $('#envoi'),
-     $reset = $('#rafraichir'),
-     $erreur = $('#erreur'),
-     $champ = $('.champ');
-
-$champ.keyup(function(){
-  if($(this).val().length<5) {
-    $(this).css({'border-color':'red', 'color':'red'});
-  }
-    else{
-         $(this).css({
-	     borderColor : 'green',
-	     color : 'green'
-	 });
-  }
-});
-
-$confirmation.keyup(function(){
-    if($(this).val() != $mdp.val()){ // si la confirmation est différente du mot de passe
-        $(this).css({ // on rend le champ rouge
-	    borderColor : 'red',
-	    color : 'red'
-        });
-    }
-    else{
-	$(this).css({ // si tout est bon, on le rend vert
-	    borderColor : 'green',
-	    color : 'green'
-	});
-    }
-});
-
-function verifier(champ){
-    if(champ.val() == ""){ // si le champ est vide
-    	$erreur.fadeIn();/*css('display', 'block'); / // on affiche le message d'erreur
-      champ.css({ // on rend le champ rouge
-        borderColor : 'red',
-        color : 'red'
-    });
+  for (var i = 0; i < getTotalPanier; i++) {
+    basketContent.insertAdjacentHTML("beforeend", "\n        <div class=\"selectedArticles d-flex\">\n          <article class=\"choosenTeddy\">\n            <div class=\"main-color card my-2 shadow\">\n              <div class=\"main-color position-relative d-flex\">\n              <img src=\"".concat(JSON.parse(getPanier[i]).imageUrl, "\" class=\"main-color img-fluid p-3 basket-card\">\n              <div class=\"article-content d-flex flex-column px-2 py-2\">\n                <h5>").concat(JSON.parse(getPanier[i]).name, "</h5\n                <span class=\"articleQty\">Quantit\xE9 : ").concat(JSON.parse(getPanier[i]).quantity, "</span>\n                <span class=\"articleColor\">Couleur : ").concat(JSON.parse(getPanier[i]).color, "</span>\n                <span class=\"articlePrice\">Prix : ").concat(JSON.parse(getPanier[i]).price, "</span>\n              </div>\n            </div>\n            <button id=\"delete\" class=\"btn btn-outline-warning\">Supprimer</button>\n          </article>  \n        </div>\n      "));
   }
 }
 
-$envoi.click(function(e){
-  e.preventDefault(); // on annule la fonction par défaut du bouton d'envoi
-
-  // puis on lance la fonction de vérification sur tous les champs :
-  verifier($pseudo);
-  verifier($mdp);
-  verifier($confirmation);
-  verifier($mail);
-});
-
-
-$reset.click(function(){
-  $champ.css({
-    borderColor : '#ccc',
-    color : '#555'
-  });
-  $erreur.fadeOut();
-});*/
+function deleteArticle() {//
+}

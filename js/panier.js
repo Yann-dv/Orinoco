@@ -1,17 +1,18 @@
 let getPanier = JSON.parse(localStorage.getItem(`panier`));
-let getArticles = JSON.stringify(getPanier.length);
+let getTotalPanier = JSON.stringify(getPanier.length);
 //let idFinder = ;
+// console.log(JSON.parse(getPanier[2]).color)
 
 checkArticles();
 emptyBasketHide();
-//formControl();
+deleteArticle();
 
 function checkArticles() {
   if (
     getPanier != null &&
     document.getElementById("panierBadge") != undefined
   ) {
-    panierBadge.textContent = getArticles;
+    panierBadge.textContent = getTotalPanier;
     panierBadge.style.visibility = "visible";
   }
 }
@@ -31,6 +32,16 @@ function createArticles() {
   basketContent.insertAdjacentHTML(
     "beforeend",
     `<h2 class="link-anim">Tous mes articles</h2>`
+  );
+  summary.insertAdjacentHTML(
+    "beforeend",
+    `<h2 class="link-anim">Résumé de ma commande</h2>`
+  );
+  summary.insertAdjacentHTML(
+    "beforeend",
+    `<div id="cmdForm">
+      <form class="mt-4 py-3 px-5 main-color">
+      `
   );
   commandForm.insertAdjacentHTML(
     "beforeend",
@@ -73,7 +84,7 @@ function createArticles() {
     </div>
   `
   );
-  for (let i = 0; i < getArticles; i++) {
+  for (let i = 0; i < getTotalPanier; i++) {
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
@@ -81,13 +92,15 @@ function createArticles() {
           <article class="choosenTeddy">
             <div class="main-color card my-2 shadow">
               <div class="main-color position-relative d-flex">
-              <img src="./images/teddy_2.jpg" class="main-color img-fluid p-3 basket-card">
+              <img src="${JSON.parse(getPanier[i]).imageUrl}" class="main-color img-fluid p-3 basket-card">
               <div class="article-content d-flex flex-column px-2 py-2">
-                <a class="stretched-link fs-4" href="./produit.html?teddy=5beaa8bf1c9d440000a57d94">Arnold</a>
-                <span class="articleQty">Quantité :</span>
-                <span class="articleColor">Couleur :</span>
+                <h5>${JSON.parse(getPanier[i]).name}</h5
+                <span class="articleQty">Quantité : ${JSON.parse(getPanier[i]).quantity}</span>
+                <span class="articleColor">Couleur : ${JSON.parse(getPanier[i]).color}</span>
+                <span class="articlePrice">Prix : ${JSON.parse(getPanier[i]).price}</span>
               </div>
             </div>
+            <button id="delete" class="btn btn-outline-warning">Supprimer</button>
           </article>  
         </div>
       `
@@ -95,110 +108,7 @@ function createArticles() {
   }
 }
 
-/*function formControl () {
-let pseudo = document.getElementsById('firstname');
-let mdp = document.getElementsById('secondname');
-let adresse = document.getElementsById('adresse');
-let ville = document.getElementsById('ville');
-let cp = document.getElementsById('cp');
-let mail = document.getElementsById('mail');
-let refresh = document.getElementsById('refresh');
-let erreur = document.getElementsById('erreur');
-let form = document.getElementsById('form-control');
 
-form.keyup(function(){
-  if(this.val().length<2) {
-  this.css({'border-color':'red', 'color':'red'});
-  }
-    else{
-      this.css({
-	     borderColor : 'green',
-	     color : 'green'
-	 });
-  }
-});
-}*/
-
-//<img src="${idFinder.imageUrl}" alt="Teddy ${idFinder.name}" title="Photo de ${idFinder.name}"
-//////////////////////////////////////////////////////////////////////////////////
-
-/*  // check paramètres en URL
-  var oParametre = {};
-  if (window.location.search.length > 1) {
-    for (
-      var aItKey,
-        nKeyId = 0,
-        aCouples = window.location.search.substr(1).split("&");
-      nKeyId < aCouples.length;
-      nKeyId++
-    ) {
-      aItKey = aCouples[nKeyId].split("=");
-      oParametre[unescape(aItKey[0])] =
-        aItKey.length > 1 ? unescape(aItKey[1]) : "";
-    }
-  } */
-
-/* var $pseudo = $('#pseudo'),
-     $mdp = $('#mdp'),
-     $confirmation =$('#confirmation'),
-     $mail = $('#mail'),
-     $envoi = $('#envoi'),
-     $reset = $('#rafraichir'),
-     $erreur = $('#erreur'),
-     $champ = $('.champ');
-
-$champ.keyup(function(){
-  if($(this).val().length<5) {
-    $(this).css({'border-color':'red', 'color':'red'});
-  }
-    else{
-         $(this).css({
-	     borderColor : 'green',
-	     color : 'green'
-	 });
-  }
-});
-
-$confirmation.keyup(function(){
-    if($(this).val() != $mdp.val()){ // si la confirmation est différente du mot de passe
-        $(this).css({ // on rend le champ rouge
-	    borderColor : 'red',
-	    color : 'red'
-        });
-    }
-    else{
-	$(this).css({ // si tout est bon, on le rend vert
-	    borderColor : 'green',
-	    color : 'green'
-	});
-    }
-});
-
-function verifier(champ){
-    if(champ.val() == ""){ // si le champ est vide
-    	$erreur.fadeIn();/*css('display', 'block'); / // on affiche le message d'erreur
-      champ.css({ // on rend le champ rouge
-        borderColor : 'red',
-        color : 'red'
-    });
-  }
+function deleteArticle() {
+//
 }
-
-$envoi.click(function(e){
-  e.preventDefault(); // on annule la fonction par défaut du bouton d'envoi
-
-  // puis on lance la fonction de vérification sur tous les champs :
-  verifier($pseudo);
-  verifier($mdp);
-  verifier($confirmation);
-  verifier($mail);
-});
-
-
-$reset.click(function(){
-  $champ.css({
-    borderColor : '#ccc',
-    color : '#555'
-  });
-  $erreur.fadeOut();
-});*/
