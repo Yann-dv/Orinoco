@@ -1,8 +1,7 @@
 "use strict";
 
 var getPanier = JSON.parse(localStorage.getItem("panier"));
-var getTotalPanier = JSON.stringify(getPanier.length); //let idFinder = ;
-// console.log(JSON.parse(getPanier[2]).color)
+var getTotalPanier = JSON.stringify(getPanier.length); // console.log(JSON.parse(getPanier[2]).color)
 
 checkArticles();
 emptyBasketHide();

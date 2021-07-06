@@ -1,6 +1,5 @@
 let getPanier = JSON.parse(localStorage.getItem(`panier`));
 let getTotalPanier = JSON.stringify(getPanier.length);
-//let idFinder = ;
 // console.log(JSON.parse(getPanier[2]).color)
 
 checkArticles();
