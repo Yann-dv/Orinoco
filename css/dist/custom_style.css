@@ -23,6 +23,11 @@
   color: #8f5bfd;
 }
 
+.coloring-second:hover {
+  color: #8f5bfd;
+  transition: 250ms ease-in-out;
+}
+
 .secondary-border {
   border-bottom: 0.25rem solid #8f5bfd;
 }

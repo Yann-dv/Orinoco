@@ -53,9 +53,9 @@ function createArticles() {
       <h5>Votre commande comprend :</h5>
       <ul>
         <li class="fs-3">${getPanier.length} articles</li>
-        <li class="fs-3"> Pour un prix total de : <span class="secondary-border">${JSON.parse(finalPrice)}€</span></li>
+        <li class="fs-3"> Pour un prix total de : <span class="secondary-border secondary-color coloring-second">${JSON.parse(finalPrice)}€</span></li>
       </ul>
-      <p class="fs-4">Remplissez le formulaire ci-contre pour finaliser votre commande -> -> -></p>
+      <p class="fs-4">Remplissez le formulaire ci-contre pour finaliser votre commande <span class="coloring-second">-> -> -></span></p>
       </div>
       `
   );
@@ -119,12 +119,17 @@ function createArticles() {
                 </div>
               </div>
           </article>  
-          <button id="delete" class="btn btn-outline-warning" aria-label"Supprimer l'article">Supprimer</button>
+          <button class="btn btn-outline-warning deleteArticle" aria-label"Supprimer l'article">Supprimer</button>
         </div>
       `
     );
   }
 }
+
+let deleting = document.getElementsByClassName('deleteArticle');
+addEventListener("click", function (e) {
+});
+
 
 function deleteArticle() {
 //

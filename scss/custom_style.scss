@@ -29,6 +29,11 @@
   color: $second-theme-color;
 }
 
+.coloring-second:hover {
+  color : $second-theme-color;
+  transition: 250ms ease-in-out;
+}
+
 .secondary-border {
   border-bottom: .25rem solid $second-theme-color;
 }

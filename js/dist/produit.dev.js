@@ -31,42 +31,60 @@ function createTeddy(tedFinder) {
     var qtyValue = document.getElementById("tedQuantity").value;
     var choosenColor = document.getElementsByName("colorChoice");
     var totalPrice = qtyValue * (tedFinder.price / 100);
+    var coloring = []; // Tableau pout stocker la couleur choisie
 
     for (var i = 0; i < choosenColor.length; i++) {
-      var coloring;
-
       if (choosenColor[i].checked) {
-        (function () {
-          //
-          //////////////// Création et envoi des objets products dans le localStorage ///////////////
-          var addToBasket = function addToBasket() {
-            var tedParams = {
-              name: tedFinder.name,
-              _id: tedIdToCreate,
-              quantity: tedQuantity.value,
-              color: coloring,
-              price: totalPrice,
-              imageUrl: tedFinder.imageUrl
-            };
-            var getPanier = JSON.parse(localStorage.getItem("panier"));
-
-            if (getPanier) {
-              getPanier.push(JSON.stringify(tedParams));
-              localStorage.setItem("panier", JSON.stringify(getPanier));
-            } else {
-              getPanier = [];
-              getPanier.push(JSON.stringify(tedParams));
-              localStorage.setItem("panier", JSON.stringify(getPanier));
-            }
-          }; //////////////////////////////////////////////////////////////////////////////////////
-
-
-          var coloring = choosenColor[i].id;
-          addToBasket();
-          window.location.reload(); // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
-        })();
+        actualColor = choosenColor[i].id;
+        coloring.push(actualColor);
       }
-    }
+    } //////////////// Création et envoi des objets products dans le localStorage ///////////////
+
+
+    function addToBasket() {
+      var tedParams = {
+        name: tedFinder.name,
+        _id: tedIdToCreate,
+        quantity: tedQuantity.value,
+        color: coloring,
+        price: totalPrice,
+        imageUrl: tedFinder.imageUrl
+      };
+
+      if (getPanier != null) {
+        var thisColor = coloring[i];
+        var thisTed = tedIdToCreate;
+
+        for (var i = 0; i < JSON.stringify(getPanier.length); i++) {
+          if ( //console.log(JSON.parse(getPanier[2])._id)
+          thisTed == JSON.parse(getPanier[i])._id && thisColor == JSON.parse(getPanier[i]).color) {
+            //Si teddy déjà présent, same id + color, alors on l'ajoute
+            console.log('partie 1');
+            console.log("Found : ".concat(thisTed));
+            console.log("Found : ".concat(coloring));
+            break;
+          } else {
+            // Si teddy non existant, on le crée dans le panier
+            //getPanier = [];
+            getPanier.push(JSON.stringify(tedParams));
+            localStorage.setItem("panier", JSON.stringify(getPanier));
+            console.log("Si pas de teddy, on l'ajoute");
+            break;
+          }
+        }
+      } else if (getPanier == null) {
+        // Si panier inexistant, création puis push
+        getPanier = [];
+        getPanier.push(JSON.stringify(tedParams));
+        localStorage.setItem("panier", JSON.stringify(getPanier));
+        console.log("Panier vide, création");
+      }
+    } //////////////////////////////////////////////////////////////////////////////////////
+    // window.location.reload();
+    // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
+
+
+    addToBasket();
   }); //////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////
   // Ecoute de la quantité choisie
@@ -75,16 +93,15 @@ function createTeddy(tedFinder) {
     var tedPrice = document.getElementById("productPrice");
     tedPrice.textContent = "Ajouter au panier pour ".concat(tedFinder.price / 100 * e.target.value, " \u20AC");
   });
-}
-
-; ///////////////////////////////////// Fin de create Teddy /////////////////////////////////////////////
+} ///////////////////////////////////// Fin de create Teddy /////////////////////////////////////////////
 // Créations des boutons de choix de couleurs en fonction du teddy séléctionné
+
 
 var teddyColorator = function teddyColorator(tedFinder) {
   var colorContainer = document.getElementById("productColors");
 
   for (var i = 0; i < tedFinder.colors.length; i++) {
     var color = tedFinder.colors;
-    colorContainer.insertAdjacentHTML("beforeend", "\n      <input type=\"radio\" class=\"color-option btn-check\" name=\"colorChoice\" id=\"".concat(color[i], "\" autocomplete=\"off\" checked>\n      <label class=\"color-btn btn fs-4\" for=\"").concat(color[i], "\" style=\"background-color: ").concat(color[i], "\">").concat(color[i], "</label>\n      "));
+    colorContainer.insertAdjacentHTML("beforeend", "\n      <input type=\"radio\" class=\"color-option btn-check\" name=\"colorChoice\" id=\"".concat(color[i], "\" autocomplete=\"off\" checked>\n      <label class=\"color-btn btn fs-4\" for=\"").concat(color[i], "\" value=\"").concat(color[i], "\" style=\"background-color: ").concat(color[i], "\">").concat(color[i], "</label>\n      "));
   }
 };
