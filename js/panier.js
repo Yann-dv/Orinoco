@@ -42,11 +42,11 @@ function createArticles() {
   let finalPrice = arrayPrices.reduce((a, b) => a + b, 0);
   // Object.values(arrayPrices).reduce((a, b) => a + b, 0);
 /////////////////////////////////////////////////////////////////////////////////////////
-  document.getElementById("panierBadge");
+  //document.getElementById("panierBadge"); -> to delete ? 
   basketContent.insertAdjacentHTML(
     "beforeend",
     `<h2 class="link-anim">Tous mes articles</h2>`
-  ); debugger;
+  );
   summary.insertAdjacentHTML(
     "beforeend",
     `<h2 class="link-anim">Résumé de ma commande</h2>`
