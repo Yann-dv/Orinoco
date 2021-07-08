@@ -25,6 +25,15 @@
   transition: 250ms ease-in-out;
 }
 
+.secondary-text {
+  color: $second-theme-color;
+}
+
+.coloring-second:hover {
+  color : $second-theme-color;
+  transition: 250ms ease-in-out;
+}
+
 .secondary-border {
   border-bottom: .25rem solid $second-theme-color;
 }
@@ -71,7 +80,15 @@
 
 input[type="radio"].btn-check.color-option:checked+label {
   outline: .35rem solid $second-theme-color;
-  transform: scale(1.08);
+}
+
+.color-btn {
+  width:8rem; 
+  height:5rem;
+}
+
+.form-control  {
+  font-family:'Times New Roman', Times, serif !important;
 }
 
 // Basket style //
@@ -136,7 +153,16 @@ input[type="radio"].btn-check.color-option:checked+label {
 } // panier-btn
 
 // Media-queries for customized elements
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
+
+  .color-btn {
+    width:5rem; 
+    height:5rem;
+    border-radius: 10rem !important;
+    font-size: 1rem !important;
+    overflow: hidden;
+  }
+
   #return .return {
     height: 2rem;
     margin-right: 3rem;

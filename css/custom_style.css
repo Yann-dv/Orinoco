@@ -19,6 +19,15 @@
   transition: 250ms ease-in-out;
 }
 
+.secondary-text {
+  color: #8f5bfd;
+}
+
+.coloring-second:hover {
+  color: #8f5bfd;
+  transition: 250ms ease-in-out;
+}
+
 .secondary-border {
   border-bottom: 0.25rem solid #8f5bfd;
 }
@@ -64,7 +73,15 @@
 
 input[type=radio].btn-check.color-option:checked + label {
   outline: 0.35rem solid #8f5bfd;
-  transform: scale(1.08);
+}
+
+.color-btn {
+  width: 8rem;
+  height: 5rem;
+}
+
+.form-control {
+  font-family: "Times New Roman", Times, serif !important;
 }
 
 .panier-btn button {
@@ -106,7 +123,15 @@ input[type=radio].btn-check.color-option:checked + label {
   --hover: #c55bfd;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
+  .color-btn {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 10rem !important;
+    font-size: 1rem !important;
+    overflow: hidden;
+  }
+
   #return .return {
     height: 2rem;
     margin-right: 3rem;
