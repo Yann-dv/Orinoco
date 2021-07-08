@@ -1,6 +1,12 @@
-let getPanier = JSON.parse(localStorage.getItem(`panier`));
-let getTotalPanier = JSON.stringify(getPanier.length);
-// console.log(JSON.parse(getPanier[2]).color)
+//let gotPanier = JSON.parse(localStorage.getItem(`panier`));
+const getPanier = () => {
+  return localStorage.getItem(`panier`);
+}
+const setPanier = (panierToStore) => {
+  localStorage.setItem('panier', JSON.stringify(panierToStore));
+}
+let panier = getPanier();
+let parsedPanier = JSON.parse(panier);
 
 checkArticles();
 emptyBasketHide();
@@ -8,17 +14,17 @@ deleteArticle();
 
 function checkArticles() {
   if (
-    getPanier != null &&
+    panier != null &&
     document.getElementById("panierBadge") != undefined
   ) {
-    panierBadge.textContent = getTotalPanier;
+    panierBadge.textContent = parsedPanier.length;
     panierBadge.style.visibility = "visible";
   }
 }
 
 function emptyBasketHide() {
   if (document.getElementById("emptyBasket") != undefined) {
-    if (getPanier != null) {
+    if (panier != null) {
       emptyBasket.classList.remove("d-flex");
       emptyBasket.style.display = "none";
       createArticles();
@@ -29,15 +35,14 @@ function emptyBasketHide() {
 function createArticles() {
   ///// Création d'un tableau pour recueillir les prix des articles et créer un total /////
   const arrayPrices = [0]; 
-  getPanier.forEach(element => {
-    let prices = (JSON.parse(element).price);
+  parsedPanier.forEach(element => {
+    let prices = element.price;
     arrayPrices.push(prices);
   });
-  let finalPrice = Object.values(arrayPrices).reduce((a, b) => a + b, 0);
-  console.log(arrayPrices);
-  console.log(Object.values(arrayPrices).reduce((a, b) => a + b, 0));
+  let finalPrice = arrayPrices.reduce((a, b) => a + b, 0);
+  // Object.values(arrayPrices).reduce((a, b) => a + b, 0);
 /////////////////////////////////////////////////////////////////////////////////////////
-  document.getElementById("panierBadge");
+  //document.getElementById("panierBadge"); -> to delete ? 
   basketContent.insertAdjacentHTML(
     "beforeend",
     `<h2 class="link-anim">Tous mes articles</h2>`
@@ -51,8 +56,8 @@ function createArticles() {
     `<div id="cmdSummary" class="main-color my-3 border border-dark rounded shadow px-3">
       <h5>Votre commande comprend :</h5>
       <ul>
-        <li class="fs-3">${getPanier.length} articles</li>
-        <li class="fs-3"> Pour un prix total de : <span class="secondary-border secondary-color coloring-second">${JSON.parse(finalPrice)}€</span></li>
+        <li class="fs-3">${parsedPanier.length} articles</li>
+        <li class="fs-3"> Pour un prix total de : <span class="secondary-border secondary-color coloring-second">${finalPrice}€</span></li>
       </ul>
       <p class="fs-4">Remplissez le formulaire ci-contre pour finaliser votre commande <span class="coloring-second">-> -> -></span></p>
       </div>
@@ -100,21 +105,21 @@ function createArticles() {
   `
   );
 
-  for (let i = 0; i < getTotalPanier; i++) {
+  for (let i = 0; i < parsedPanier.length; i++) {
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
         <div class="selectedArticles my-2 card rounded shadow"> 
             <article class="main-color row g-0">
               <div class="main-color col-6">
-                <img src="${JSON.parse(getPanier[i]).imageUrl}" class="main-color img-fluid p-3">
+                <img src="${parsedPanier[i].imageUrl}" class="main-color img-fluid p-3">
               </div>
               <div class=" col-6">
                 <div class="card-body px-2 py-2">
-                  <h5 class="secondary-text card-title">${JSON.parse(getPanier[i]).name}</h5>
-                  <span class="articleQty card-text fs-5">Quantité : ${JSON.parse(getPanier[i]).quantity}</span></br>
-                  <span class="articleColor card-text fs-5">Couleur : ${JSON.parse(getPanier[i]).color}</span></br>
-                  <span class="articlePrice card-text fs-5">Prix : ${JSON.parse(getPanier[i]).price}€</span>
+                  <h5 class="secondary-text card-title">${parsedPanier[i].name}</h5>
+                  <span class="articleQty card-text fs-5">Quantité : ${parsedPanier[i].quantity}</span></br>
+                  <span class="articleColor card-text fs-5">Couleur : ${parsedPanier[i].color}</span></br>
+                  <span class="articlePrice card-text fs-5">Prix : ${parsedPanier[i].price}€</span>
                 </div>
               </div>
           </article>  

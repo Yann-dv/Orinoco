@@ -1,9 +1,5 @@
-const localStoragePanier = localStorage.getItem(`panier`);
-
 // Recherche de l'objet local correspondant à l'id du teddy passée en URL sur page index
-var tedIdToCreate = new URLSearchParams(
-  document.location.search.substring(1)
-).get("teddy");
+var tedIdToCreate = new URLSearchParams(document.location.search.substring(1)).get("teddy");
 
 /// API Fetch
 fetch("http://localhost:3000/api/teddies/")
@@ -75,77 +71,10 @@ function createTeddy(tedFinder) {
   );
   ////////////////////// Ecoute du bouton d'envoi de commande //////////////////////
   productPrice.addEventListener("click", function (e) {
-    // Boucle pour détecter quelle couleur est checked
-    var qtyValue = document.getElementById("tedQuantity").value;
-    //var choosenColor = document.getElementsByName("colorChoice");
-    var totalPrice = qtyValue * (tedFinder.price / 100);
-    var isCheckedColor = document.querySelector('input[name = "colorChoice"]:checked');
-    var checkedColorValue = document.querySelector('input[name = "colorChoice"]:checked').value;
-    var checkedColorToString = JSON.stringify(document.querySelector('input[name = "colorChoice"]:checked').value);
-
-    //////////////// Création et envoi des objets products dans le localStorage ///////////////
-    function addToBasket() {
-      if (isCheckedColor != null) { // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
-
-        //////////// Création des objets teddy de teddy //////////////////////////
-            const tedParams = {name: tedFinder.name, _id: tedIdToCreate,
-            quantity: tedQuantity.value, color: JSON.stringify(checkedColorToString), 
-            price: totalPrice, imageUrl: tedFinder.imageUrl,};
-        //////////////////////////////////////////////////////////////////
-        if (getPanier != null) {
-          for (var i = 0; i < JSON.stringify(getPanier.length); i++) {
-            let searchingColors = JSON.parse(getPanier[i]).color;
-            //let searchingId = (JSON.parse(element)._id);
-            const arrayPrices = [0]; 
-            //getPanier.forEach(element => {
-                var thisTed = tedIdToCreate;
-                //let searchingColors = (JSON.parse(element).color);
-                //let col = getPanier.indexOf(JSON.stringify(document.querySelector('input[name = "colorChoice"]:checked')));
-              //});
-              if (checkedColorValue = JSON.parse(searchingColors)
-                //console.log(JSON.parse(getPanier[2])._id)
-                //thisTed == (JSON.stringify(getPanier[i])._id) &&
-                //thisColor == (JSON.stringify(getPanier[i]).color)
-                //thisTed == localStorage.getItem(`panier`)[i])._id;
-                //thisTed == allBasketIds
-                
-              ) {
-                //Si teddy déjà présent, same id + color, alors on l'ajoute
-                console.log(checkedColorValue, searchingColors);
-                console.log("Teddy déjà présent, on doit rajouter qty et price");
-                break;
-              } else {
-              // Si teddy non existant, on le crée dans le panier
-              //getPanier = [];
-              getPanier.push(JSON.stringify(tedParams));
-              localStorage.setItem(`panier`, JSON.stringify(getPanier));
-              console.log("Si pas de teddy, on l'ajoute");
-              break;
-              }
-            //});
-          };
-        
-        } else if (getPanier == null) {
-          // Si panier inexistant, création puis push
-          getPanier = [];
-          getPanier.push(JSON.stringify(tedParams));
-          localStorage.setItem(`panier`, JSON.stringify(getPanier));
-          console.log("Panier vide, création");
-        }
-      
-          //////////////////////////////////////////////////////////////////////////////////////
-          //window.location.reload();
-          // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
-      } // fin de checkedcolor
-      else {
-      alert("Veuillez séléctionner une couleur pour votre produit."); // Si pas de couleur checked, message d'alerte et pas d'envoi
-      }
-      
-    } //fin de addToBasket
-    addToBasket();
+    addToBasket(tedFinder);
   }); // Fin addeventlistener
   //////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////
+  
   // Ecoute de la quantité choisie
   tedQuantity.addEventListener("change", function (e) {
     const tedPrice = document.getElementById("productPrice");
@@ -158,14 +87,79 @@ function createTeddy(tedFinder) {
 // Créations des boutons de choix de couleurs en fonction du teddy séléctionné
 const teddyColorator = (tedFinder) => {
   const colorContainer = document.getElementById("productColors");
+  let color = tedFinder.colors;
+  
   for (let i = 0; i < tedFinder.colors.length; i++) {
-    let color = tedFinder.colors;
+    const colorFilter = (color) => { // Filtres pour le défaut d'affichage CSS des couleurs dark et pale brown
+      if (color=== 'Pale brown') {
+        return "#8B4513";
+      } else if(color === 'Dark brown') {
+        return "#800000";
+      } else {
+        return color; }
+      };
+    //let brownFilter = colorFilter(tedFinder.colors);
+   
     colorContainer.insertAdjacentHTML(
       "beforeend",
       `
       <input type="radio" class="color-option btn-check" value="${color[i]}" name="colorChoice" id="${color[i]}" autocomplete="off">
-      <label class="color-btn btn fs-4" for="${color[i]}" style="background-color: ${color[i]}">${color[i]}</label>
+      <label class="color-btn btn fs-4" for="${color[i]}" style="background-color: ${colorFilter(color[i])}">${color[i]}</label>
       `
     );
-  }
+  };
 };
+
+//////////////// Création et envoi des objets products dans le localStorage ///////////////
+function addToBasket(tedFinder) {
+    // récupère le panier récent
+    var qtyValue = document.getElementById("tedQuantity").value;
+    var totalPrice = qtyValue * (tedFinder.price / 100);
+    var isCheckedColor = document.querySelector('input[name = "colorChoice"]:checked');
+    var colorBtnValue = document.querySelector('input[name = "colorChoice"]:checked').value;
+    const SEARCHED_TEDDY_ID = tedIdToCreate;
+    const SEARCHED_TEDDY_COLOR = colorBtnValue;
+
+    //////////// Création des objets teddy //////////////////////////
+    const tedParams = {name: tedFinder.name, _id: tedIdToCreate,
+      quantity: qtyValue, color: colorBtnValue, 
+      price: totalPrice, imageUrl: tedFinder.imageUrl,};
+    /////////////////////////////////////////////////////////////////
+
+  if (isCheckedColor != null) { // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
+    if (panier != null) {
+      let foundIndex = -1;
+      for(let i = 0; i < parsedPanier.length; i++) {
+        if((panier[i])._id == SEARCHED_TEDDY_ID && (panier[i]).color == SEARCHED_TEDDY_COLOR) {
+        foundIndex = i;
+        panier[foundIndex].quantity = panier[foundIndex].quantity + 1;
+        setPanier(panier[foundIndex]);
+        alert(panier[foundIndex]);
+        // add changer price
+        console.log("Ici");
+        }
+        else{
+          monPanier = [];
+          monPanier.push(tedParams);
+          setPanier(monPanier);
+          console.log('Teddy ajouté');
+          debugger;
+        }
+      }//fin de boucle for i
+
+    } else if (panier == null) {
+      // Si panier inexistant, création puis push
+      monPanier = [];
+      monPanier.push(tedParams);
+      setPanier(monPanier);
+      console.log("Panier vide, création + ajout teddy");
+    }
+  
+      //////////////////////////////////////////////////////////////////////////////////////
+      window.location.reload();
+      // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
+  } // fin de checkedcolor
+  else if(isCheckedColor == null){
+  alert("Veuillez séléctionner une couleur pour votre produit."); // Si pas de couleur checked, message d'alerte et pas d'envoi
+  }
+} //fin de addToBasket
