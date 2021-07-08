@@ -1,5 +1,9 @@
 const localStoragePanier = localStorage.getItem(`panier`);
 
+/*const getColor = (color) {
+  if (color === 'Pale brown') rturn '#fd4fd';
+}*/
+
 // Recherche de l'objet local correspondant à l'id du teddy passée en URL sur page index
 var tedIdToCreate = new URLSearchParams(
   document.location.search.substring(1)
@@ -105,6 +109,8 @@ const teddyColorator = (tedFinder) => {
 
 //////////////// Création et envoi des objets products dans le localStorage ///////////////
 function addToBasket(tedFinder) {
+    // récupère le panier récent
+    let panier = getPanier();
     var qtyValue = document.getElementById("tedQuantity").value;
     var totalPrice = qtyValue * (tedFinder.price / 100);
     var isCheckedColor = document.querySelector('input[name = "colorChoice"]:checked');
@@ -114,37 +120,36 @@ function addToBasket(tedFinder) {
 
     //////////// Création des objets teddy //////////////////////////
     const tedParams = {name: tedFinder.name, _id: tedIdToCreate,
-      quantity: tedQuantity.value, color: colorBtnValue, 
+      quantity: parseInt(qtyValue.value,10), color: colorBtnValue, 
       price: totalPrice, imageUrl: tedFinder.imageUrl,};
   //////////////////////////////////////////////////////////////////
     //var checkedColorValue = document.querySelector('input[name = "colorChoice"]:checked').value;
     //var checkedColorToString = JSON.stringify(document.querySelector('input[name = "colorChoice"]:checked').value);*/
   if (isCheckedColor != null) { // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
-    if (getPanier != null) {
+    if (panier != null) {
       //const foundIndex = getPanier.findIndex((temporaryTeddy) => temporaryTeddy._id === SEARCHED_TEDDY_ID && temporaryTeddy.color === SEARCHED_TEDDY_COLOR);
       let foundIndex = -1;
-      for(let i = 0; i < getPanier.length; i++) {
-        if((getPanier[i])._id == SEARCHED_TEDDY_ID && (getPanier[i]).color == SEARCHED_TEDDY_COLOR) {
+      for(let i = 0; i < panier.length; i++) {
+        if((panier[i])._id == SEARCHED_TEDDY_ID && (panier[i]).color == SEARCHED_TEDDY_COLOR) {
         foundIndex = i;
-        (getPanier[foundIndex]).quantity = (getPanier[foundIndex]).quantity + 1;
-        localStorage.set(JSON.stringify(getPanier));
-        console.log(getPanier);
-        console.log(getPanier[foundIndex]).quantity;
+        (panier[foundIndex]).quantity = (panier[foundIndex]).quantity + 1;
+        localStorage.setItem(`panier`, JSON.stringify(panier));
+        // add changer price
         console.log("Ici");
         }
         else{
-          console.log('là');
+          console.log('là'); // si même id mais pas même couleur et teddy déjà dans le panier
         }
       }//fin de boucle for i
 
-    } else if (getPanier == null) {
+    } else if (panier == null) {
       // Si panier inexistant, création puis push
-      getPanier = [];
-      getPanier.push(JSON.stringify(tedParams));
-      localStorage.setItem(`panier`, JSON.stringify(getPanier));
+      panier = [];
+      panier.push(tedParams);
+      localStorage.setItem(`panier`, JSON.stringify(panier));
       console.log("Panier vide, création");
       console.log(tedFinder._id);
-      console.log(JSON.parse(getPanier[0]).color);
+      console.log(panier[0].color);
     }
   
       //////////////////////////////////////////////////////////////////////////////////////
