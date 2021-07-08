@@ -1,7 +1,5 @@
 "use strict";
 
-var panier = getPanier();
-
 var getPanier = function getPanier() {
   return JSON.parse(localStorage.getItem("panier"));
 };
@@ -10,6 +8,7 @@ var setPanier = function setPanier(panierToStore) {
   localStorage.setItem('panier', panierToStore);
 };
 
+var panier = getPanier();
 checkArticles();
 emptyBasketHide();
 deleteArticle();

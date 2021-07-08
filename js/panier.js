@@ -1,10 +1,10 @@
-let panier = getPanier();
 const getPanier = () => {
   return JSON.parse(localStorage.getItem(`panier`));
 }
 const setPanier = (panierToStore) => {
   localStorage.setItem('panier', panierToStore)
 }
+let panier = getPanier();
 
 checkArticles();
 emptyBasketHide();
