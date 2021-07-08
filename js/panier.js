@@ -1,10 +1,12 @@
+//let gotPanier = JSON.parse(localStorage.getItem(`panier`));
 const getPanier = () => {
-  return JSON.parse(localStorage.getItem(`panier`));
+  return localStorage.getItem(`panier`);
 }
 const setPanier = (panierToStore) => {
-  localStorage.setItem('panier', panierToStore)
+  localStorage.setItem('panier', JSON.stringify(panierToStore));
 }
 let panier = getPanier();
+let parsedPanier = JSON.parse(panier);
 
 checkArticles();
 emptyBasketHide();
@@ -15,7 +17,7 @@ function checkArticles() {
     panier != null &&
     document.getElementById("panierBadge") != undefined
   ) {
-    panierBadge.textContent = panier.length;
+    panierBadge.textContent = parsedPanier.length;
     panierBadge.style.visibility = "visible";
   }
 }
@@ -33,19 +35,18 @@ function emptyBasketHide() {
 function createArticles() {
   ///// Création d'un tableau pour recueillir les prix des articles et créer un total /////
   const arrayPrices = [0]; 
-  panier.forEach(element => {
-    let prices = (element.price);
+  parsedPanier.forEach(element => {
+    let prices = element.price;
     arrayPrices.push(prices);
   });
-  let finalPrice = arrayPrices.reduce((a, b) => a + b, 0); /// Object.values(arrayPrices).reduce((a, b) => a + b, 0);
-  //console.log(arrayPrices);
-  //console.log(arrayPrices).reduce((a, b) => a + b, 0);
+  let finalPrice = arrayPrices.reduce((a, b) => a + b, 0);
+  // Object.values(arrayPrices).reduce((a, b) => a + b, 0);
 /////////////////////////////////////////////////////////////////////////////////////////
   document.getElementById("panierBadge");
   basketContent.insertAdjacentHTML(
     "beforeend",
     `<h2 class="link-anim">Tous mes articles</h2>`
-  );
+  ); debugger;
   summary.insertAdjacentHTML(
     "beforeend",
     `<h2 class="link-anim">Résumé de ma commande</h2>`
@@ -56,7 +57,7 @@ function createArticles() {
       <h5>Votre commande comprend :</h5>
       <ul>
         <li class="fs-3">${panier.length} articles</li>
-        <li class="fs-3"> Pour un prix total de : <span class="secondary-border secondary-color coloring-second">${JSON.parse(finalPrice)}€</span></li>
+        <li class="fs-3"> Pour un prix total de : <span class="secondary-border secondary-color coloring-second">${finalPrice}€</span></li>
       </ul>
       <p class="fs-4">Remplissez le formulaire ci-contre pour finaliser votre commande <span class="coloring-second">-> -> -></span></p>
       </div>
@@ -104,21 +105,21 @@ function createArticles() {
   `
   );
 
-  for (let i = 0; i < panier.length; i++) {
+  for (let i = 0; i < parsedPanier.length; i++) {
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
         <div class="selectedArticles my-2 card rounded shadow"> 
             <article class="main-color row g-0">
               <div class="main-color col-6">
-                <img src="${panier[i].imageUrl}" class="main-color img-fluid p-3">
+                <img src="${parsedPanier[i].imageUrl}" class="main-color img-fluid p-3">
               </div>
               <div class=" col-6">
                 <div class="card-body px-2 py-2">
-                  <h5 class="secondary-text card-title">${panier[i].name}</h5>
-                  <span class="articleQty card-text fs-5">Quantité : ${panier[i].quantity}</span></br>
-                  <span class="articleColor card-text fs-5">Couleur : ${panier[i].color}</span></br>
-                  <span class="articlePrice card-text fs-5">Prix : ${panier[i].price}€</span>
+                  <h5 class="secondary-text card-title">${parsedPanier[i].name}</h5>
+                  <span class="articleQty card-text fs-5">Quantité : ${parsedPanier[i].quantity}</span></br>
+                  <span class="articleColor card-text fs-5">Couleur : ${parsedPanier[i].color}</span></br>
+                  <span class="articlePrice card-text fs-5">Prix : ${parsedPanier[i].price}€</span>
                 </div>
               </div>
           </article>  

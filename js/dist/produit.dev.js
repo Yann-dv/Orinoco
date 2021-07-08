@@ -72,21 +72,18 @@ function addToBasket(tedFinder) {
     color: colorBtnValue,
     price: totalPrice,
     imageUrl: tedFinder.imageUrl
-  }; //////////////////////////////////////////////////////////////////
-  //var checkedColorValue = document.querySelector('input[name = "colorChoice"]:checked').value;
-  //var checkedColorToString = JSON.stringify(document.querySelector('input[name = "colorChoice"]:checked').value);*/
+  }; /////////////////////////////////////////////////////////////////
 
   if (isCheckedColor != null) {
     // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
     if (panier != null) {
-      //const foundIndex = getPanier.findIndex((temporaryTeddy) => temporaryTeddy._id === SEARCHED_TEDDY_ID && temporaryTeddy.color === SEARCHED_TEDDY_COLOR);
       var foundIndex = -1;
 
       for (var i = 0; i < panier.length; i++) {
         if (panier[i]._id == SEARCHED_TEDDY_ID && panier[i].color == SEARCHED_TEDDY_COLOR) {
           foundIndex = i;
           panier[foundIndex].quantity = panier[foundIndex].quantity + 1;
-          localStorage.setItem("panier", JSON.stringify(panier)); // add changer price
+          setPanier(); // add changer price
 
           console.log("Ici");
         } else {

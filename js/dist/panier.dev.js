@@ -40,8 +40,6 @@ function createArticles() {
   var finalPrice = arrayPrices.reduce(function (a, b) {
     return a + b;
   }, 0); /// Object.values(arrayPrices).reduce((a, b) => a + b, 0);
-  //console.log(arrayPrices);
-  //console.log(arrayPrices).reduce((a, b) => a + b, 0);
   /////////////////////////////////////////////////////////////////////////////////////////
 
   document.getElementById("panierBadge");
