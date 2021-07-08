@@ -56,7 +56,7 @@ function createArticles() {
     `<div id="cmdSummary" class="main-color my-3 border border-dark rounded shadow px-3">
       <h5>Votre commande comprend :</h5>
       <ul>
-        <li class="fs-3">${panier.length} articles</li>
+        <li class="fs-3">${parsedPanier.length} articles</li>
         <li class="fs-3"> Pour un prix total de : <span class="secondary-border secondary-color coloring-second">${finalPrice}€</span></li>
       </ul>
       <p class="fs-4">Remplissez le formulaire ci-contre pour finaliser votre commande <span class="coloring-second">-> -> -></span></p>

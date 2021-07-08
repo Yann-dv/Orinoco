@@ -129,7 +129,7 @@ function addToBasket(tedFinder) {
   if (isCheckedColor != null) { // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
     if (panier != null) {
       let foundIndex = -1;
-      for(let i = 0; i < panier.length; i++) {
+      for(let i = 0; i < parsedPanier.length; i++) {
         if((panier[i])._id == SEARCHED_TEDDY_ID && (panier[i]).color == SEARCHED_TEDDY_COLOR) {
         foundIndex = i;
         panier[foundIndex].quantity = panier[foundIndex].quantity + 1;
@@ -137,7 +137,6 @@ function addToBasket(tedFinder) {
         alert(panier[foundIndex]);
         // add changer price
         console.log("Ici");
-        debugger;
         }
         else{
           monPanier = [];

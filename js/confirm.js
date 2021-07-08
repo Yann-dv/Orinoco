@@ -13,15 +13,17 @@ const h = today.getUTCHours();
 function getRandomArbitrary(min, max) {
     return Math.random(9999, 1) * (max - min) + min;
   }
-
-var randomCmdNumber = `${y}${m}${d}${h}${String(getRandomArbitrary)}`;
+ 
+const rNbr =  Math.floor((Math.random() * 999) + 1);
+  
+var randomCmdNumber = `${y}${m}${d}${h}_${commandPrice}_${rNbr.toString()}`;
 
 
 confirmation.insertAdjacentHTML(
     "beforeend",
-    `<h2 class="link-anim">Mon récapitulatif de commande</h2>
-    <h3 class="link-anim">Commande n°: ${randomCmdNumber}</h3>
-    <span class="articleQty card-text fs-5">Quantité : ${parsedPanier[0].quantity}</span></br>
-    <span class="articlePrice card-text fs-5">Prix : ${commandPrice}€</span>
+    `<h2 class="fs-2 secondary-border w-50">Mon récapitulatif de commande</h2>
+    <h3 class="mt-3">Commande n°: ${randomCmdNumber}</h3>
+    <span class="articleQty card-text fs-4">Quantité : ${parsedPanier[0].quantity}</span></br>
+    <span class="articlePrice card-text fs-4">Prix : ${commandPrice}€</span>
     
     `);
