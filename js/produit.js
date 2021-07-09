@@ -115,7 +115,7 @@ function addToBasket(tedFinder) {
     // récupère le panier récent
     panier = getPanier();
     var qtyValue = document.getElementById("tedQuantity").value;
-    var totalPrice = qtyValue * (tedFinder.price / 100);
+    var itemPrice = qtyValue * (tedFinder.price / 100);
     var isCheckedColor = document.querySelector('input[name = "colorChoice"]:checked');
     var colorBtnValue = document.querySelector('input[name = "colorChoice"]:checked').value;
     const SEARCHED_TEDDY_ID = tedIdToCreate;
@@ -124,7 +124,7 @@ function addToBasket(tedFinder) {
     //////////// Création des objets teddy //////////////////////////
     const tedParams = {name: tedFinder.name, _id: tedIdToCreate,
       quantity: qtyValue, color: colorBtnValue, 
-      price: totalPrice, imageUrl: tedFinder.imageUrl,};
+      price: itemPrice, imageUrl: tedFinder.imageUrl,};
     /////////////////////////////////////////////////////////////////
 
   if (isCheckedColor != null) { // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
@@ -134,6 +134,7 @@ function addToBasket(tedFinder) {
         if((panier[i])._id == SEARCHED_TEDDY_ID && (panier[i]).color == SEARCHED_TEDDY_COLOR) {
         foundIndex = i;
         panier[foundIndex].quantity = parseInt(panier[foundIndex].quantity) + parseInt(qtyValue);
+        panier[foundIndex].price = parseInt(panier[foundIndex].price) + parseInt(itemPrice);
         setPanier(panier[foundIndex]);
         alert(panier);
         // add changer price
