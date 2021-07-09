@@ -9,7 +9,6 @@ let panier = getPanier();
 
 checkArticles();
 emptyBasketHide();
-deleteArticle();
 
 function checkArticles() {
   if (
@@ -27,6 +26,10 @@ function emptyBasketHide() {
       emptyBasket.classList.remove("d-flex");
       emptyBasket.style.display = "none";
       createArticles();
+    }
+    else if(panier == null || panier == 0) {
+      emptyBasket.classList.add("d-flex");
+      emptyBasket.style.display = "visible";
     }
   }
 }
@@ -108,7 +111,7 @@ function createArticles() {
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
-        <div class="selectedArticles my-2 card rounded shadow"> 
+        <div class="selectedArticles my-2 card rounded shadow ${panier[i]._id}"> 
             <article class="main-color row g-0">
               <div class="main-color col-6">
                 <img src="${panier[i].imageUrl}" class="main-color img-fluid p-3">
@@ -122,18 +125,29 @@ function createArticles() {
                 </div>
               </div>
           </article>  
-          <button class="btn btn-outline-warning deleteArticle" aria-label"Supprimer l'article">Supprimer</button>
+          <button class="btn btn-outline-warning deleteArticle" aria-label="Supprimer l'article">Supprimer</button>
         </div>
       `
     );
   }
 }
 
-let deleting = document.getElementsByClassName('deleteArticle');
-addEventListener("click", function (e) {
-});
+// Bouton de suppresion d'article //
+const deleteItem = document.querySelectorAll(".btn.deleteArticle");
+let target = document.querySelectorAll("div.selectedArticles");
 
+for(let i = 0; i < deleteItem.length; i++) {
+  deleteItem[i].addEventListener("click", (event) => {
+    event.preventDefault();
+    let id_delete_target = panier[i]._id;
+    console.log(id_delete_target);
 
-function deleteArticle() {
-//
+    panier = panier.filter(el => el._id !== id_delete_target);
+    setPanier(panier);
+    window.location.reload();
+// Si panier = vide, suppression du localStorage panier
+    if (panier == 0 ||panier == null) {
+      localStorage.removeItem('panier');
+    }
+  })
 }
