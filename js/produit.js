@@ -113,6 +113,7 @@ const teddyColorator = (tedFinder) => {
 //////////////// Création et envoi des objets products dans le localStorage ///////////////
 function addToBasket(tedFinder) {
     // récupère le panier récent
+    panier = getPanier();
     var qtyValue = document.getElementById("tedQuantity").value;
     var totalPrice = qtyValue * (tedFinder.price / 100);
     var isCheckedColor = document.querySelector('input[name = "colorChoice"]:checked');
@@ -129,30 +130,32 @@ function addToBasket(tedFinder) {
   if (isCheckedColor != null) { // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
     if (panier != null) {
       let foundIndex = -1;
-      for(let i = 0; i < parsedPanier.length; i++) {
+      for(let i = 0; i < panier.length; i++) {
         if((panier[i])._id == SEARCHED_TEDDY_ID && (panier[i]).color == SEARCHED_TEDDY_COLOR) {
         foundIndex = i;
-        panier[foundIndex].quantity = panier[foundIndex].quantity + 1;
+        panier[foundIndex].quantity = parseInt(panier[foundIndex].quantity) + parseInt(qtyValue);
         setPanier(panier[foundIndex]);
-        alert(panier[foundIndex]);
+        alert(panier);
         // add changer price
+        debugger;
         console.log("Ici");
         }
         else{
-          monPanier = [];
-          monPanier.push(tedParams);
-          setPanier(monPanier);
-          console.log('Teddy ajouté');
-          debugger;
+          panier = [];
+          panier.push(tedParams);
+          setPanier(panier);
+         
         }
       }//fin de boucle for i
 
     } else if (panier == null) {
       // Si panier inexistant, création puis push
-      monPanier = [];
-      monPanier.push(tedParams);
-      setPanier(monPanier);
+      panier = [];
+      panier.push(tedParams);
+      setPanier(panier);
       console.log("Panier vide, création + ajout teddy");
+      
+      //window.open("./images/teddy_3.jpg","My teddy","toolbar=no,location=yes,directories=no,menubar=no,scrollbars=yes,status=yes,resizable=1,width=450, height=100");
     }
   
       //////////////////////////////////////////////////////////////////////////////////////
