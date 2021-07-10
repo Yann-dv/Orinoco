@@ -1,20 +1,18 @@
 //let gotPanier = JSON.parse(localStorage.getItem(`panier`));
 const getPanier = () => {
   return JSON.parse(localStorage.getItem(`panier`));
-}
+};
 const setPanier = (panierToStore) => {
-  localStorage.setItem('panier', JSON.stringify(panierToStore));
-}
+  localStorage.setItem("panier", JSON.stringify(panierToStore));
+};
 let panier = getPanier();
 
 checkArticles();
 emptyBasketHide();
 
+
 function checkArticles() {
-  if (
-    panier != null &&
-    document.getElementById("panierBadge") != undefined
-  ) {
+  if (panier != null && document.getElementById("panierBadge") != undefined) {
     panierBadge.textContent = panier.length;
     panierBadge.style.visibility = "visible";
   }
@@ -26,8 +24,7 @@ function emptyBasketHide() {
       emptyBasket.classList.remove("d-flex");
       emptyBasket.style.display = "none";
       createArticles();
-    }
-    else if(panier == null || panier == 0) {
+    } else if (panier == null || panier == 0) {
       emptyBasket.classList.add("d-flex");
       emptyBasket.style.display = "visible";
     }
@@ -36,15 +33,15 @@ function emptyBasketHide() {
 
 function createArticles() {
   ///// Création d'un tableau pour recueillir les prix des articles et créer un total /////
-  const arrayPrices = [0]; 
-  panier.forEach(element => {
+  const arrayPrices = [0];
+  panier.forEach((element) => {
     let prices = element.price;
     arrayPrices.push(prices);
   });
   let finalPrice = arrayPrices.reduce((a, b) => a + b, 0);
   // Object.values(arrayPrices).reduce((a, b) => a + b, 0);
-/////////////////////////////////////////////////////////////////////////////////////////
-  //document.getElementById("panierBadge"); -> to delete ? 
+  /////////////////////////////////////////////////////////////////////////////////////////
+  //document.getElementById("panierBadge"); -> to delete ?
   basketContent.insertAdjacentHTML(
     "beforeend",
     `<h2 class="link-anim">Tous mes articles</h2>`
@@ -130,24 +127,43 @@ function createArticles() {
       `
     );
   }
-}
+  basketContent.insertAdjacentHTML(
+    "beforeend",
+    `
+    <button class="btn btn-outline-danger deletePanier" aria-label="Supprimer l'ensemble du panier">Vider mon panier</button>
+    `
+  );
+} //Fin creatArticle
 
 // Bouton de suppresion d'article //
 const deleteItem = document.querySelectorAll(".btn.deleteArticle");
 let target = document.querySelectorAll("div.selectedArticles");
 
-for(let i = 0; i < deleteItem.length; i++) {
+for (let i = 0; i < deleteItem.length; i++) {
   deleteItem[i].addEventListener("click", (event) => {
     event.preventDefault();
     let id_delete_target = panier[i]._id;
     console.log(id_delete_target);
 
-    panier = panier.filter(el => el._id !== id_delete_target);
+    panier = panier.filter((el) => el._id !== id_delete_target);
     setPanier(panier);
     window.location.reload();
-// Si panier = vide, suppression du localStorage panier
-    if (panier == 0 ||panier == null) {
-      localStorage.removeItem('panier');
+    // Si panier = vide, suppression du localStorage panier
+    if (panier == 0 || panier == null) {
+      localStorage.removeItem("panier");
     }
-  })
+  });
+}
+
+
+//// Bouton de suppression du panier ////
+const deletePanier = document.querySelectorAll(".btn.deletePanier");
+for (let i = 0; i < deletePanier.length; i++) {
+if (deletePanier[i] !=undefined && panier != 0 || panier != null) {
+  deletePanier[i].addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("panier");
+    window.location.reload();
+  });
+}
 }
