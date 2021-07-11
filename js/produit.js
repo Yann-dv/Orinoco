@@ -178,7 +178,7 @@ function addToBasket(tedFinder) {
     }
   
       //////////////////////////////////////////////////////////////////////////////////////
-      //window.location.reload();
+      window.location.reload();
       // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
   } // fin de checkedcolor
   else if(isCheckedColor == null){

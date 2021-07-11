@@ -40,7 +40,7 @@ function createArticles() {
   let finalPrice = arrayPrices.reduce((a, b) => a + b, 0);
   // Object.values(arrayPrices).reduce((a, b) => a + b, 0);
   /////////////////////////////////////////////////////////////////////////////////////////
-  //document.getElementById("panierBadge"); -> to delete ?
+
   basketContent.insertAdjacentHTML(
     "beforeend",
     `<h2 class="link-anim">Tous mes articles</h2>`
@@ -118,7 +118,7 @@ function createArticles() {
                   <span class="articleQty card-text fs-5">Quantité : ${panier[i].quantity}</span></br>
                   <span class="articleColor card-text fs-5">Couleur : ${panier[i].color}</span></br>
                   <span class="articlePrice card-text fs-5">Prix : ${panier[i].fullPrice}€</span>
-                  <div class="changeQtyBtns">
+                  <div id="changeQtyBtns">
                   <button class="btn py-0 px-2 btn-outline-dark rounded-pill fw-bold plus" value="${panier[i].cmdId}">+</button>
                   <button class="btn py-0 px-2 btn-outline-dark rounded-pill fw-bold moins" value="${panier[i].cmdId}">-</button>
                   </div>
@@ -129,7 +129,7 @@ function createArticles() {
         </div>
       `
     );
-  }
+}
   basketContent.insertAdjacentHTML(
     "beforeend",
     `
@@ -146,7 +146,6 @@ for (let i = 0; i < deleteItem.length; i++) {
   deleteItem[i].addEventListener("click", (event) => {
     event.preventDefault();
     let id_delete_target = panier[i].cmdId;
-    console.log(id_delete_target);
     panier = panier.filter((el) => el.cmdId !== id_delete_target);
     setPanier(panier);
     window.location.reload();
@@ -179,7 +178,7 @@ for (let i = 0; i < panier.length; i++) {
       if (panier[i].cmdId == qtyPlus[i].value) {
         panier[i].quantity = parseInt(panier[i].quantity) + 1;
         panier[i].fullPrice = panier[i].fullPrice + panier[i].unitPrice;
-        panier[i].cmdId = panier[i].name+panier[i].id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        panier[i].cmdId = panier[i].name+panier[i]._id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
         setPanier(panier);
         window.location.reload();
       }
@@ -187,17 +186,13 @@ for (let i = 0; i < panier.length; i++) {
     qtyMoins[i].addEventListener("click", (e) => {
       e.preventDefault();
       if (panier[i].cmdId == qtyPlus[i].value) {
-        if (panier[i].quantity > 0) {
+        if (panier[i].quantity >= 1) {
         panier[i].quantity = parseInt(panier[i].quantity) - 1;
         panier[i].fullPrice = panier[i].fullPrice - panier[i].unitPrice;
-        panier[i].cmdId = panier[i].name+panier[i].id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        panier[i].cmdId = panier[i].name+panier[i]._id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        panier = panier.filter((el) => el.quantity !== 0);// Si élément à 0, on le supprime du local storage
         setPanier(panier);
         window.location.reload();
-        }
-        else { // Si élémnet à 0, on supprimer l'élément du storage local
-          panier = panier.filter((el) => el.quantity !== 0);
-          setPanier(panier);
-          window.location.reload();
         }
       } 
     });
