@@ -172,8 +172,7 @@ function addToBasket(tedFinder) {
       setPanier(panier);
       console.log("Panier vide, création + ajout teddy");
       
-      //window.open("./images/teddy_3.jpg","My teddy","toolbar=no,location=yes,directories=no,menubar=no,scrollbars=yes,status=yes,resizable=1,width=450, height=100");
-    }
+      }
   
       //////////////////////////////////////////////////////////////////////////////////////
       window.location.reload();

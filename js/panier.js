@@ -94,8 +94,8 @@ function createArticles() {
           <input type="email" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z.]{2,15}" id="email" class="form-control" placeholder="jdoe@outlook.fr" required/>
         </div>
         <div>
-          <input type="submit" id="envoi" class="btn btn-primary mt-2" value="Valider ma commande"/> 
-          <input type="reset" id="refresh" class="btn btn-danger mt-2" value="Effacer ma saisie"/>
+          <input type="submit" id="envoi" class="btn btn-primary mt-2" aria-label="Valider ma commande" value="Valider ma commande"/> 
+          <input type="reset" id="refresh" class="btn btn-danger mt-2" aria-label="Effacer ma saisie" value="Effacer ma saisie"/>
         </div>
     </form>
     </div>
@@ -199,9 +199,9 @@ for (let i = 0; i < panier.length; i++) {
 }
 
   ////////////////////// Ecoute du bouton d'envoi de commande //////////////////////
-  envoi.addEventListener("click", function (e) {
-    e.preventDefault();
-    const formValues = { //Object pour localstorage
+  envoi.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formValues = { //Object pour localstorage
       nom: document.querySelector('#firstname').value,
       prenom: document.querySelector('#secondname').value,
       adresse: document.querySelector('#adresse').value,
@@ -210,6 +210,24 @@ for (let i = 0; i < panier.length; i++) {
       email: document.querySelector('#email').value,
     }
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
+
+    //////////////////Envoi de la commande via POST //////////
+    const commandRequest = {
+      contact : JSON.parse(localStorage.getItem("formValues")),
+      commande : JSON.parse(localStorage.getItem(`panier`))
+    }
+    //const contact = localStorage.getItem("formValues");
+    //const commande = localStorage.getItem(`panier`);
+    fetch("http://localhost:3000/api/teddies/order", {
+      method: "POST",
+      body: JSON.stringify(commandRequest),
+      headers: {
+        "Content-Type" : "application/json",
+      },
+    });
+    //////////////////////////////////////////////////////////
+
+    debugger; 
   }); // Fin addeventlistener
   //////////////////////////////////////////////////////////////////////////////////////
 
