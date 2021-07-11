@@ -1,7 +1,5 @@
 // Recherche de l'objet local correspondant à l'id du teddy passée en URL sur page index
-var tedIdToCreate = new URLSearchParams(
-  document.location.search.substring(1)
-).get("teddy");
+var tedIdToCreate = new URLSearchParams(document.location.search.substring(1)).get("teddy");
 
 /// API Fetch
 fetch("http://localhost:3000/api/teddies/")
@@ -41,16 +39,16 @@ function createTeddy(tedFinder) {
             <img src="${tedFinder.imageUrl}" alt="Teddy" class="img-fluid p-3">
         </div>
       </div>
-      <div class="teddy col-12 col-lg-6 main-color ms-3 px-3 d-flex">
-        <div class="product-desc d-flex flex-column">
-            <h2 class="fw-bold text-center pt-2">${tedFinder.name}</h2>
+      <div class="teddy col-12 col-lg-6 main-color px-3">
+        <div class="product-desc">
+            <h2 class="fw-bold text-center">${tedFinder.name}</h2>
             <p class="fs-5">${tedFinder.description}</p>
             <h5 class="font-lg fw-bold">Choisissez une couleur pour votre teddy :</h5>
             <div class="container colors-container">
-              <div class="d-flex m-auto justify-content-around py-1" id="productColors">
+              <div class="m-auto d-flex flex-nowrap justify-content-between" id="productColors">
               </div>
             </div>
-            <label class="m-2 fs-5 selectQuantity">Quantité : 
+            <label class="m-2 fs-5 selectQuantity">Quantité :
             <select id="tedQuantity">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -64,50 +62,19 @@ function createTeddy(tedFinder) {
             <option value="10">10</option>
             </select>
             </label>
-            <button id="productPrice" class="w-full bg-secondary text-white fw-bold fs-4 rounded mx-5" type="button">Ajouter au panier pour 
-            <span>${tedFinder.price / 100} €</span>
+            <button id="productPrice" class="btn btn-secondary bg-gradientp-2 d-flex flex-nowrap w-full bg-secondary text-white fw-bold fs-4 rounded" type="button">Ajouter au panier pour 
+            <span class="ms-2">${tedFinder.price / 100}€</span>
             </button>
         </div>
       </div>
         `
   );
-
   ////////////////////// Ecoute du bouton d'envoi de commande //////////////////////
   productPrice.addEventListener("click", function (e) {
-    // Boucle pour détecter quelle couleur est checked
-    //addProduct(tedParams); where ?
-    var qtyValue = document.getElementById("tedQuantity").value;
-    var choosenColor = document.getElementsByName("colorChoice");
-    var totalPrice = qtyValue * (tedFinder.price / 100);
-    for (var i = 0; i < choosenColor.length; i++) {
-      var coloring;
-      if (choosenColor[i].checked) {
-        let coloring = choosenColor[i].id;
-        addToBasket(); //
-  //////////////// Création et envoi des objets products dans le localStorage ///////////////
-        function addToBasket() {
-          const tedParams = {
-            _id: tedIdToCreate,
-            quantity: tedQuantity.value,
-            color: coloring,
-            price: totalPrice,
-          };
-          let getPanier = JSON.parse(localStorage.getItem(`panier`));
-          if (getPanier) {
-            getPanier.push(JSON.stringify(tedParams));
-            localStorage.setItem(`panier`, JSON.stringify(getPanier));
-          } else {
-            getPanier = [];
-            getPanier.push(JSON.stringify(tedParams));
-            localStorage.setItem(`panier`, JSON.stringify(getPanier));
-          }
-        }
-        //////////////////////////////////////////////////////////////////////////////////////
-      }
-    }
-  });
+    addToBasket(tedFinder);
+  }); // Fin addeventlistener
   //////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////
+  
   // Ecoute de la quantité choisie
   tedQuantity.addEventListener("change", function (e) {
     const tedPrice = document.getElementById("productPrice");
@@ -115,19 +82,106 @@ function createTeddy(tedFinder) {
       (tedFinder.price / 100) * e.target.value
     } €`;
   });
-}; ///////////////////////////////////// Fin de create Teddy /////////////////////////////////////////////
+} ///////////////////////////////////// Fin de create Teddy /////////////////////////////////////////////
 
 // Créations des boutons de choix de couleurs en fonction du teddy séléctionné
 const teddyColorator = (tedFinder) => {
   const colorContainer = document.getElementById("productColors");
+  let color = tedFinder.colors;
+  
   for (let i = 0; i < tedFinder.colors.length; i++) {
-    let color = tedFinder.colors;
+    const colorFilter = (color) => { // Filtres pour le défaut d'affichage CSS des couleurs dark et pale brown
+      if (color=== 'Pale brown') {
+        return "#8B4513";
+      } else if(color === 'Dark brown') {
+        return "#800000";
+      } else {
+        return color; }
+      };
+    //let brownFilter = colorFilter(tedFinder.colors);
+   
     colorContainer.insertAdjacentHTML(
       "beforeend",
       `
-      <input type="radio" class="color-option btn-check" name="colorChoice" id="${color[i]}" autocomplete="off" checked>
-      <label class="btn scale-up fs-4" for="${color[i]}" style="background-color: ${color[i]}; width:8rem; height:5rem">${color[i]}</label>
-        `
+      <input type="radio" class="color-option btn-check" value="${color[i]}" name="colorChoice" id="${color[i]}" autocomplete="off">
+      <label class="color-btn btn fs-4" for="${color[i]}" style="background-color: ${colorFilter(color[i])}">${color[i]}</label>
+      `
     );
-  }
+  };
 };
+
+//////////////// Création et envoi des objets products dans le localStorage ///////////////
+function addToBasket(tedFinder) {
+    // récupère le panier récent
+    panier = getPanier();
+    var qtyValue = document.getElementById("tedQuantity").value;
+    var itemPrice = qtyValue * (tedFinder.price / 100);
+    var isCheckedColor = document.querySelector('input[name = "colorChoice"]:checked');
+
+  if (isCheckedColor != null) { // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
+    const SEARCHED_TEDDY_NAME = tedFinder.name;
+    const SEARCHED_TEDDY_ID = tedIdToCreate;
+    const SEARCHED_TEDDY_COLOR = isCheckedColor.value;
+    
+    //////////// Création des objets teddy //////////////////////////
+    const tedParams = {name: tedFinder.name, _id: tedIdToCreate, cmdId: tedFinder.name+tedIdToCreate+qtyValue+isCheckedColor.value+itemPrice,
+      quantity: qtyValue, color: isCheckedColor.value, 
+      price: itemPrice, imageUrl: tedFinder.imageUrl,};
+    /////////////////////////////////////////////////////////////////
+    let foundIndex = -1;
+
+    if (panier != null) {
+      for(let i = 0; i < panier.length; i++) {
+        if(panier[i]._id === SEARCHED_TEDDY_ID && panier[i].color === SEARCHED_TEDDY_COLOR && panier[i].name === SEARCHED_TEDDY_NAME) {
+        foundIndex = i;
+        console.log(foundIndex);
+        debugger;
+        panier[foundIndex].quantity = parseInt(panier[foundIndex].quantity) + parseInt(qtyValue);
+        panier[foundIndex].price = parseInt(panier[foundIndex].price) + parseInt(itemPrice);
+        panier[foundIndex].cmdId = tedFinder.name+tedIdToCreate+panier[foundIndex].quantity+isCheckedColor.value+panier[foundIndex].price;
+        setPanier(panier);
+        console.log("Ici on doit ajouter qty et price");
+        console.log(panier[i]._id, SEARCHED_TEDDY_ID, panier[i].color, SEARCHED_TEDDY_COLOR, panier[i].name, SEARCHED_TEDDY_NAME);
+        break;
+        }
+        else {
+          panier.push(tedParams);
+          setPanier(panier);
+          console.log("Ici, on rajoute seulement un object article");
+          break;
+        }
+      }//fin de boucle for i 
+    
+      /*panier.forEach(element => {
+        if(element._id === SEARCHED_TEDDY_ID && element.color === SEARCHED_TEDDY_COLOR && element.name === SEARCHED_TEDDY_NAME) {
+        element.quantity = parseInt(element.quantity) + parseInt(qtyValue);
+        element.price = parseInt(element.price) + parseInt(itemPrice);
+        debugger;
+        console.log("Ici on doit ajouter qty et price");
+        setPanier(panier);
+        }
+        else {
+          panier.push(tedParams);
+          setPanier(panier);
+          console.log("Ici, on rajoute seulement un object article")
+        }
+      });*/
+  
+    } else if (panier == null) {
+      // Si panier inexistant, création puis push
+      panier = [];
+      panier.push(tedParams);
+      setPanier(panier);
+      console.log("Panier vide, création + ajout teddy");
+      
+      //window.open("./images/teddy_3.jpg","My teddy","toolbar=no,location=yes,directories=no,menubar=no,scrollbars=yes,status=yes,resizable=1,width=450, height=100");
+    }
+  
+      //////////////////////////////////////////////////////////////////////////////////////
+      //window.location.reload();
+      // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
+  } // fin de checkedcolor
+  else if(isCheckedColor == null){
+  alert("Veuillez séléctionner une couleur pour votre produit."); // Si pas de couleur checked, message d'alerte et pas d'envoi
+  }
+} //fin de addToBasket
