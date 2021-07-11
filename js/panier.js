@@ -68,22 +68,22 @@ function createArticles() {
     </div>
     <div id="cmdForm">
     <h2 class="link-anim mb-3">Formulaire de commande</h2>
-      <form class="py-3 px-5 main-color border border-dark rounded shadow" onsubmit="sendForm(), createOrder()">
+      <form class="py-3 px-5 main-color border border-dark rounded shadow">
         <div class="my-2 position-relative">
-          <label for="firstname" class="form-label fs-4 link-anim">Nom :</label>
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="Doe" required minlength="2"/>
+          <label for="firstname" class="form-label fs-4 link-anim">Prénom :</label>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required minlength="2"/>
         </div>
         <div class="my-2 position-relative">
-          <label for="secondname" class="form-label fs-4 link-anim">Prénom :</label> 
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="secondname" class="form-control" placeholder="John" required minlength="2"/>
+          <label for="secondname" class="form-label fs-4 link-anim">Nom :</label> 
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastname" class="form-control" placeholder="Doe" required minlength="2"/>
         </div>
         <div class="my-2 position-relative">
           <label for="adresse" class="form-label fs-4 link-anim">Adresse :</label> 
-          <input type="text" pattern="^[a-zA-Z0-9-\\s]+$" id="adresse" class="form-control" placeholder="1 rue des Cerisiers" required/>
+          <input type="text" pattern="^[a-zA-Z0-9-\\s]+$" id="adress" class="form-control" placeholder="1 rue des Cerisiers" required/>
         </div>
         <div class="my-2 position-relative">
           <label for="ville" class="form-label fs-4 link-anim">Ville :</label> 
-          <input type="text" pattern="^[a-zA-Z\\s\\-]+$" id="ville" class="form-control" placeholder="Paris" required minlength="2"/>
+          <input type="text" pattern="^[a-zA-Z\\s\\-]+$" id="city" class="form-control" placeholder="Paris" required minlength="2"/>
         </div>
         <div class="my-2 position-relative">
           <label for="cp" class="form-label fs-4 link-anim">Code postal :</label> 
@@ -94,7 +94,7 @@ function createArticles() {
           <input type="email" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z.]{2,15}" id="email" class="form-control" placeholder="jdoe@outlook.fr" required/>
         </div>
         <div>
-          <input type="submit" id="envoi" class="btn btn-primary mt-2" aria-label="Valider ma commande" value="Valider ma commande"/> 
+          <input type="submit" id="envoi" class="btn btn-primary mt-2" aria-label="Valider ma commande" value="Valider ma commande"/>
           <input type="reset" id="refresh" class="btn btn-danger mt-2" aria-label="Effacer ma saisie" value="Effacer ma saisie"/>
         </div>
     </form>
@@ -204,22 +204,24 @@ for (let i = 0; i < panier.length; i++) {
       
   function sendForm () {
       const formValues = { //Object pour localstorage
-      nom: document.querySelector('#firstname').value,
-      prenom: document.querySelector('#secondname').value,
-      adresse: document.querySelector('#adresse').value,
-      ville: document.querySelector('#ville').value, 
+      firstname: document.querySelector('#firstname').value,
+      lastname: document.querySelector('#lastname').value,
+      adress: document.querySelector('#adress').value,
+      city: document.querySelector('#city').value, 
       cp: document.querySelector('#cp').value,
       email: document.querySelector('#email').value,
     }
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
   };
-
+  envoi.addEventListener("click", function(evt) { // repasser en submit après aoir debuggé
+     
+        evt.preventDefault();
+        sendForm();
+        createOrder();
+    
+  });
    function createOrder() {
      //////////////////Envoi de la commande via POST //////////
-    /*const commandRequest = {
-      contact : JSON.parse(localStorage.getItem("formValues")),
-      commande : JSON.parse(localStorage.getItem(`panier`))
-    }*/
       // Specify with argument match which object
       const contact = JSON.parse(localStorage.getItem("formValues"));
       const commande = JSON.parse(localStorage.getItem(`panier`));
@@ -228,11 +230,12 @@ for (let i = 0; i < panier.length; i++) {
         "commande": commande
     }
     console.log(data)
-      const result = fetch("http://localhost:3000/api/teddies/order", { // Fetch but POST this time
+      const result = fetch("http://localhost:3000/api/teddies/order", { 
               headers: {
               'Content-Type': 'application/json'
               },
               method: 'POST',
+              credentials: 'omit',
               body: JSON.stringify(data), // JSON.stringify() transforms JS object to JSON
               mode: 'cors',
               cache: 'default'
@@ -240,46 +243,9 @@ for (let i = 0; i < panier.length; i++) {
           .then(response => response.text())
           .then(result => JSON.parse(result))
           .catch(error => console.log('error', error));
-
       return result
-    
-    };// Fin du onsubmit
-      /*var postInit = { method: 'POST',
-    headers: {"Content-Type" : "application/json"},
-    body: JSON.stringify(commandRequest),
-    mode: 'cors',
-    cache: 'default' };*/
-    
-    /*fetch("http://localhost:3000/api/teddies/order", postInit)
-    .then(function (res) {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .then(res) {
-      var postInit = { method: 'POST',
-    headers: {"Content-Type" : "application/json"},
-    body: JSON.stringify(commandRequest),
-    mode: 'cors',
-    cache: 'default' }
     };
-    .catch(function (err) {
-      // Une erreur est survenue
-    });*/
-
-    /*fetch("http://localhost:3000/api/teddies/order", {
-      method: "POST",
-      body: JSON.stringify(commandRequest),
-      headers: {
-        "Content-Type" : "application/json"
-      },
-    });*/
-
   //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 function deleteEmptypanier () {
   if (panier == 0 || panier == null) {
@@ -294,10 +260,10 @@ const localFormValuesToObject = JSON.parse(localFormValues);
 
 function autoCompleteForm(input) {
   if (localFormValuesToObject !== null) {
-  document.querySelector('#firstname').value = localFormValuesToObject.nom;
-  document.querySelector('#secondname').value = localFormValuesToObject.prenom;
-  document.querySelector('#adresse').value = localFormValuesToObject.adresse;
-  document.querySelector('#ville').value = localFormValuesToObject.ville; 
+  document.querySelector('#firstname').value = localFormValuesToObject.firstname;
+  document.querySelector('#lastname').value = localFormValuesToObject.lastname;
+  document.querySelector('#adress').value = localFormValuesToObject.adress;
+  document.querySelector('#city').value = localFormValuesToObject.city; 
   document.querySelector('#cp').value = localFormValuesToObject.cp;
   document.querySelector('#email').value = localFormValuesToObject.email;
   }
