@@ -68,14 +68,14 @@ function createArticles() {
     </div>
     <div id="cmdForm">
     <h2 class="link-anim mb-3">Formulaire de commande</h2>
-      <form class="py-3 px-5 main-color border border-dark rounded shadow">
+      <form class="py-3 px-5 main-color border border-dark rounded shadow" onsubmit="sendForm(), createOrder()">
         <div class="my-2 position-relative">
           <label for="firstname" class="form-label fs-4 link-anim">Nom :</label>
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required minlength="2"/>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="Doe" required minlength="2"/>
         </div>
         <div class="my-2 position-relative">
           <label for="secondname" class="form-label fs-4 link-anim">Prénom :</label> 
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="secondname" class="form-control" placeholder="Doe" required minlength="2"/>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="secondname" class="form-control" placeholder="John" required minlength="2"/>
         </div>
         <div class="my-2 position-relative">
           <label for="adresse" class="form-label fs-4 link-anim">Adresse :</label> 
@@ -128,7 +128,8 @@ function createArticles() {
         </div>
       `
     );
-}
+  }
+  
   basketContent.insertAdjacentHTML(
     "beforeend",
     `
@@ -165,7 +166,7 @@ for (let i = 0; i < deletePanier.length; i++) {
       window.location.reload();
     });
   }
-}
+};
 
 //// Bouton d'ajout ou supprresion d'1 article à la fois
 const qtyPlus = document.querySelectorAll(".btn.btn-outline-dark.plus");
@@ -196,11 +197,12 @@ for (let i = 0; i < panier.length; i++) {
       } 
     });
   }
-}
+};
 
   ////////////////////// Ecoute du bouton d'envoi de commande //////////////////////
-  envoi.addEventListener("submit", function (e) {
-      e.preventDefault();
+  //Fonction du onsubmit du formulaire
+      
+  function sendForm () {
       const formValues = { //Object pour localstorage
       nom: document.querySelector('#firstname').value,
       prenom: document.querySelector('#secondname').value,
@@ -210,29 +212,73 @@ for (let i = 0; i < panier.length; i++) {
       email: document.querySelector('#email').value,
     }
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
+  };
 
-    //////////////////Envoi de la commande via POST //////////
-    const commandRequest = {
+   function createOrder() {
+     //////////////////Envoi de la commande via POST //////////
+    /*const commandRequest = {
       contact : JSON.parse(localStorage.getItem("formValues")),
       commande : JSON.parse(localStorage.getItem(`panier`))
+    }*/
+      // Specify with argument match which object
+      const contact = JSON.parse(localStorage.getItem("formValues"));
+      const commande = JSON.parse(localStorage.getItem(`panier`));
+      const data = {
+        "contact": contact,
+        "commande": commande
     }
-    //const contact = localStorage.getItem("formValues");
-    //const commande = localStorage.getItem(`panier`);
-    fetch("http://localhost:3000/api/teddies/order", {
+    console.log(data)
+      const result = fetch("http://localhost:3000/api/teddies/order", { // Fetch but POST this time
+              headers: {
+              'Content-Type': 'application/json'
+              },
+              method: 'POST',
+              body: JSON.stringify(data), // JSON.stringify() transforms JS object to JSON
+              mode: 'cors',
+              cache: 'default'
+          })
+          .then(response => response.text())
+          .then(result => JSON.parse(result))
+          .catch(error => console.log('error', error));
+
+      return result
+    
+    };// Fin du onsubmit
+      /*var postInit = { method: 'POST',
+    headers: {"Content-Type" : "application/json"},
+    body: JSON.stringify(commandRequest),
+    mode: 'cors',
+    cache: 'default' };*/
+    
+    /*fetch("http://localhost:3000/api/teddies/order", postInit)
+    .then(function (res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then(res) {
+      var postInit = { method: 'POST',
+    headers: {"Content-Type" : "application/json"},
+    body: JSON.stringify(commandRequest),
+    mode: 'cors',
+    cache: 'default' }
+    };
+    .catch(function (err) {
+      // Une erreur est survenue
+    });*/
+
+    /*fetch("http://localhost:3000/api/teddies/order", {
       method: "POST",
       body: JSON.stringify(commandRequest),
       headers: {
-        "Content-Type" : "application/json",
+        "Content-Type" : "application/json"
       },
-    });
-    //////////////////////////////////////////////////////////
+    });*/
 
-    debugger; 
-  }); // Fin addeventlistener
   //////////////////////////////////////////////////////////////////////////////////////
 
 
-window.onload = deleteEmptypanier(); // check au chargement de page, si pas de panier => reload page
+
 
 
 function deleteEmptypanier () {
@@ -256,5 +302,6 @@ function autoCompleteForm(input) {
   document.querySelector('#email').value = localFormValuesToObject.email;
   }
 }
-autoCompleteForm();
 
+autoCompleteForm();
+window.onload = deleteEmptypanier(); // check au chargement de page, si pas de panier => reload page
