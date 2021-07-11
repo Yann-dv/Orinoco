@@ -10,7 +10,6 @@ let panier = getPanier();
 checkArticles();
 emptyBasketHide();
 
-
 function checkArticles() {
   if (panier != null && document.getElementById("panierBadge") != undefined) {
     panierBadge.textContent = panier.length;
@@ -35,7 +34,7 @@ function createArticles() {
   ///// Création d'un tableau pour recueillir les prix des articles et créer un total /////
   const arrayPrices = [0];
   panier.forEach((element) => {
-    let prices = element.price;
+    let prices = element.fullPrice;
     arrayPrices.push(prices);
   });
   let finalPrice = arrayPrices.reduce((a, b) => a + b, 0);
@@ -111,14 +110,18 @@ function createArticles() {
         <div class="selectedArticles my-2 card rounded shadow ${panier[i]._id}"> 
             <article class="main-color row g-0">
               <div class="main-color col-6">
-                <img src="${panier[i].imageUrl}" class="main-color img-fluid p-3">
+              <a href="produit.html?teddy=${panier[i]._id}"><img src="${panier[i].imageUrl}" class="main-color img-fluid p-3" title="Retourner vers la fiche produit"></a>
               </div>
               <div class=" col-6">
                 <div class="card-body px-2 py-2">
                   <h5 class="secondary-text card-title">${panier[i].name}</h5>
                   <span class="articleQty card-text fs-5">Quantité : ${panier[i].quantity}</span></br>
                   <span class="articleColor card-text fs-5">Couleur : ${panier[i].color}</span></br>
-                  <span class="articlePrice card-text fs-5">Prix : ${panier[i].price}€</span>
+                  <span class="articlePrice card-text fs-5">Prix : ${panier[i].fullPrice}€</span>
+                  <div class="changeQtyBtns">
+                  <button class="btn py-0 px-2 btn-outline-dark rounded-pill fw-bold plus" value="${panier[i].cmdId}">+</button>
+                  <button class="btn py-0 px-2 btn-outline-dark rounded-pill fw-bold moins" value="${panier[i].cmdId}">-</button>
+                  </div>
                 </div>
               </div>
           </article>  
@@ -154,15 +157,59 @@ for (let i = 0; i < deleteItem.length; i++) {
   });
 }
 
-
 //// Bouton de suppression du panier ////
 const deletePanier = document.querySelectorAll(".btn.deletePanier");
 for (let i = 0; i < deletePanier.length; i++) {
-if (deletePanier[i] !=undefined && panier != 0 || panier != null) {
-  deletePanier[i].addEventListener("click", (e) => {
-    e.preventDefault();
+  if ((deletePanier[i] != undefined && panier != 0) || panier != null) {
+    deletePanier[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.clear();
+      window.location.reload();
+    });
+  }
+}
+
+//// Bouton d'ajout ou supprresion d'1 article à la fois
+const qtyPlus = document.querySelectorAll(".btn.btn-outline-dark.plus");
+const qtyMoins = document.querySelectorAll(".btn.btn-outline-dark.moins");
+for (let i = 0; i < panier.length; i++) {
+  if (panier != 0 || panier != null) {
+    qtyPlus[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      if (panier[i].cmdId == qtyPlus[i].value) {
+        panier[i].quantity = parseInt(panier[i].quantity) + 1;
+        panier[i].fullPrice = panier[i].fullPrice + panier[i].unitPrice;
+        panier[i].cmdId = panier[i].name+panier[i].id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        setPanier(panier);
+        window.location.reload();
+      }
+    });
+    qtyMoins[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      if (panier[i].cmdId == qtyPlus[i].value) {
+        if (panier[i].quantity > 0) {
+        panier[i].quantity = parseInt(panier[i].quantity) - 1;
+        panier[i].fullPrice = panier[i].fullPrice - panier[i].unitPrice;
+        panier[i].cmdId = panier[i].name+panier[i].id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        setPanier(panier);
+        window.location.reload();
+        }
+        else { // Si élémnet à 0, on supprimer l'élément du storage local
+          panier = panier.filter((el) => el.quantity !== 0);
+          setPanier(panier);
+          window.location.reload();
+        }
+      } 
+    });
+  }
+}
+
+window.onload = deleteEmptypanier(); // check au chargement de page, si pas de panier => reload page
+
+
+function deleteEmptypanier () {
+  if (panier == 0 || panier == null) {
     localStorage.clear();
     window.location.reload();
-  });
-}
+  }
 }

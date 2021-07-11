@@ -125,8 +125,8 @@ function addToBasket(tedFinder) {
     
     //////////// Création des objets teddy //////////////////////////
     const tedParams = {name: tedFinder.name, _id: tedIdToCreate, cmdId: tedFinder.name+tedIdToCreate+qtyValue+isCheckedColor.value+itemPrice,
-      quantity: qtyValue, color: isCheckedColor.value, 
-      price: itemPrice, imageUrl: tedFinder.imageUrl,};
+      quantity: qtyValue, color: isCheckedColor.value, unitPrice: (tedFinder.price/100),
+      fullPrice: itemPrice, imageUrl: tedFinder.imageUrl};
     /////////////////////////////////////////////////////////////////
     let foundIndex = -1;
 
@@ -137,8 +137,8 @@ function addToBasket(tedFinder) {
         console.log(foundIndex);
         debugger;
         panier[foundIndex].quantity = parseInt(panier[foundIndex].quantity) + parseInt(qtyValue);
-        panier[foundIndex].price = parseInt(panier[foundIndex].price) + parseInt(itemPrice);
-        panier[foundIndex].cmdId = tedFinder.name+tedIdToCreate+panier[foundIndex].quantity+isCheckedColor.value+panier[foundIndex].price;
+        panier[foundIndex].fullPrice = parseInt(panier[foundIndex].fullPrice) + parseInt(itemPrice);
+        panier[foundIndex].cmdId = tedFinder.name+tedIdToCreate+panier[foundIndex].quantity+isCheckedColor.value+panier[foundIndex].fullPrice;
         setPanier(panier);
         console.log("Ici on doit ajouter qty et price");
         console.log(panier[i]._id, SEARCHED_TEDDY_ID, panier[i].color, SEARCHED_TEDDY_COLOR, panier[i].name, SEARCHED_TEDDY_NAME);
