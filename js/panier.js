@@ -1,4 +1,3 @@
-//let gotPanier = JSON.parse(localStorage.getItem(`panier`));
 const getPanier = () => {
   return JSON.parse(localStorage.getItem(`panier`));
 };
@@ -92,10 +91,10 @@ function createArticles() {
         </div>
         <div class="my-2 position-relative">
           <label for="mail" class="form-label fs-4 link-anim">E-mail :</label>
-          <input type="email" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z.]{2,15}" id="mail" class="form-control" placeholder="jdoe@outlook.fr" required/>
+          <input type="email" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z.]{2,15}" id="email" class="form-control" placeholder="jdoe@outlook.fr" required/>
         </div>
         <div>
-          <input type="submit" class="btn btn-primary mt-2" id="envoi" value="Valider ma commande"/> 
+          <input type="submit" id="envoi" class="btn btn-primary mt-2" value="Valider ma commande"/> 
           <input type="reset" id="refresh" class="btn btn-danger mt-2" value="Effacer ma saisie"/>
         </div>
     </form>
@@ -151,7 +150,7 @@ for (let i = 0; i < deleteItem.length; i++) {
     window.location.reload();
     // Si panier = vide, suppression du localStorage panier
     if (panier == 0 || panier == null) {
-      localStorage.clear();
+      localStorage.removeItem("panier");
     }
   });
 }
@@ -162,7 +161,7 @@ for (let i = 0; i < deletePanier.length; i++) {
   if ((deletePanier[i] != undefined && panier != 0) || panier != null) {
     deletePanier[i].addEventListener("click", (e) => {
       e.preventDefault();
-      localStorage.clear();
+      localStorage.removeItem("panier");
       window.location.reload();
     });
   }
@@ -199,12 +198,45 @@ for (let i = 0; i < panier.length; i++) {
   }
 }
 
+  ////////////////////// Ecoute du bouton d'envoi de commande //////////////////////
+  envoi.addEventListener("click", function (e) {
+    e.preventDefault();
+    const formValues = { //Object pour localstorage
+      nom: document.querySelector('#firstname').value,
+      prenom: document.querySelector('#secondname').value,
+      adresse: document.querySelector('#adresse').value,
+      ville: document.querySelector('#ville').value, 
+      cp: document.querySelector('#cp').value,
+      email: document.querySelector('#email').value,
+    }
+    localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
+  }); // Fin addeventlistener
+  //////////////////////////////////////////////////////////////////////////////////////
+
+
 window.onload = deleteEmptypanier(); // check au chargement de page, si pas de panier => reload page
 
 
 function deleteEmptypanier () {
   if (panier == 0 || panier == null) {
-    localStorage.clear();
+    localStorage.removeItem("panier");
     window.location.reload();
   }
 }
+
+///////////////Autoremplissage du formulaire si données déjà présente en local///////////
+const localFormValues = localStorage.getItem("formValues");
+const localFormValuesToObject = JSON.parse(localFormValues);
+
+function autoCompleteForm(input) {
+  if (localFormValuesToObject !== null) {
+  document.querySelector('#firstname').value = localFormValuesToObject.nom;
+  document.querySelector('#secondname').value = localFormValuesToObject.prenom;
+  document.querySelector('#adresse').value = localFormValuesToObject.adresse;
+  document.querySelector('#ville').value = localFormValuesToObject.ville; 
+  document.querySelector('#cp').value = localFormValuesToObject.cp;
+  document.querySelector('#email').value = localFormValuesToObject.email;
+  }
+}
+autoCompleteForm();
+

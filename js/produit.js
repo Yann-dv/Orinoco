@@ -69,7 +69,7 @@ function createTeddy(tedFinder) {
       </div>
         `
   );
-  ////////////////////// Ecoute du bouton d'envoi de commande //////////////////////
+  ////////////////////// Ecoute du bouton d'envoi d'article vers panier' //////////////////////
   productPrice.addEventListener("click", function (e) {
     addToBasket(tedFinder);
   }); // Fin addeventlistener
@@ -134,8 +134,6 @@ function addToBasket(tedFinder) {
       for(let i = 0; i < panier.length; i++) {
         if(panier[i]._id === SEARCHED_TEDDY_ID && panier[i].color === SEARCHED_TEDDY_COLOR && panier[i].name === SEARCHED_TEDDY_NAME) {
         foundIndex = i;
-        console.log(foundIndex);
-        debugger;
         panier[foundIndex].quantity = parseInt(panier[foundIndex].quantity) + parseInt(qtyValue);
         panier[foundIndex].fullPrice = parseInt(panier[foundIndex].fullPrice) + parseInt(itemPrice);
         panier[foundIndex].cmdId = tedFinder.name+tedIdToCreate+panier[foundIndex].quantity+isCheckedColor.value+panier[foundIndex].fullPrice;
