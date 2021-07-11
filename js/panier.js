@@ -142,15 +142,14 @@ let target = document.querySelectorAll("div.selectedArticles");
 for (let i = 0; i < deleteItem.length; i++) {
   deleteItem[i].addEventListener("click", (event) => {
     event.preventDefault();
-    let id_delete_target = panier[i]._id;
+    let id_delete_target = panier[i].cmdId;
     console.log(id_delete_target);
-
-    panier = panier.filter((el) => el._id !== id_delete_target);
+    panier = panier.filter((el) => el.cmdId !== id_delete_target);
     setPanier(panier);
     window.location.reload();
     // Si panier = vide, suppression du localStorage panier
     if (panier == 0 || panier == null) {
-      localStorage.removeItem("panier");
+      localStorage.clear();
     }
   });
 }
@@ -162,7 +161,7 @@ for (let i = 0; i < deletePanier.length; i++) {
 if (deletePanier[i] !=undefined && panier != 0 || panier != null) {
   deletePanier[i].addEventListener("click", (e) => {
     e.preventDefault();
-    localStorage.removeItem("panier");
+    localStorage.clear();
     window.location.reload();
   });
 }

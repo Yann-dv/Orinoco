@@ -117,39 +117,56 @@ function addToBasket(tedFinder) {
     var qtyValue = document.getElementById("tedQuantity").value;
     var itemPrice = qtyValue * (tedFinder.price / 100);
     var isCheckedColor = document.querySelector('input[name = "colorChoice"]:checked');
-    var colorBtnValue = document.querySelector('input[name = "colorChoice"]:checked').value;
-    const SEARCHED_TEDDY_NAME = tedFinder.name;
-    const SEARCHED_TEDDY_ID = tedIdToCreate;
-    const SEARCHED_TEDDY_COLOR = colorBtnValue;
-
-    //////////// Création des objets teddy //////////////////////////
-    const tedParams = {name: tedFinder.name, _id: tedIdToCreate,
-      quantity: qtyValue, color: colorBtnValue, 
-      price: itemPrice, imageUrl: tedFinder.imageUrl,};
-    /////////////////////////////////////////////////////////////////
 
   if (isCheckedColor != null) { // Nécessite la coche d'un des btns de couleurs pour appuyer sur l'envoi
+    const SEARCHED_TEDDY_NAME = tedFinder.name;
+    const SEARCHED_TEDDY_ID = tedIdToCreate;
+    const SEARCHED_TEDDY_COLOR = isCheckedColor.value;
+    
+    //////////// Création des objets teddy //////////////////////////
+    const tedParams = {name: tedFinder.name, _id: tedIdToCreate, cmdId: tedFinder.name+tedIdToCreate+qtyValue+isCheckedColor.value+itemPrice,
+      quantity: qtyValue, color: isCheckedColor.value, 
+      price: itemPrice, imageUrl: tedFinder.imageUrl,};
+    /////////////////////////////////////////////////////////////////
+    let foundIndex = -1;
+
     if (panier != null) {
-      let foundIndex = -1;
       for(let i = 0; i < panier.length; i++) {
-        if((panier[i])._id == SEARCHED_TEDDY_ID && (panier[i]).color == SEARCHED_TEDDY_COLOR && (panier[i]).name == SEARCHED_TEDDY_NAME) {
+        if(panier[i]._id === SEARCHED_TEDDY_ID && panier[i].color === SEARCHED_TEDDY_COLOR && panier[i].name === SEARCHED_TEDDY_NAME) {
         foundIndex = i;
+        console.log(foundIndex);
+        debugger;
         panier[foundIndex].quantity = parseInt(panier[foundIndex].quantity) + parseInt(qtyValue);
         panier[foundIndex].price = parseInt(panier[foundIndex].price) + parseInt(itemPrice);
-        setPanier(panier[foundIndex]);
-        alert(panier);
-        // add changer price
-        debugger;
-        console.log("Ici");
+        panier[foundIndex].cmdId = tedFinder.name+tedIdToCreate+panier[foundIndex].quantity+isCheckedColor.value+panier[foundIndex].price;
+        setPanier(panier);
+        console.log("Ici on doit ajouter qty et price");
+        console.log(panier[i]._id, SEARCHED_TEDDY_ID, panier[i].color, SEARCHED_TEDDY_COLOR, panier[i].name, SEARCHED_TEDDY_NAME);
+        break;
         }
-        else{
-          panier = [];
+        else {
           panier.push(tedParams);
           setPanier(panier);
-         
+          console.log("Ici, on rajoute seulement un object article");
+          break;
         }
-      }//fin de boucle for i
-
+      }//fin de boucle for i 
+    
+      /*panier.forEach(element => {
+        if(element._id === SEARCHED_TEDDY_ID && element.color === SEARCHED_TEDDY_COLOR && element.name === SEARCHED_TEDDY_NAME) {
+        element.quantity = parseInt(element.quantity) + parseInt(qtyValue);
+        element.price = parseInt(element.price) + parseInt(itemPrice);
+        debugger;
+        console.log("Ici on doit ajouter qty et price");
+        setPanier(panier);
+        }
+        else {
+          panier.push(tedParams);
+          setPanier(panier);
+          console.log("Ici, on rajoute seulement un object article")
+        }
+      });*/
+  
     } else if (panier == null) {
       // Si panier inexistant, création puis push
       panier = [];
@@ -161,7 +178,7 @@ function addToBasket(tedFinder) {
     }
   
       //////////////////////////////////////////////////////////////////////////////////////
-      window.location.reload();
+      //window.location.reload();
       // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
   } // fin de checkedcolor
   else if(isCheckedColor == null){
