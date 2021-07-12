@@ -78,8 +78,8 @@ function createArticles() {
           <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastName" class="form-control" placeholder="Doe" required/>
         </div>
         <div class="my-2 position-relative">
-          <label for="adresse" class="form-label fs-4 link-anim">Adresse :</label> 
-          <input type="text" pattern="^[a-zA-Z0-9-\\s]+$" id="adress" class="form-control" placeholder="1 rue des Cerisiers" required/>
+          <label for="address" class="form-label fs-4 link-anim">Adresse :</label> 
+          <input type="text" pattern="^[a-zA-Z0-9-\\s]+$" id="address" class="form-control" placeholder="1 rue des Cerisiers" required/>
         </div>
         <div class="my-2 position-relative">
           <label for="ville" class="form-label fs-4 link-anim">Ville :</label> 
@@ -106,10 +106,10 @@ function createArticles() {
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
-        <div class="selectedArticles my-2 card rounded shadow ${panier[i]._id}"> 
+        <div class="selectedArticles my-2 card rounded shadow ${panier[i].productId}"> 
             <article class="main-color row g-0">
               <div class="main-color col-6">
-              <a href="produit.html?teddy=${panier[i]._id}"><img src="${panier[i].imageUrl}" class="main-color img-fluid p-3" title="Retourner vers la fiche produit"></a>
+              <a href="produit.html?teddy=${panier[i].productId}"><img src="${panier[i].imageUrl}" class="main-color img-fluid p-3" title="Retourner vers la fiche produit"></a>
               </div>
               <div class=" col-6">
                 <div class="card-body px-2 py-2">
@@ -179,7 +179,7 @@ for (let i = 0; i < panier.length; i++) {
       if (panier[i].cmdId == qtyPlus[i].value) {
         panier[i].quantity = parseInt(panier[i].quantity) + 1;
         panier[i].fullPrice = panier[i].fullPrice + panier[i].unitPrice;
-        panier[i].cmdId = panier[i].name+panier[i]._id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        panier[i].cmdId = panier[i].name+panier[i].productId+panier[i].quantity+panier[i].color+panier[i].fullPrice;
         setPanier(panier);
         window.location.reload();
       }
@@ -190,7 +190,7 @@ for (let i = 0; i < panier.length; i++) {
         if (panier[i].quantity >= 1) {
         panier[i].quantity = parseInt(panier[i].quantity) - 1;
         panier[i].fullPrice = panier[i].fullPrice - panier[i].unitPrice;
-        panier[i].cmdId = panier[i].name+panier[i]._id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        panier[i].cmdId = panier[i].name+panier[i].productId+panier[i].quantity+panier[i].color+panier[i].fullPrice;
         panier = panier.filter((el) => el.quantity !== 0);// Si élément à 0, on le supprime du local storage
         setPanier(panier);
         window.location.reload();
@@ -208,9 +208,9 @@ for (let i = 0; i < panier.length; i++) {
       const formValues = { //Object pour localstorage
       firstName: document.querySelector('#firstName').value,
       lastName: document.querySelector('#lastName').value,
-      adress: document.querySelector('#adress').value,
+      address: document.querySelector('#address').value,
       city: document.querySelector('#city').value, 
-      //cp: document.querySelector('#cp').value,
+      cp: document.querySelector('#cp').value,
       email: document.querySelector('#email').value,
     }
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
@@ -227,7 +227,16 @@ for (let i = 0; i < panier.length; i++) {
      //////////////////Envoi de la commande via POST //////////
       // Specify with argument match which object
       const contact = JSON.parse(localStorage.getItem("formValues"));
-      const products = JSON.parse(localStorage.getItem(`panier`));
+      /*const productsGet = localStorage.getItem(`panier`);
+      const productsGetId = productsGet.productId;
+      const product = JSON.parse(productsGetId);*/
+      const products = [];
+      panier.forEach(element => {
+        let elementId = element.productId;
+        products.push(elementId);
+        debugger;
+      });
+      
       const data = {
         "contact": contact,
         "products": products
@@ -238,7 +247,7 @@ for (let i = 0; i < panier.length; i++) {
               'Content-Type': 'application/json'
               },
               method: 'POST',
-              credentials: 'omit',
+              
               body: JSON.stringify(data), // JSON.stringify() transforms JS object to JSON
               mode: 'cors',
               cache: 'default'
@@ -265,7 +274,7 @@ function autoCompleteForm(input) {
   if (localFormValuesToObject !== null) {
   document.querySelector('#firstName').value = localFormValuesToObject.firstName;
   document.querySelector('#lastName').value = localFormValuesToObject.lastName;
-  document.querySelector('#adress').value = localFormValuesToObject.adress;
+  document.querySelector('#address').value = localFormValuesToObject.address;
   document.querySelector('#city').value = localFormValuesToObject.city; 
   document.querySelector('#cp').value = localFormValuesToObject.cp;
   document.querySelector('#email').value = localFormValuesToObject.email;
