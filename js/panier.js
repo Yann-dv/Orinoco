@@ -70,12 +70,12 @@ function createArticles() {
     <h2 class="link-anim mb-3">Formulaire de commande</h2>
       <form class="py-3 px-5 main-color border border-dark rounded shadow">
         <div class="my-2 position-relative">
-          <label for="firstname" class="form-label fs-4 link-anim">Prénom :</label>
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required/>
+          <label for="firstName" class="form-label fs-4 link-anim">Prénom :</label>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstName" class="form-control is-valide" placeholder="John" required/>
         </div>
         <div class="my-2 position-relative">
-          <label for="secondname" class="form-label fs-4 link-anim">Nom :</label> 
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastname" class="form-control" placeholder="Doe" required/>
+          <label for="secondName" class="form-label fs-4 link-anim">Nom :</label> 
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastName" class="form-control" placeholder="Doe" required/>
         </div>
         <div class="my-2 position-relative">
           <label for="adresse" class="form-label fs-4 link-anim">Adresse :</label> 
@@ -206,11 +206,11 @@ for (let i = 0; i < panier.length; i++) {
       
   function sendForm () {
       const formValues = { //Object pour localstorage
-      firstname: document.querySelector('#firstname').value,
-      lastname: document.querySelector('#lastname').value,
+      firstName: document.querySelector('#firstName').value,
+      lastName: document.querySelector('#lastName').value,
       adress: document.querySelector('#adress').value,
       city: document.querySelector('#city').value, 
-      cp: document.querySelector('#cp').value,
+      //cp: document.querySelector('#cp').value,
       email: document.querySelector('#email').value,
     }
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
@@ -227,10 +227,10 @@ for (let i = 0; i < panier.length; i++) {
      //////////////////Envoi de la commande via POST //////////
       // Specify with argument match which object
       const contact = JSON.parse(localStorage.getItem("formValues"));
-      const commande = JSON.parse(localStorage.getItem(`panier`));
+      const products = JSON.parse(localStorage.getItem(`panier`));
       const data = {
         "contact": contact,
-        "commande": commande
+        "products": products
     }
     console.log(data)
       const result = fetch("http://localhost:3000/api/teddies/order", { 
@@ -239,7 +239,7 @@ for (let i = 0; i < panier.length; i++) {
               },
               method: 'POST',
               credentials: 'omit',
-              body: JSON.parse(data), // JSON.stringify() transforms JS object to JSON
+              body: JSON.stringify(data), // JSON.stringify() transforms JS object to JSON
               mode: 'cors',
               cache: 'default'
           })
@@ -263,8 +263,8 @@ const localFormValuesToObject = JSON.parse(localFormValues);
 
 function autoCompleteForm(input) {
   if (localFormValuesToObject !== null) {
-  document.querySelector('#firstname').value = localFormValuesToObject.firstname;
-  document.querySelector('#lastname').value = localFormValuesToObject.lastname;
+  document.querySelector('#firstName').value = localFormValuesToObject.firstName;
+  document.querySelector('#lastName').value = localFormValuesToObject.lastName;
   document.querySelector('#adress').value = localFormValuesToObject.adress;
   document.querySelector('#city').value = localFormValuesToObject.city; 
   document.querySelector('#cp').value = localFormValuesToObject.cp;
