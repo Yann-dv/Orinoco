@@ -71,11 +71,11 @@ function createArticles() {
       <form class="py-3 px-5 main-color border border-dark rounded shadow">
         <div class="my-2 position-relative">
           <label for="firstname" class="form-label fs-4 link-anim">Prénom :</label>
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required minlength="2"/>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required/>
         </div>
         <div class="my-2 position-relative">
           <label for="secondname" class="form-label fs-4 link-anim">Nom :</label> 
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastname" class="form-control" placeholder="Doe" required minlength="2"/>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastname" class="form-control" placeholder="Doe" required/>
         </div>
         <div class="my-2 position-relative">
           <label for="adresse" class="form-label fs-4 link-anim">Adresse :</label> 
