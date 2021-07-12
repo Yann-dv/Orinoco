@@ -168,6 +168,7 @@ for (let i = 0; i < deletePanier.length; i++) {
   }
 };
 
+if(panier.length > 0) {
 //// Bouton d'ajout ou supprresion d'1 article à la fois
 const qtyPlus = document.querySelectorAll(".btn.btn-outline-dark.plus");
 const qtyMoins = document.querySelectorAll(".btn.btn-outline-dark.moins");
@@ -198,6 +199,7 @@ for (let i = 0; i < panier.length; i++) {
     });
   }
 };
+}// fin if panier
 
   ////////////////////// Ecoute du bouton d'envoi de commande //////////////////////
   //Fonction du onsubmit du formulaire
@@ -213,7 +215,8 @@ for (let i = 0; i < panier.length; i++) {
     }
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
   };
-  envoi.addEventListener("click", function(evt) { // repasser en submit après aoir debuggé
+  
+  envoi.addEventListener("click", function(evt) { // repasser en submit après avoir debuggé
      
         evt.preventDefault();
         sendForm();
@@ -236,7 +239,7 @@ for (let i = 0; i < panier.length; i++) {
               },
               method: 'POST',
               credentials: 'omit',
-              body: JSON.stringify(data), // JSON.stringify() transforms JS object to JSON
+              body: JSON.parse(data), // JSON.stringify() transforms JS object to JSON
               mode: 'cors',
               cache: 'default'
           })
