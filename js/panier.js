@@ -68,7 +68,7 @@ function createArticles() {
     </div>
     <div id="cmdForm">
     <h2 class="link-anim mb-3">Formulaire de commande</h2>
-      <form class="py-3 px-5 main-color border border-dark rounded shadow">
+      <form class="py-3 px-5 main-color border border-dark rounded shadow" onClick="sendForm(); createOrder();" action="/new_url">
         <div class="my-2 position-relative">
           <label for="firstName" class="form-label fs-4 link-anim">Prénom :</label>
           <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstName" class="form-control is-valide" placeholder="John" required/>
@@ -216,11 +216,6 @@ for (let i = 0; i < panier.length; i++) {
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
   };
   
-  envoi.addEventListener("click", function(evt) { // repasser en submit après avoir debuggé
-        evt.preventDefault();
-        sendForm(); // Envoi du formulaire en local storage (+ préremplissage si existant)
-        createOrder(); // Envoi de la requête POST au serveur
-  });
    function createOrder() {
      //////////////////Envoi de la commande via POST //////////
       const contact = JSON.parse(localStorage.getItem("formValues"));
