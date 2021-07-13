@@ -241,6 +241,7 @@ for (let i = 0; i < panier.length; i++) {
           .then(response => response.text())
           .then(function (result) {
             JSON.parse(result);
+            localStorage.setItem("sendRequest", result);
             
             let order = JSON.parse(result).orderId;
             if (!getLocalOrder) {
