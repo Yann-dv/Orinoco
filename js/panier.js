@@ -217,31 +217,20 @@ for (let i = 0; i < panier.length; i++) {
   };
   
   envoi.addEventListener("click", function(evt) { // repasser en submit après avoir debuggé
-     
         evt.preventDefault();
-        sendForm();
-        createOrder();
-    
+        sendForm(); // Envoi du formulaire en local storage (+ préremplissage si existant)
+        createOrder(); // Envoi de la requête POST au serveur
   });
    function createOrder() {
      //////////////////Envoi de la commande via POST //////////
-      // Specify with argument match which object
       const contact = JSON.parse(localStorage.getItem("formValues"));
-      /*const productsGet = localStorage.getItem(`panier`);
-      const productsGetId = productsGet.productId;
-      const product = JSON.parse(productsGetId);*/
       const products = [];
       panier.forEach(element => {
         let elementId = element.productId;
         products.push(elementId);
         debugger;
       });
-      
-      const data = {
-        "contact": contact,
-        "products": products
-    }
-    console.log(data)
+      const data = {"contact": contact,"products": products}
       const result = fetch("http://localhost:3000/api/teddies/order", { 
               headers: {
               'Content-Type': 'application/json'
@@ -253,9 +242,17 @@ for (let i = 0; i < panier.length; i++) {
               cache: 'default'
           })
           .then(response => response.text())
-          .then(result => JSON.parse(result))
+          .then(function (result) {
+            JSON.parse(result);
+            let order = JSON.parse(result).orderId;
+            const orderNbr = [];
+            orderNbr.push(order);
+            localStorage.setItem("orderN°", orderNbr);
+          })
+          
           .catch(error => console.log('error', error));
       return result
+      
     };
   //////////////////////////////////////////////////////////////////////////////////////
 
