@@ -1,3 +1,5 @@
+//const e = require("express");
+
 const getPanier = () => {
   return JSON.parse(localStorage.getItem(`panier`));
 };
@@ -66,9 +68,9 @@ function createArticles() {
     <div class="error d-none">
         <p>Il manque encore quelques informations pour pouvoir valider votre commande !</p>
     </div>
-    <div id="cmdForm">
+    <div>
     <h2 class="link-anim mb-3">Formulaire de commande</h2>
-      <form class="py-3 px-5 main-color border border-dark rounded shadow" onClick="sendForm(); createOrder();" action="/new_url">
+      <form id="cmdForm" class="py-3 px-5 main-color border border-dark rounded shadow">
         <div class="my-2 position-relative">
           <label for="firstName" class="form-label fs-4 link-anim">Prénom :</label>
           <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstName" class="form-control is-valide" placeholder="John" required/>
@@ -253,12 +255,22 @@ for (let i = 0; i < panier.length; i++) {
             localStorage.setItem("orderN°", orderNbr);
             }
           })
-          
           .catch(error => console.log('error', error));
       return result
       
     };
   //////////////////////////////////////////////////////////////////////////////////////
+
+  /*envoi.addEventListener("submit", function() {
+    e.preventDefault();
+    //window.location.href = "confirm.html";
+  });*/
+  cmdForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    sendForm(); 
+    createOrder();
+    window.location.href = ".//confirm.html";
+  });
 
 function deleteEmptypanier () {
   if (panier == 0 || panier == null) {
