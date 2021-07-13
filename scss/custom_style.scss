@@ -10,8 +10,8 @@
   font-display: swap;
 }
 
-* {
-  // default font-family for all
+*:not(.fa, .fab) {
+  // default font-family for all, except FA icons for socials
   font-family: 'belligerent' !important;
 }
 
@@ -29,13 +29,53 @@
   color: $second-theme-color;
 }
 
+.confirm-text-animation {
+    -webkit-animation: color-change 10 infinite;
+    -moz-animation: color-change 10s infinite;
+    -o-animation: color-change 10s infinite;
+    -ms-animation: color-change 10s infinite;
+    animation: color-change 10s infinite;
+
+@-webkit-keyframes color-change {
+    0% { color: black; }
+    50% { color: $second-theme-color; }
+    100% {color : black; }
+}
+@-moz-keyframes color-change {
+  0% { color: black; }
+    50% { color: $second-theme-color; }
+    100% {color : black; }
+}
+@-ms-keyframes color-change {
+  0% { color: black; }
+    50% { color: $second-theme-color; }
+    100% {color : black; }
+}
+@-o-keyframes color-change {
+  0% { color: black; }
+    50% { color: $second-theme-color; }
+    100% {color : black; }
+}
+@keyframes color-change {
+  0% { color: black; }
+    50% { color: $second-theme-color; }
+    100% {color : black; }
+}
+}// End confirm-text-animation
+
 .coloring-second:hover {
   color : $second-theme-color;
   transition: 250ms ease-in-out;
 }
 
 .secondary-border {
-  border-bottom: .25rem solid $second-theme-color;
+  //border-bottom: .25rem solid $second-theme-color;
+  background: linear-gradient(to top, ($second-theme-color) 0%, ($second-theme-color) 5%, transparent 5.01%) no-repeat left bottom / 100% 100%;
+}
+
+.secondary-underline {
+  text-decoration: underline;
+  text-decoration-color: $second-theme-color;
 }
 
 .title-border {
@@ -90,8 +130,8 @@ input[type="radio"].btn-check.color-option:checked+label {
 .form-control  {
   font-family:'Times New Roman', Times, serif !important;
 }
-
 // Basket style //
+
 .panier-btn {
   button {
     background: none;

@@ -1,29 +1,29 @@
 const totalPrice = [0]; 
-  parsedPanier.forEach(element => {
-    let allPrices = element.price;
+  panier.forEach(element => {
+    let allPrices = element.fullPrice;
     totalPrice.push(allPrices);
   });
   let commandPrice = totalPrice.reduce((a, b) => a + b, 0);
 
-var today = new Date();
-const y = today.getFullYear();
-const m = today.getMonth();
-const d = today.getDate();
-const h = today.getUTCHours();
-function getRandomArbitrary(min, max) {
-    return Math.random(9999, 1) * (max - min) + min;
-  }
- 
-const rNbr =  Math.floor((Math.random() * 999) + 1);
-  
-var randomCmdNumber = `${y}${m}${d}${h}_${commandPrice}_${rNbr.toString()}`;
-
+  let localOrder = localStorage.getItem("orderN°");
 
 confirmation.insertAdjacentHTML(
     "beforeend",
-    `<h2 class="fs-2 secondary-border w-50">Mon récapitulatif de commande</h2>
-    <h3 class="mt-3">Commande n°: ${randomCmdNumber}</h3>
-    <span class="articleQty card-text fs-4">Quantité : ${parsedPanier[0].quantity}</span></br>
-    <span class="articlePrice card-text fs-4">Prix : ${commandPrice}€</span>
+    `
+    <h1 class="my-3 fw-bold confirm-text-animation"> Félicitations, votre commande est confirmée !</h1>
+    <h2 class="fs-2 my-3 secondary-underline">Mon récapitulatif de commande :</h2>
+    <h4 class="my-3">Commande n°: <strong>${localOrder}</strong></h4>
+    <span class="articleQty card-text fs-4">Nombre d'articles : ${panier[0].quantity}</span></br>
+    <span class="mb-2 articlePrice card-text fs-4">Prix : ${commandPrice}€</span>
+    <p class="fs-5">Une copie de cette confirmation va vous être envoyée par email d'ici quelques minutes.</p>
+    <p class="fs-5 mb-3">Votre commande sera expédiée d'ici 48h, merci pour votre achat. A bientot sur Orinoco !</p>
+   
     
     `);
+
+//// On exiting confirm page, deleting localStorage elements, except formValues for auto-completion ////
+window.onbeforeunload = function () {
+localStorage.removeItem("panier");
+localStorage.removeItem("orderN°");
+window.location.href="index.html";
+}
