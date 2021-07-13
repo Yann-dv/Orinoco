@@ -244,10 +244,19 @@ for (let i = 0; i < panier.length; i++) {
           .then(response => response.text())
           .then(function (result) {
             JSON.parse(result);
+            let getLocalOrder = localStorage.getItem("orderN°");
             let order = JSON.parse(result).orderId;
+            if (!getLocalOrder) {
             const orderNbr = [];
             orderNbr.push(order);
             localStorage.setItem("orderN°", orderNbr);
+            }
+            else if (getLocalOrder) {
+            localStorage.removeItem("orderN°"); // Delete old orderN° if existing
+            const orderNbr = [];
+            orderNbr.push(order);
+            localStorage.setItem("orderN°", orderNbr);
+            }
           })
           
           .catch(error => console.log('error', error));
