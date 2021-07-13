@@ -1,3 +1,5 @@
+const getLocalOrder = localStorage.getItem("orderN°");
+
 const getPanier = () => {
   return JSON.parse(localStorage.getItem(`panier`));
 };
@@ -66,20 +68,20 @@ function createArticles() {
     <div class="error d-none">
         <p>Il manque encore quelques informations pour pouvoir valider votre commande !</p>
     </div>
-    <div id="cmdForm">
+    <div>
     <h2 class="link-anim mb-3">Formulaire de commande</h2>
-      <form class="py-3 px-5 main-color border border-dark rounded shadow">
+      <form id="cmdForm" class="py-3 px-5 main-color border border-dark rounded shadow">
         <div class="my-2 position-relative">
-          <label for="firstname" class="form-label fs-4 link-anim">Prénom :</label>
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstname" class="form-control is-valide" placeholder="John" required minlength="2"/>
+          <label for="firstName" class="form-label fs-4 link-anim">Prénom :</label>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstName" class="form-control is-valide" placeholder="John" required/>
         </div>
         <div class="my-2 position-relative">
-          <label for="secondname" class="form-label fs-4 link-anim">Nom :</label> 
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastname" class="form-control" placeholder="Doe" required minlength="2"/>
+          <label for="secondName" class="form-label fs-4 link-anim">Nom :</label> 
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastName" class="form-control" placeholder="Doe" required/>
         </div>
         <div class="my-2 position-relative">
-          <label for="adresse" class="form-label fs-4 link-anim">Adresse :</label> 
-          <input type="text" pattern="^[a-zA-Z0-9-\\s]+$" id="adress" class="form-control" placeholder="1 rue des Cerisiers" required/>
+          <label for="address" class="form-label fs-4 link-anim">Adresse :</label> 
+          <input type="text" pattern="^[a-zA-Z0-9-\\s]+$" id="address" class="form-control" placeholder="1 rue des Cerisiers" required/>
         </div>
         <div class="my-2 position-relative">
           <label for="ville" class="form-label fs-4 link-anim">Ville :</label> 
@@ -106,10 +108,10 @@ function createArticles() {
     basketContent.insertAdjacentHTML(
       "beforeend",
       `
-        <div class="selectedArticles my-2 card rounded shadow ${panier[i]._id}"> 
+        <div class="selectedArticles my-2 card rounded shadow ${panier[i].productId}"> 
             <article class="main-color row g-0">
               <div class="main-color col-6">
-              <a href="produit.html?teddy=${panier[i]._id}"><img src="${panier[i].imageUrl}" class="main-color img-fluid p-3" title="Retourner vers la fiche produit"></a>
+              <a href="produit.html?teddy=${panier[i].productId}"><img src="${panier[i].imageUrl}" class="main-color img-fluid p-3" title="Retourner vers la fiche produit"></a>
               </div>
               <div class=" col-6">
                 <div class="card-body px-2 py-2">
@@ -179,7 +181,7 @@ for (let i = 0; i < panier.length; i++) {
       if (panier[i].cmdId == qtyPlus[i].value) {
         panier[i].quantity = parseInt(panier[i].quantity) + 1;
         panier[i].fullPrice = panier[i].fullPrice + panier[i].unitPrice;
-        panier[i].cmdId = panier[i].name+panier[i]._id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        panier[i].cmdId = panier[i].name+panier[i].productId+panier[i].quantity+panier[i].color+panier[i].fullPrice;
         setPanier(panier);
         window.location.reload();
       }
@@ -190,7 +192,7 @@ for (let i = 0; i < panier.length; i++) {
         if (panier[i].quantity >= 1) {
         panier[i].quantity = parseInt(panier[i].quantity) - 1;
         panier[i].fullPrice = panier[i].fullPrice - panier[i].unitPrice;
-        panier[i].cmdId = panier[i].name+panier[i]._id+panier[i].quantity+panier[i].color+panier[i].fullPrice;
+        panier[i].cmdId = panier[i].name+panier[i].productId+panier[i].quantity+panier[i].color+panier[i].fullPrice;
         panier = panier.filter((el) => el.quantity !== 0);// Si élément à 0, on le supprime du local storage
         setPanier(panier);
         window.location.reload();
@@ -206,9 +208,9 @@ for (let i = 0; i < panier.length; i++) {
       
   function sendForm () {
       const formValues = { //Object pour localstorage
-      firstname: document.querySelector('#firstname').value,
-      lastname: document.querySelector('#lastname').value,
-      adress: document.querySelector('#adress').value,
+      firstName: document.querySelector('#firstName').value,
+      lastName: document.querySelector('#lastName').value,
+      address: document.querySelector('#address').value,
       city: document.querySelector('#city').value, 
       cp: document.querySelector('#cp').value,
       email: document.querySelector('#email').value,
@@ -216,39 +218,64 @@ for (let i = 0; i < panier.length; i++) {
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
   };
   
-  envoi.addEventListener("click", function(evt) { // repasser en submit après avoir debuggé
-     
-        evt.preventDefault();
-        sendForm();
-        createOrder();
-    
-  });
    function createOrder() {
      //////////////////Envoi de la commande via POST //////////
-      // Specify with argument match which object
       const contact = JSON.parse(localStorage.getItem("formValues"));
-      const commande = JSON.parse(localStorage.getItem(`panier`));
-      const data = {
-        "contact": contact,
-        "commande": commande
-    }
-    console.log(data)
+      const products = [];
+      panier.forEach(element => {
+        let elementId = element.productId;
+        products.push(elementId);
+        debugger;
+      });
+      const data = {"contact": contact,"products": products}
       const result = fetch("http://localhost:3000/api/teddies/order", { 
               headers: {
               'Content-Type': 'application/json'
               },
               method: 'POST',
-              credentials: 'omit',
-              body: JSON.parse(data), // JSON.stringify() transforms JS object to JSON
+              
+              body: JSON.stringify(data), // JSON.stringify() transforms JS object to JSON
               mode: 'cors',
               cache: 'default'
           })
           .then(response => response.text())
-          .then(result => JSON.parse(result))
+          .then(function (result) {
+            JSON.parse(result);
+            localStorage.setItem("sendRequest", result);
+            
+            let order = JSON.parse(result).orderId;
+            if (!getLocalOrder) {
+            const orderNbr = [];
+            orderNbr.push(order);
+            localStorage.setItem("orderN°", orderNbr);
+            }
+            else if (getLocalOrder) {
+            localStorage.removeItem("orderN°"); // Delete old orderN° if existing
+            const orderNbr = [];
+            orderNbr.push(order);
+            localStorage.setItem("orderN°", orderNbr);
+            }
+          })
           .catch(error => console.log('error', error));
       return result
+      
     };
+
+    function goConfirm() {
+        window.location.href = "./confirm.html"; // attente du numéro de commande pour charger la page de confirm
+    }
   //////////////////////////////////////////////////////////////////////////////////////
+
+  /*envoi.addEventListener("submit", function() {
+    e.preventDefault();
+    //window.location.href = "confirm.html";
+  });*/
+  cmdForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    sendForm(); 
+    createOrder();
+    setTimeout(function(){goConfirm()}, 500);
+  });
 
 function deleteEmptypanier () {
   if (panier == 0 || panier == null) {
@@ -263,9 +290,9 @@ const localFormValuesToObject = JSON.parse(localFormValues);
 
 function autoCompleteForm(input) {
   if (localFormValuesToObject !== null) {
-  document.querySelector('#firstname').value = localFormValuesToObject.firstname;
-  document.querySelector('#lastname').value = localFormValuesToObject.lastname;
-  document.querySelector('#adress').value = localFormValuesToObject.adress;
+  document.querySelector('#firstName').value = localFormValuesToObject.firstName;
+  document.querySelector('#lastName').value = localFormValuesToObject.lastName;
+  document.querySelector('#address').value = localFormValuesToObject.address;
   document.querySelector('#city').value = localFormValuesToObject.city; 
   document.querySelector('#cp').value = localFormValuesToObject.cp;
   document.querySelector('#email').value = localFormValuesToObject.email;

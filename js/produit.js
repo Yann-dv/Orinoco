@@ -124,23 +124,22 @@ function addToBasket(tedFinder) {
     const SEARCHED_TEDDY_COLOR = isCheckedColor.value;
     
     //////////// Création des objets teddy //////////////////////////
-    const tedParams = {name: tedFinder.name, _id: tedIdToCreate, cmdId: tedFinder.name+tedIdToCreate+qtyValue+isCheckedColor.value+itemPrice,
-      quantity: qtyValue, color: isCheckedColor.value, colorCompare: tedIdToCreate+isCheckedColor.value, unitPrice: (tedFinder.price/100),
+    const tedParams = {name: tedFinder.name, productId: tedIdToCreate, cmdId: tedFinder.name+tedIdToCreate+qtyValue+isCheckedColor.value+itemPrice,
+      quantity: qtyValue, color: isCheckedColor.value, unitPrice: (tedFinder.price/100),
       fullPrice: itemPrice, imageUrl: tedFinder.imageUrl};
     /////////////////////////////////////////////////////////////////
     //let foundIndex = -1;
 
     if (panier != null) {
        for(let i = 0; i < panier.length; i++) {
-        foundIndex = i;
-        if(panier[foundIndex].colorCompare == SEARCHED_TEDDY_ID+SEARCHED_TEDDY_COLOR) {
-        panier[foundIndex].quantity = parseInt(panier[foundIndex].quantity) + parseInt(qtyValue);
-        panier[foundIndex].fullPrice = parseInt(panier[foundIndex].fullPrice) + parseInt(itemPrice);
-        panier[foundIndex].cmdId = tedFinder.name+tedIdToCreate+panier[foundIndex].quantity+isCheckedColor.value+panier[foundIndex].fullPrice;
+        if(panier[i].color == SEARCHED_TEDDY_ID+SEARCHED_TEDDY_COLOR) {
+        panier[i].quantity = parseInt(panier[i].quantity) + parseInt(qtyValue);
+        panier[i].fullPrice = parseInt(panier[i].fullPrice) + parseInt(itemPrice);
+        panier[i].cmdId = tedFinder.name+tedIdToCreate+panier[i].quantity+isCheckedColor.value+panier[i].fullPrice;
         setPanier(panier);
         debugger;
         console.log("Ici on doit ajouter qty et price");
-        console.log(panier[i]._id, SEARCHED_TEDDY_ID, panier[i].color, SEARCHED_TEDDY_COLOR, panier[i].name, SEARCHED_TEDDY_NAME); 
+        console.log(panier[i].productId, SEARCHED_TEDDY_ID, panier[i].color, SEARCHED_TEDDY_COLOR, panier[i].name, SEARCHED_TEDDY_NAME); 
         break;
         }
         else {
