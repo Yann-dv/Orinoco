@@ -1,4 +1,5 @@
 //const e = require("express");
+const getLocalOrder = localStorage.getItem("orderN°");
 
 const getPanier = () => {
   return JSON.parse(localStorage.getItem(`panier`));
@@ -241,7 +242,7 @@ for (let i = 0; i < panier.length; i++) {
           .then(response => response.text())
           .then(function (result) {
             JSON.parse(result);
-            let getLocalOrder = localStorage.getItem("orderN°");
+            
             let order = JSON.parse(result).orderId;
             if (!getLocalOrder) {
             const orderNbr = [];
@@ -259,6 +260,12 @@ for (let i = 0; i < panier.length; i++) {
       return result
       
     };
+
+    function goConfirm() {
+      if (getLocalOrder) {
+        window.location.href = ".//confirm.html"; // attente du numéro de commande pour charger la page de confirm
+    }
+    }
   //////////////////////////////////////////////////////////////////////////////////////
 
   /*envoi.addEventListener("submit", function() {
@@ -269,7 +276,7 @@ for (let i = 0; i < panier.length; i++) {
     e.preventDefault();
     sendForm(); 
     createOrder();
-    window.location.href = ".//confirm.html";
+    goConfirm();
   });
 
 function deleteEmptypanier () {

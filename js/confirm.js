@@ -11,15 +11,16 @@ confirmation.insertAdjacentHTML(
     "beforeend",
     `
     <h1 class="my-3 fw-bold confirm-text-animation"> Félicitations, votre commande est confirmée !</h1>
-    <h2 class="fs-2 my-3 secondary-underline">Mon récapitulatif de commande</h2>
-    <h3 class="my-3">Commande n°: ${localOrder}</h3>
+    <h2 class="fs-2 my-3 secondary-underline">Mon récapitulatif de commande :</h2>
+    <h4 class="my-3">Commande n°: <strong>${localOrder}</strong></h4>
     <span class="articleQty card-text fs-4">Quantité : ${panier[0].quantity}</span></br>
-    <span class="mb-5 articlePrice card-text fs-4">Prix : ${commandPrice}€</span>
+    <span class="mb-2 articlePrice card-text fs-4">Prix : ${commandPrice}€</span>
+    <p class="fs-5 mb-5">Votre commande sera expédiée d'ici 48h, merci pour votre achat. A bientot sur Orinoco !</p>
     
     `);
 
 //// On exiting confirm page, deleting localStorage elements, except formValues for auto-completion ////
-window.onbeforeunload = function () {
+/*window.onbeforeunload = function () {
 localStorage.removeItem("panier");
 localStorage.removeItem("orderN°");
-}
+}*/

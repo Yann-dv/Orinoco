@@ -1,3 +1,6 @@
+window.onload = deleteTrashes;
+
+
 fetch("http://localhost:3000/api/teddies")
   .then(function (res) {
     if (res.ok) {
@@ -63,11 +66,9 @@ function teddySendUrl() {
   });
 }
 
-
-/*
-var str = window.location.href;
-var url = new URL(str);
-var urlParams = new URLSearchParams(window.location.search);
-urlParams.set("Teddy", "1");
-window.location.search = urlParams;
-console.log(urlParams);*/
+function deleteTrashes() {
+let localOrder = localStorage.getItem("orderN°");
+if(localOrder){
+localStorage.removeItem("orderN°");
+}
+}
