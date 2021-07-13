@@ -10,8 +10,8 @@
   font-display: swap;
 }
 
-* {
-  // default font-family for all
+*:not(.fa, .fab) {
+  // default font-family for all, except FA icons for socials
   font-family: 'belligerent' !important;
 }
 

@@ -1,6 +1,5 @@
 window.onload = deleteTrashes;
 
-
 fetch("http://localhost:3000/api/teddies")
   .then(function (res) {
     if (res.ok) {

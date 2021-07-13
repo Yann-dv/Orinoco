@@ -5,7 +5,7 @@
   font-style: normal;
   font-display: swap;
 }
-* {
+*:not(.fa, .fab) {
   font-family: "belligerent" !important;
 }
 
