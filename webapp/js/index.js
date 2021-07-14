@@ -27,7 +27,7 @@ const addArticles = (teddies) => {
       "beforeend",
       `
       <div class="teddy col-12 col-lg-4">
-        <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+        <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 mx-lg-0 mx-md-5 shadow">
         <div class="card-body main-color position-relative">
         <img src="${iteddy.imageUrl}" alt="Teddy" class="card-img-top main-color" style="height: 15rem">
         <h4 class="card-title fw-bold">${iteddy.name}</h4>

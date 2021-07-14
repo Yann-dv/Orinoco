@@ -6,11 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css" />
-  <title>Produit</title>
-  <link rel="icon" href="./images/favicon.ico">
+  <link rel="icon" href="../server/images/favicon.ico">
+  <title>Confirmation</title>
   <script src="https://kit.fontawesome.com/158c254b57.js" crossorigin="anonymous"></script>
-  <script src="./js/produit.js" defer></script>
   <script src="./js/panier.js" defer></script>
+  <script src="./js/confirm.js" defer></script>
+
 </head>
 
 <header class="main-color py-1 px-1">
@@ -19,16 +20,15 @@
       <div class="col d-flex justify-content-between align-items-center">
         <div id="return">
           <a href="javascript:history.go(-1)" class="header-return" aria-label="Bouton vers page précédente">
-            <img class="return img-fluid" src="./images/return.png" alt="Bouton retour page accueil">
+            <img class="return img-fluid hidden" src="../server/images/return.png" alt="Bouton retour page accueil">
           </a>
         </div>
-        <h1><a href="./index.html"><img class="logo-img img-fluid" src="./images/logo.png" alt="Orinico"></a></h1>
+        <h1><a href="./index.html"><img class="logo-img img-fluid" src="../server/images/logo.png" alt="Orinico"></a></h1>
         <div>
           <div id="panier" class="panier-btn">   
-            <button class="offset"><span class="panier-text">Panier</span>
-              <a class="stretched-link" href="panier.html" aria-label="Bouton d'accès page panier">
+            <button class="offset"><span class="panier-text">Accueil</span>
+              <a class="stretched-link" href="index.html" aria-label="Bouton de retour page d'accueil">
               </a>
-              <span id="panierBadge" class="panier-badge hidden"></span>
             </button>
           </div>
         </div>
@@ -39,12 +39,12 @@
 </header>
 
 <body>
-  <section id="products" class="d-flex flex-row p-3 justify-content-around m-2 flex-wrap">
+
+  <section id="confirmation" class="d-flex flex-column flex-wrap text-center">
     <!--Création dynamique du produit séléctionné-->
   </section>
 
 </body>
-
 <div class="footer bg-light">
   <h4 class="text-center">Partagez-nous votre expérience avec Orinoco :</h4>
   <div class="text-center p-2">
