@@ -12,7 +12,7 @@ confirmation.insertAdjacentHTML(
     `
     <h1 class="my-3 fw-bold confirm-text-animation"> Félicitations, votre commande est confirmée !</h1>
     <h2 class="fs-2 my-3 secondary-underline">Mon récapitulatif de commande :</h2>
-    <h4 class="my-3">Commande n°: <strong>${localOrder}</strong></h4>
+    <h3 class="my-3">Commande n°: <strong>${localOrder}</strong></h3>
     <span class="articleQty card-text fs-4">Nombre d'articles : ${panier.length}</span></br>
     <span class="mb-2 articlePrice card-text fs-4">Prix : ${commandPrice}€</span>
     <p class="fs-5">Une copie de cette confirmation va vous être envoyée par email d'ici quelques minutes.</p>

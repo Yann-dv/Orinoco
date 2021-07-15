@@ -44,16 +44,16 @@ function createArticles() {
 
   basketContent.insertAdjacentHTML(
     "beforeend",
-    `<h2 class="link-anim">Tous mes articles</h2>`
+    `<h3 class="fs-2 link-anim">Tous mes articles</h3>`
   );
   summary.insertAdjacentHTML(
     "beforeend",
-    `<h2 class="link-anim">Résumé de ma commande</h2>`
+    `<h3 class="fs-2 link-anim">Résumé de ma commande</h3>`
   );
   summary.insertAdjacentHTML(
     "beforeend",
     `<div id="cmdSummary" class="main-color my-3 border border-dark rounded shadow px-3">
-      <h5>Votre commande comprend :</h5>
+      <h4>Votre commande comprend :</h4>
       <ul>
         <li class="fs-3">${panier.length} articles</li>
         <li class="fs-3"> Pour un prix total de : <span class="secondary-border secondary-color coloring-second">${finalPrice}€</span></li>
@@ -69,14 +69,14 @@ function createArticles() {
         <p>Il manque encore quelques informations pour pouvoir valider votre commande !</p>
     </div>
     <div>
-    <h2 class="link-anim mb-3">Formulaire de commande</h2>
+    <h3 class="fs-2 link-anim mb-3">Formulaire de commande</h3>
       <form id="cmdForm" class="py-3 px-5 main-color border border-dark rounded shadow">
         <div class="my-2 position-relative">
           <label for="firstName" class="form-label fs-4 link-anim">Prénom :</label>
-          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstName" class="form-control is-valide" placeholder="John" required/>
+          <input type="text" pattern="^[a-zA-Z\\-]+$" id="firstName" class="form-control" placeholder="John" required/>
         </div>
         <div class="my-2 position-relative">
-          <label for="secondName" class="form-label fs-4 link-anim">Nom :</label> 
+          <label for="lastName" class="form-label fs-4 link-anim">Nom :</label> 
           <input type="text" pattern="^[a-zA-Z\\-]+$" id="lastName" class="form-control" placeholder="Doe" required/>
         </div>
         <div class="my-2 position-relative">
@@ -84,7 +84,7 @@ function createArticles() {
           <input type="text" pattern="^[a-zA-Z0-9-\\s]+$" id="address" class="form-control" placeholder="1 rue des Cerisiers" required/>
         </div>
         <div class="my-2 position-relative">
-          <label for="ville" class="form-label fs-4 link-anim">Ville :</label> 
+          <label for="city" class="form-label fs-4 link-anim">Ville :</label> 
           <input type="text" pattern="^[a-zA-Z\\s\\-]+$" id="city" class="form-control" placeholder="Paris" required minlength="2"/>
         </div>
         <div class="my-2 position-relative">
@@ -92,7 +92,7 @@ function createArticles() {
           <input type="text" pattern="[0-9]{5}" id="cp" class="form-control" placeholder="75005" required/>
         </div>
         <div class="my-2 position-relative">
-          <label for="mail" class="form-label fs-4 link-anim">E-mail :</label>
+          <label for="email" class="form-label fs-4 link-anim">E-mail :</label>
           <input type="email" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z.]{2,15}" id="email" class="form-control" placeholder="jdoe@outlook.fr" required/>
         </div>
         <div>
@@ -115,7 +115,7 @@ function createArticles() {
               </div>
               <div class=" col-6">
                 <div class="card-body px-2 py-2">
-                  <h5 class="secondary-text card-title">${panier[i].name}</h5>
+                  <h4 class="secondary-text card-title">${panier[i].name}</h4>
                   <span class="articleQty card-text fs-5">Quantité : ${panier[i].quantity}</span></br>
                   <span class="articleColor card-text fs-5">Couleur : ${panier[i].color}</span></br>
                   <span class="articlePrice card-text fs-5">Prix : ${panier[i].fullPrice}€</span>
