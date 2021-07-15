@@ -9,7 +9,6 @@ fetch("http://localhost:3000/api/teddies")
   .then(function (value) {
     // Stockage en local des listes de produits récupérés via l'API
     JSON.stringify(value)
-    teddySendUrl(value);
     addArticles(value);
     
   })
@@ -54,16 +53,6 @@ document.querySelector("#searchInput").addEventListener("keyup", function (e) {
     }
   });
 });
-
-function teddySendUrl() {
-  // Envoi des paramètres des teddies selectionnés dans l'url, selon selection locale
-  teddyList.addEventListener("click", function (e) {
-    var str = window.location.href;
-    var urlParams = new URLSearchParams(window.location.search);
-    urlParams.set("teddy", e.target.id);
-    window.location.search = urlParams;
-  });
-}
 
 function deleteTrashes() {
 let localOrder = localStorage.getItem("orderN°");
