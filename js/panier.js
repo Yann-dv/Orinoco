@@ -170,12 +170,12 @@ for (let i = 0; i < deletePanier.length; i++) {
   }
 };
 
-if(panier.length > 0) {
+if(panier != null && panier.length > 0) {
 //// Bouton d'ajout ou supprresion d'1 article à la fois
 const qtyPlus = document.querySelectorAll(".btn.btn-outline-dark.plus");
 const qtyMoins = document.querySelectorAll(".btn.btn-outline-dark.moins");
 for (let i = 0; i < panier.length; i++) {
-  if (panier != 0 || panier != null) {
+  if (panier != 0 || panier != null) { // déplacer dans autre fichier JS //
     qtyPlus[i].addEventListener("click", (e) => {
       e.preventDefault();
       if (panier[i].cmdId == qtyPlus[i].value) {
@@ -218,7 +218,7 @@ for (let i = 0; i < panier.length; i++) {
     localStorage.setItem("formValues", JSON.stringify(formValues)); //Envoi des données en local storage
   };
   
-   function createOrder() {
+   async function createOrder() {
      //////////////////Envoi de la commande via POST //////////
       const contact = JSON.parse(localStorage.getItem("formValues"));
       const products = [];
@@ -255,6 +255,9 @@ for (let i = 0; i < panier.length; i++) {
             orderNbr.push(order);
             localStorage.setItem("orderN°", orderNbr);
             }
+
+            // 
+            goConfirm();
           })
           .catch(error => console.log('error', error));
       return result
@@ -270,12 +273,13 @@ for (let i = 0; i < panier.length; i++) {
     e.preventDefault();
     //window.location.href = "confirm.html";
   });*/
+  if(cmdForm !=null) {
   cmdForm.addEventListener("submit", function(e) {
     e.preventDefault();
     sendForm(); 
     createOrder();
-    setTimeout(function(){goConfirm()}, 500);
   });
+}
 
 function deleteEmptypanier () {
   if (panier == 0 || panier == null) {

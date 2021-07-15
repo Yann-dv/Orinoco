@@ -98,7 +98,7 @@ for (var _i = 0; _i < deletePanier.length; _i++) {
 
 ;
 
-if (panier.length > 0) {
+if (panier != null && panier.length > 0) {
   (function () {
     //// Bouton d'ajout ou supprresion d'1 article à la fois
     var qtyPlus = document.querySelectorAll(".btn.btn-outline-dark.plus");
@@ -106,6 +106,7 @@ if (panier.length > 0) {
 
     var _loop2 = function _loop2(_i2) {
       if (panier != 0 || panier != null) {
+        // déplacer dans autre fichier JS //
         qtyPlus[_i2].addEventListener("click", function (e) {
           e.preventDefault();
 
@@ -165,51 +166,66 @@ function sendForm() {
 ;
 
 function createOrder() {
-  //////////////////Envoi de la commande via POST //////////
-  var contact = JSON.parse(localStorage.getItem("formValues"));
-  var products = [];
-  panier.forEach(function (element) {
-    var elementId = element.productId;
-    products.push(elementId);
-    debugger;
-  });
-  var data = {
-    "contact": contact,
-    "products": products
-  };
-  var result = fetch("http://localhost:3000/api/teddies/order", {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify(data),
-    // JSON.stringify() transforms JS object to JSON
-    mode: 'cors',
-    cache: 'default'
-  }).then(function (response) {
-    return response.text();
-  }).then(function (result) {
-    JSON.parse(result);
-    localStorage.setItem("sendRequest", result);
-    var order = JSON.parse(result).orderId;
+  var contact, products, data, result;
+  return regeneratorRuntime.async(function createOrder$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          //////////////////Envoi de la commande via POST //////////
+          contact = JSON.parse(localStorage.getItem("formValues"));
+          products = [];
+          panier.forEach(function (element) {
+            var elementId = element.productId;
+            products.push(elementId);
+            debugger;
+          });
+          data = {
+            "contact": contact,
+            "products": products
+          };
+          result = fetch("http://localhost:3000/api/teddies/order", {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(data),
+            // JSON.stringify() transforms JS object to JSON
+            mode: 'cors',
+            cache: 'default'
+          }).then(function (response) {
+            return response.text();
+          }).then(function (result) {
+            JSON.parse(result);
+            localStorage.setItem("sendRequest", result);
+            var order = JSON.parse(result).orderId;
 
-    if (!getLocalOrder) {
-      var orderNbr = [];
-      orderNbr.push(order);
-      localStorage.setItem("orderN°", orderNbr);
-    } else if (getLocalOrder) {
-      localStorage.removeItem("orderN°"); // Delete old orderN° if existing
+            if (!getLocalOrder) {
+              var orderNbr = [];
+              orderNbr.push(order);
+              localStorage.setItem("orderN°", orderNbr);
+            } else if (getLocalOrder) {
+              localStorage.removeItem("orderN°"); // Delete old orderN° if existing
 
-      var _orderNbr = [];
+              var _orderNbr = [];
 
-      _orderNbr.push(order);
+              _orderNbr.push(order);
 
-      localStorage.setItem("orderN°", _orderNbr);
+              localStorage.setItem("orderN°", _orderNbr);
+            } // 
+
+
+            goConfirm();
+          })["catch"](function (error) {
+            return console.log('error', error);
+          });
+          return _context.abrupt("return", result);
+
+        case 6:
+        case "end":
+          return _context.stop();
+      }
     }
-  })["catch"](function (error) {
-    return console.log('error', error);
   });
-  return result;
 }
 
 ;
@@ -224,14 +240,13 @@ function goConfirm() {
 });*/
 
 
-cmdForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-  sendForm();
-  createOrder();
-  setTimeout(function () {
-    goConfirm();
-  }, 500);
-});
+if (cmdForm != null) {
+  cmdForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    sendForm();
+    createOrder();
+  });
+}
 
 function deleteEmptypanier() {
   if (panier == 0 || panier == null) {
