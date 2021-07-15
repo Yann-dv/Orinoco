@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/index.html</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/panier.html</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/produit.html?teddy=5be9c8541c9d440000665243</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/produit.html?teddy=5beaa8bf1c9d440000a57d94</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/produit.html?teddy=5beaa8bf1c9d440000a57d95</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/produit.html?teddy=5beaabe91c9d440000a57d96</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/produit.html?teddy=5beaacd41c9d440000a57d97</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://yann-dv.github.io/YannHagege_5_20062021/confirm.html</loc>
+  <lastmod>2021-07-15T13:35:55+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
