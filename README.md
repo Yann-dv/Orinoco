@@ -24,3 +24,9 @@ communication via une API. Création d'une commande d'articles, avec n° de comm
   - Tous les produits possèdent les attributs : _id, name, price, description, imageUrl
   - Personnalisation du produit en utilisant le string "color" de l'API
   - Routes POST : envoi d'un objet contenant les champs firstName, lastName, address, city, email (validation avant post)
+
+
+* Installation backend : 
+  - Requiert npm et node installés
+  - npm install
+  - lancer node server (lancement sur localhost:3000)
