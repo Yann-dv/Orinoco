@@ -28,9 +28,9 @@ function emptyBasketHide() {
       emptyBasket.classList.add("d-flex");
       emptyBasket.style.display = "visible";
       
-      let garfunkelSrc = getElementsByclassName('garfunkel');
-      let gustavSrc = getElementsByclassName('gustav');
-      let arnoldSrc = getElementsByclassName('arnold');
+      let garfunkelSrc = getElementById('min_garfunkel');
+      let gustavSrc = getElementById('min_gustav');
+      let arnoldSrc = getElementById('min_arnold');
       arnoldSrc.setAttribute("src", `${apiUrl}/images/teddy_2.jpg`);
       gustavSrc.setAttribute("src", `${apiUrl}/images/teddy_4.jpg`);
       garfunkelSrc.setAttribute("src", `${apiUrl}/images/teddy_5.jpg`);

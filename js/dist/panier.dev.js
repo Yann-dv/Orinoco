@@ -30,9 +30,9 @@ function emptyBasketHide() {
     } else if (panier == null || panier == 0) {
       emptyBasket.classList.add("d-flex");
       emptyBasket.style.display = "visible";
-      var garfunkelSrc = getElementsByclass('garfunkel');
-      var gustavSrc = getElementsByclass('gustav');
-      var arnoldSrc = getElementsByclass('arnold');
+      var garfunkelSrc = getElementById('min_garfunkel');
+      var gustavSrc = getElementById('min_gustav');
+      var arnoldSrc = getElementById('min_arnold');
       arnoldSrc.setAttribute("src", "".concat(apiUrl, "/images/teddy_2.jpg"));
       gustavSrc.setAttribute("src", "".concat(apiUrl, "/images/teddy_4.jpg"));
       garfunkelSrc.setAttribute("src", "".concat(apiUrl, "/images/teddy_5.jpg"));
