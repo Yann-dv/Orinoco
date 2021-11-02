@@ -1,7 +1,7 @@
 "use strict";
 
 window.onload = deleteTrashes;
-fetch("http://localhost:3000/api/teddies").then(function (res) {
+fetch("".concat(apiUrl, "/api/teddies")).then(function (res) {
   if (res.ok) {
     return res.json();
   }

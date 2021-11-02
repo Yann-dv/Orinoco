@@ -1,6 +1,6 @@
 window.onload = deleteTrashes;
 
-fetch("http://localhost:3000/api/teddies")
+fetch(`${apiUrl}/api/teddies`)
   .then(function (res) {
     if (res.ok) {
       return res.json();
