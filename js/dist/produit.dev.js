@@ -3,13 +3,13 @@
 // Recherche de l'objet local correspondant à l'id du teddy passée en URL sur page index
 var tedIdToCreate = new URLSearchParams(document.location.search.substring(1)).get("teddy"); /// API Fetch
 
-fetch("http://localhost:3000/api/teddies/").then(function (res) {
+fetch("".concat(apiUrl, "/api/teddies/")).then(function (res) {
   if (res.ok) {
     return res.json();
   }
 }).then(function () {
   /// API Fetch -> id en URL
-  fetch("http://localhost:3000/api/teddies/" + tedIdToCreate).then(function (tedFinder) {
+  fetch("".concat(apiUrl, "/api/teddies/") + tedIdToCreate).then(function (tedFinder) {
     if (tedFinder.ok) {
       return tedFinder.json();
     }

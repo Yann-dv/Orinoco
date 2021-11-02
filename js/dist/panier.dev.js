@@ -94,7 +94,7 @@ function createOrder() {
             "contact": contact,
             "products": products
           };
-          result = fetch("http://localhost:3000/api/teddies/order", {
+          result = fetch("".concat(apiUrl, "/api/teddies/order"), {
             headers: {
               'Content-Type': 'application/json'
             },

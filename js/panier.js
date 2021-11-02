@@ -165,7 +165,7 @@ function createArticles() {
         debugger;
       });
       const data = {"contact": contact,"products": products}
-      const result = fetch("http://localhost:3000/api/teddies/order", { 
+      const result = fetch(`${apiUrl}/api/teddies/order`, { 
               headers: {
               'Content-Type': 'application/json'
               },
