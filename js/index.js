@@ -1,20 +1,6 @@
-window.onload = deleteTrashes;
+import { teddies } from "../datas.js";
 
-fetch(`${apiUrl}/api/teddies`)
-  .then(function (res) {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-  .then(function (value) {
-    // Stockage en local des listes de produits récupérés via l'API
-    JSON.stringify(value)
-    addArticles(value);
-    
-  })
-  .catch(function (err) {
-    // Une erreur est survenue
-  });
+window.onload = deleteTrashes;
 
 const addArticles = (teddies) => {
   const mainContainer = document.getElementById("teddyList");
@@ -28,7 +14,7 @@ const addArticles = (teddies) => {
       <div class="teddy col-12 col-lg-4">
         <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 mx-lg-0 mx-md-5 shadow">
         <div class="card-body main-color position-relative">
-        <img src="${iteddy.imageUrl}" alt="Teddy ${iteddy.name}" class="card-img-top main-color" style="height: 15rem">
+        <img src="${ "../images/" + iteddy.imageUrl}" alt="Teddy ${iteddy.name}" class="card-img-top main-color" style="height: 15rem">
         <h3 class="card-title fw-bold">${iteddy.name}</h3>
         <p class="card-text">${iteddy.description}</p>
         <a id="${iteddy._id}" class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="produit.html?teddy=${iteddy._id}" role="button">
@@ -39,6 +25,10 @@ const addArticles = (teddies) => {
     );
   }
 };
+
+// Call the addArticles function after defining it
+addArticles(teddies);
+
 
 // Barre de recherche dynamique, fonctionnant par filtre, évolutive en fonction des produits proposés //
 document.querySelector("#searchInput").addEventListener("keyup", function (e) {

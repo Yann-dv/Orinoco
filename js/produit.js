@@ -1,34 +1,59 @@
-// Recherche de l'objet local correspondant à l'id du teddy passée en URL sur page index
+import { teddies } from "../datas.js";
+import { getPanier, setPanier, panier } from "./panier.js";
+
+// Recherche de l'objet local correspondant à l'id du teddy passé en URL sur la page index
 var tedIdToCreate = new URLSearchParams(document.location.search.substring(1)).get("teddy");
 
-/// API Fetch
-fetch(`${apiUrl}/api/teddies/`)
-  .then(function (res) {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-  .then(function () {
-    /// API Fetch -> id en URL
-    fetch(`${apiUrl}/api/teddies/` + tedIdToCreate)
-      .then(function (tedFinder) {
-        if (tedFinder.ok) {
-          return tedFinder.json();
-        }
-      })
-      .then(function (tedFinder) {
-        //Recherche dans l'api du teddy correspondant à l'id envoyé en URL
-        createTeddy(tedFinder);
-        teddyColorator(tedFinder);
-      })
-      .catch(function (err) {
-        // Une erreur est survenue
-      });
-  })
-  .catch(function (err) {
-    // Une erreur est survenue
+// Find the teddy in the teddies array based on tedIdToCreate
+var tedFinder = teddies.find(teddy => teddy._id === tedIdToCreate);
+// Créations des boutons de choix de couleurs en fonction du teddy séléctionné
+
+const teddyColorator = (tedFinder) => {
+  const colorContainer = document.getElementById("productColors");
+  let color = tedFinder.colors;
+  
+  for (let i = 0; i < tedFinder.colors.length; i++) {
+    const colorFilter = (color) => { // Filtres pour le défaut d'affichage CSS des couleurs dark et pale brown
+      if (color=== 'Pale brown') {
+        return "#8B4513";
+      } else if(color === 'Dark brown') {
+        return "#800000";
+      } else {
+        return color; }
+      };
+    //let brownFilter = colorFilter(tedFinder.colors);
+   
+    colorContainer.insertAdjacentHTML(
+      "beforeend",
+      `
+      <input type="radio" class="color-option btn-check" value="${color[i]}" name="colorChoice" id="${color[i]}" autocomplete="off">
+      <label class="color-btn btn fs-4" for="${color[i]}" style="background-color: ${colorFilter(color[i])}">${color[i]}</label>
+      `
+    );
+  };
+};
+
+if (tedFinder) {
+  // Call createTeddy and teddyColorator functions with the found teddy
+  createTeddy(tedFinder);
+  teddyColorator(tedFinder);
+
+  // Add event listener for the "Ajouter au panier" button
+  const productPrice = document.getElementById("productPrice");
+  productPrice.addEventListener("click", function (e) {
+    addToBasket(tedFinder);
   });
 
+  // Add event listener for the quantity select
+  const tedQuantity = document.getElementById("tedQuantity");
+  tedQuantity.addEventListener("change", function (e) {
+    const tedPrice = document.getElementById("productPrice");
+    tedPrice.textContent = `Ajouter au panier pour ${((tedFinder.price / 100) * e.target.value).toFixed(2)} €`;
+  });
+} else {
+  // Handle the case where the teddy with the specified ID was not found
+  console.error("Teddy not found.");
+}
 function createTeddy(tedFinder) {
   const mainContainer = document.getElementById("products");
   mainContainer.insertAdjacentHTML(
@@ -36,7 +61,7 @@ function createTeddy(tedFinder) {
     `
       <div class="teddy col-12 col-lg-6">
         <div class="product-image main-color">
-            <img src="${tedFinder.imageUrl}" alt="Teddy" class="img-fluid p-3">
+            <img src="${"../images/" + tedFinder.imageUrl}" alt="Teddy" class="img-fluid p-3">
         </div>
       </div>
       <div class="teddy col-12 col-lg-6 main-color px-3">
@@ -84,35 +109,12 @@ function createTeddy(tedFinder) {
   });
 } ///////////////////////////////////// Fin de create Teddy /////////////////////////////////////////////
 
-// Créations des boutons de choix de couleurs en fonction du teddy séléctionné
-const teddyColorator = (tedFinder) => {
-  const colorContainer = document.getElementById("productColors");
-  let color = tedFinder.colors;
-  
-  for (let i = 0; i < tedFinder.colors.length; i++) {
-    const colorFilter = (color) => { // Filtres pour le défaut d'affichage CSS des couleurs dark et pale brown
-      if (color=== 'Pale brown') {
-        return "#8B4513";
-      } else if(color === 'Dark brown') {
-        return "#800000";
-      } else {
-        return color; }
-      };
-    //let brownFilter = colorFilter(tedFinder.colors);
-   
-    colorContainer.insertAdjacentHTML(
-      "beforeend",
-      `
-      <input type="radio" class="color-option btn-check" value="${color[i]}" name="colorChoice" id="${color[i]}" autocomplete="off">
-      <label class="color-btn btn fs-4" for="${color[i]}" style="background-color: ${colorFilter(color[i])}">${color[i]}</label>
-      `
-    );
-  };
-};
+
 
 //////////////// Création et envoi des objets products dans le localStorage ///////////////
 function addToBasket(tedFinder) {
     // récupère le panier récent
+    let panier = getPanier();
     panier = getPanier();
     var qtyValue = document.getElementById("tedQuantity").value;
     var itemPrice = qtyValue * (tedFinder.price / 100);

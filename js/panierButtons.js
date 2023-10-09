@@ -1,3 +1,5 @@
+import {panier, setPanier, deleteEmptypanier} from "./panier.js";
+
 // Bouton de suppresion d'article //
 const deleteItem = document.querySelectorAll(".btn.deleteArticle");
 let target = document.querySelectorAll("div.selectedArticles");

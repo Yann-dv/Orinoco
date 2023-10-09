@@ -55,14 +55,4 @@ const teddies = [
   }
 ];
 
-exports.find = () => {
-  return new Promise((resolve, reject) => resolve(JSON.parse(JSON.stringify(teddies))));
-}
-
-exports.findById = (id) => {
-  return new Promise((resolve, reject) =>
-    resolve(JSON.parse(JSON.stringify(teddies)).find(teddy =>
-      teddy._id == id)
-    )
-  );
-}
+export { teddies };
