@@ -1,55 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr-FR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="icon" href="./images/favicon.ico">
-    <title>Mon Panier</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="https://api-orinoco.herokuapp.com/images/favicon.ico">
+  <title>Mon Panier</title>
+  <script src="https://kit.fontawesome.com/158c254b57.js" crossorigin="anonymous"></script>
+  <script src="./js/config.js" defer></script>
+  <script src="./js/panier.js" defer></script>
+  <script src="./js/panierButtons.js" defer></script>
 </head>
 
-<header class="main-color d-flex justify-content-between align-items-center rounded-lg w-full py-1 px-1">
-    <div id="return">
-      <a href="javascript:history.go(-1)" class="header-return displayFlex" aria-label="Bouton vers page précédente">
-          <img class="return mx-5" src="./images/return.png" alt="Bouton retour page accueil" width="50" height=50>
-      </a>
-  </div>
-    <a href="./index.html"><img class="logo-img m-3" src="./images/logo.png" width="240" height="120" alt="Orinico"></a>
-    <a class="panier-btn link-anim d-flex align-items-center mx-5" href="panier.html"
-      aria-label="Bouton d'accès page panier">
-      <img class="basket mx-1" src="./images/panier.jpg" width="30" height="25" alt="Image Panier"> Panier
-    </a>
-  </header>
-
-<body>
-    <main id="container cart">
-        <h1>Panier</h1>
-        <section id="emptyCartSection">
-            <h2>Votre panier est vide !!</h2>
-            <p>Retrouvez tous nos produits ici : </p><button>Nos produits</button>
-            <p>Ces produits pourraient vous plaire :</p>
-        </section>
-    </main>
-</body>
-
-<div class="footer bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <ul class="list-inline text-center">
-            <li class="list-inline-item"><a href="#" class="link-anim">À propos</a></li>
-            <li class="list-inline-item">&middot;</li>
-            <li class="list-inline-item"><a href="#" class="link-anim">Vie privée</a></li>
-            <li class="list-inline-item">&middot;</li>
-            <li class="list-inline-item"><a href="#" class="link-anim">Conditions d'utilisations</a></li>
-            <li class="list-inline-item">&middot;</li>
-            <li class="list-inline-item"><a href="mailto:orinoco.contact@outlook.fr"
-                class="link-anim">Contactez-nous</a></li>
-          </ul>
+<header class="main-color py-1 px-1">
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex justify-content-between align-items-center">
+        <div id="return">
+          <a href="javascript:history.go(-1)" class="header-return" aria-label="Bouton vers page précédente">
+            <img class="return img-fluid" src="https://api-orinoco.herokuapp.com/images/return.png" alt="Bouton retour page accueil">
+          </a>
+        </div>
+        <h1><a href="./index.html"><img class="logo-img img-fluid" src="https://api-orinoco.herokuapp.com/images/logo.png" alt="Orinico"></a></h1>
+        <div>
+         <!--Placeholder div-->
+        </div>
         </div>
       </div>
     </div>
+  </div>
+</header>
+
+<body>
+  <main id="basket" class="container">
+    <h2 class="m-3 fs-1 secondary-border title-border">Mon panier</h2>
+    <section id="emptyBasket" class="d-flex m-3 text-center align-items-center flex-column">
+      <h2 class="secondary-border">Votre panier est vide !!!</h2>
+      <h3 class="fs-4 my-3">Retrouvez tous nos produits ici : </h3>
+      <a class="btn btn-secondary bg-gradient rounded-pill fs-3 px-5 py-2" href="./index.html">
+        Nos produits
+      </a>
+      <h4 class="fs-3 m-3">Ces produits pourraient vous plaire :</h4>
+      <div id="suggestions" class="row mb-4 d-flex justify-content-center">
+        <article class="teddy col-12 col-lg-4">
+          <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+            <div class="card-body main-color position-relative d-flex flex-column text-center">
+              <img src="" alt="Arnold" title="Photo du teddy Arnold" id="min_arnold"
+                class="card-img-top main-color mini-card">
+              <a class="stretched-link fs-3" href="./produit.html?teddy=5beaa8bf1c9d440000a57d94">Arnold</a>
+        </article>
+        <article class="teddy col-12 col-lg-4">
+          <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+            <div class="card-body main-color position-relative d-flex flex-column text-center">
+              <img src="" alt="Gustav" title="Photo du teddy" id="min_gustav"
+                class="card-img-top main-color mini-card gustav">
+              <a class="stretched-link fs-3" href="./produit.html?teddy=5beaabe91c9d440000a57d96">Gustav</a>
+        </article>
+        <article class="teddy col-12 col-lg-4">
+          <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 shadow">
+            <div class="card-body main-color position-relative d-flex flex-column text-center">
+              <img src="" alt="Garfunkel" title="Photo du teddy Garfunkel" id="min_garfunkel"
+                class="card-img-top main-color mini-card">
+              <a class="stretched-link fs-3" href="./produit.html?teddy=5beaacd41c9d440000a57d97">Garfunkel</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="panierWithArticles" class="row">
+        <div id="basketContent" class="col-md-4 col-12 d-flex flex-column mb-3"></div>
+        <div id="summary" class="col-md-4 col-12 summary mb-3"></div>
+        <div id="commandForm" class="col-md-4 col-12 d-flex needs-validation was-validated mb-3"></div>
+  </section>
+  </main>
+</body>
+
+<div class="footer bg-light">
+  <h4 class="text-center">Partagez votre expérience avec Orinoco :</h4>
+  <div class="text-center p-2">
+<!--Socials btns-->
+    <!-- Facebook -->
+    <a class="btn btn-primary m-2" style="background-color: #3b5998;" href="https://facebook.com/" aria-label="lien vers Facebook" role="button"
+    ><i class="fab fa-facebook-f"></i
+    ></a>
+    <!-- Google -->
+    <a class="btn btn-primary m-2" style="background-color: #dd4b39;" href="https://www.google.com/" aria-label="lien vers Google" role="button"
+      ><i class="fab fa-google"></i
+    ></a>
+    <!-- Twitter -->
+    <a class="btn btn-primary m-2" style="background-color: #55acee;" href="https://www.twitter.com/" aria-label="lien vers Twitter" role="button"
+    ><i class="fab fa-twitter"></i
+    ></a>
+    <!-- Instagram -->
+    <a class="btn btn-primary m-2" style="background-color: #ac2bac;" href="https://www.instagram.com/" aria-label="lien vers Instagram" role="button"
+    ><i class="fab fa-instagram"></i
+    ></a>
+    <!---->
 </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ul class="list-inline text-center">
+          <li class="list-inline-item"><a href="#" class="link-anim">A propos</a></li>
+          <li class="list-inline-item">&middot;</li>
+          <li class="list-inline-item"><a href="#" class="link-anim">Vie privée</a></li>
+          <li class="list-inline-item">&middot;</li>
+          <li class="list-inline-item"><a href="#" class="link-anim">Conditions d'utilisations</a></li>
+          <li class="list-inline-item">&middot;</li>
+          <li class="list-inline-item"><a href="mailto:orinoco.contact@outlook.fr" class="link-anim">Contactez-nous</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 </html>

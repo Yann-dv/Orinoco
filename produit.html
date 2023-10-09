@@ -1,50 +1,89 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css" />
-    <title>Produit</title>
-    <link rel="icon" href="./images/favicon.ico">
-    <script src="./produit.js" defer></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Produit</title>
+  <link rel="icon" href="https://api-orinoco.herokuapp.com/images/favicon.ico">
+  <script src="https://kit.fontawesome.com/158c254b57.js" crossorigin="anonymous"></script>
+  <script src="./js/config.js" defer></script>
+  <script src="./js/produit.js" defer></script>
+  <script src="./js/panier.js" defer></script>
 </head>
 
-<header class="main-color d-flex justify-content-between align-items-center rounded-lg w-full py-1 px-1">
-    <div id="return">
-      <a href="javascript:history.go(-1)" class="header-return displayFlex" aria-label="Bouton vers page précédente">
-          <img class="return mx-5" src="./images/return.png" alt="Bouton retour page accueil" width="50" height=50>
-      </a>
-  </div>
-    <a href="./index.html"><img class="logo-img m-3" src="./images/logo.png" width="240" height="120" alt="Orinico"></a>
-    <a class="panier-btn link-anim d-flex align-items-center mx-5" href="panier.html"
-      aria-label="Bouton d'accès page panier">
-      <img class="basket mx-1" src="./images/panier.jpg" width="30" height="25" alt="Image Panier"> Panier
-    </a>
-  </header>
-<body>
-  <section id="products" class="d-flex btn-group p-3 justify-content-around m-2" role="group" aria-label="choix de couleurs">
-    <!--Création dynamique du produit séléctionné-->
-  </section>
-  
-</body>
-
-<div class="footer bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <ul class="list-inline text-center">
-            <li class="list-inline-item"><a href="#" class="link-anim">À propos</a></li>
-            <li class="list-inline-item">&middot;</li>
-            <li class="list-inline-item"><a href="#" class="link-anim">Vie privée</a></li>
-            <li class="list-inline-item">&middot;</li>
-            <li class="list-inline-item"><a href="#" class="link-anim">Conditions d'utilisations</a></li>
-            <li class="list-inline-item">&middot;</li>
-            <li class="list-inline-item"><a href="mailto:orinoco.contact@outlook.fr"
-                class="link-anim">Contactez-nous</a></li>
-          </ul>
+<header class="main-color py-1 px-1">
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex justify-content-between align-items-center">
+        <div id="return">
+          <a href="javascript:history.go(-1)" class="header-return" aria-label="Bouton vers page précédente">
+            <img class="return img-fluid" src="https://api-orinoco.herokuapp.com/images/return.png" alt="Bouton retour page accueil">
+          </a>
+        </div>
+        <h1><a href="./index.html"><img class="logo-img img-fluid" src="https://api-orinoco.herokuapp.com/images/logo.png" alt="Orinico"></a></h1>
+        <div>
+          <div id="panier" class="panier-btn">   
+            <button class="offset"><span class="panier-text">Panier</span>
+              <a class="stretched-link" href="panier.html" aria-label="Bouton d'accès page panier">
+              </a>
+              <span id="panierBadge" class="panier-badge hidden"></span>
+            </button>
+          </div>
+        </div>
         </div>
       </div>
     </div>
+  </div>
+</header>
+
+<body>
+  <section id="products" class="d-flex flex-row p-3 justify-content-around m-2 flex-wrap">
+    <!--Création dynamique du produit séléctionné-->
+  </section>
+
+</body>
+
+<div class="footer bg-light">
+  <h4 class="text-center">Partagez votre expérience avec Orinoco :</h4>
+  <div class="text-center p-2">
+<!--Socials btns-->
+    <!-- Facebook -->
+    <a class="btn btn-primary m-2" style="background-color: #3b5998;" href="https://facebook.com/" aria-label="lien vers Facebook" role="button"
+    ><i class="fab fa-facebook-f"></i
+    ></a>
+    <!-- Google -->
+    <a class="btn btn-primary m-2" style="background-color: #dd4b39;" href="https://www.google.com/" aria-label="lien vers Google" role="button"
+      ><i class="fab fa-google"></i
+    ></a>
+    <!-- Twitter -->
+    <a class="btn btn-primary m-2" style="background-color: #55acee;" href="https://www.twitter.com/" aria-label="lien vers Twitter" role="button"
+    ><i class="fab fa-twitter"></i
+    ></a>
+    <!-- Instagram -->
+    <a class="btn btn-primary m-2" style="background-color: #ac2bac;" href="https://www.instagram.com/" aria-label="lien vers Instagram" role="button"
+    ><i class="fab fa-instagram"></i
+    ></a>
+    <!---->
 </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ul class="list-inline text-center">
+          <li class="list-inline-item"><a href="#" class="link-anim">A propos</a></li>
+          <li class="list-inline-item">&middot;</li>
+          <li class="list-inline-item"><a href="#" class="link-anim">Vie privée</a></li>
+          <li class="list-inline-item">&middot;</li>
+          <li class="list-inline-item"><a href="#" class="link-anim">Conditions d'utilisations</a></li>
+          <li class="list-inline-item">&middot;</li>
+          <li class="list-inline-item"><a href="mailto:orinoco.contact@outlook.fr" class="link-anim">Contactez-nous</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 </html>

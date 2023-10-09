@@ -6,12 +6,112 @@
   font-style: normal;
   font-display: swap;
 }
-* {
+*:not(.fa, .fab) {
   font-family: "belligerent" !important;
 }
 
 .hidden {
   visibility: hidden;
+}
+
+.logo-img:hover,
+#return:hover {
+  transform: scale(0.9);
+  transition: 250ms ease-in-out;
+}
+
+.secondary-text {
+  color: #8f5bfd;
+}
+
+.confirm-text-animation {
+  -webkit-animation: color-change 10 infinite;
+  -moz-animation: color-change 10s infinite;
+  -o-animation: color-change 10s infinite;
+  -ms-animation: color-change 10s infinite;
+  animation: color-change 10s infinite;
+}
+@-webkit-keyframes color-change {
+  0% {
+    color: black;
+  }
+  50% {
+    color: #8f5bfd;
+  }
+  100% {
+    color: black;
+  }
+}
+@-moz-keyframes color-change {
+  0% {
+    color: black;
+  }
+  50% {
+    color: #8f5bfd;
+  }
+  100% {
+    color: black;
+  }
+}
+@-ms-keyframes color-change {
+  0% {
+    color: black;
+  }
+  50% {
+    color: #8f5bfd;
+  }
+  100% {
+    color: black;
+  }
+}
+@-o-keyframes color-change {
+  0% {
+    color: black;
+  }
+  50% {
+    color: #8f5bfd;
+  }
+  100% {
+    color: black;
+  }
+}
+@keyframes color-change {
+  0% {
+    color: black;
+  }
+  50% {
+    color: #8f5bfd;
+  }
+  100% {
+    color: black;
+  }
+}
+
+.coloring-second:hover {
+  color: #8f5bfd;
+  transition: 250ms ease-in-out;
+}
+
+.secondary-border {
+  background: linear-gradient(to top, #8f5bfd 0%, #8f5bfd 5%, transparent 5.01%) no-repeat left bottom/100% 100%;
+}
+
+.secondary-underline {
+  text-decoration: underline;
+  text-decoration-color: #8f5bfd;
+}
+
+.title-border {
+  width: 12rem;
+}
+
+#searchInput {
+  height: 4rem;
+  width: 50vw;
+}
+
+.mini-card {
+  height: 8rem;
 }
 
 .link-anim {
@@ -28,12 +128,8 @@
   background-color: #f3e9f1;
 }
 
-.logo-img:hover, #return:hover {
-  transform: scale(0.9);
-  transition: 250ms ease-in-out;
-}
-
-.scale-up:hover, .scale-up:focus {
+.scale-up:hover,
+.scale-up:focus {
   transform: scale(1.05);
   transition: 350ms ease-in-out;
 }
@@ -44,6 +140,105 @@
   margin: 0.5rem;
 }
 
+input[type=radio].btn-check.color-option:checked + label {
+  outline: 0.35rem solid #8f5bfd;
+}
+
+.color-btn {
+  width: 8rem;
+  height: 5rem;
+}
+
+.form-control {
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+.panier-btn button {
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 0.8rem 1.5rem;
+}
+.panier-btn button {
+  position: relative;
+  color: var(--color);
+  transition: 0.25s;
+}
+.panier-btn button:hover, .panier-btn button:focus {
+  border-color: var(--hover);
+  color: #f3e9f1;
+}
+.panier-btn .panier-badge {
+  color: white;
+  padding: 0.2rem 0.6rem;
+  position: absolute;
+  top: -0.5rem;
+  right: -1rem;
+  font-size: 1.3rem;
+  background-color: red;
+  border-radius: 1rem;
+}
+.panier-btn .offset {
+  box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
+  font-size: 2rem;
+}
+.panier-btn .offset:hover, .panier-btn .offset:focus {
+  box-shadow: 0 0 0 0 var(--hover), inset 6em 3.5em 0 0 var(--hover);
+}
+.panier-btn .offset {
+  --color: #8f5bfd;
+  --hover: #c55bfd;
+}
+
+@media only screen and (max-width: 768px) {
+  .color-btn {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 10rem !important;
+    font-size: 1rem !important;
+    overflow: hidden;
+  }
+
+  #return .return {
+    height: 2rem;
+    margin-right: 3rem;
+  }
+
+  .panier-btn .panier-badge {
+    padding: 0.2rem 0.4rem;
+    font-size: 1rem;
+  }
+  .panier-btn .offset {
+    margin-left: 1rem;
+    padding: 0.5rem 0.6rem;
+    box-shadow: 0.1em 0.1em 0 0 var(--color), inset 0.1em 0.1em 0 0 var(--color);
+    font-size: 1rem;
+  }
+  .panier-btn button {
+    padding: 0.7rem 1rem;
+  }
+  .panier-btn .button {
+    padding: 0 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .panier-btn .panier-text {
+    font-size: 1.2rem;
+  }
+
+  #searchInput {
+    width: 100%;
+  }
+
+  .title-border {
+    width: 10rem;
+  }
+
+  #suggestions .teddy {
+    width: 80%;
+  }
+}
 /*!
  * Bootstrap v5.0.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
