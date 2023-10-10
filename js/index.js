@@ -2,6 +2,8 @@ import { teddies } from "../datas.js";
 
 window.onload = deleteTrashes;
 
+const imgUrl = "https://github.com/Yann-dv/Orinoco/blob/master/images/";
+
 const addArticles = (teddies) => {
   const mainContainer = document.getElementById("teddyList");
   for (let i = 0; i < teddies.length; i++) {
@@ -14,7 +16,7 @@ const addArticles = (teddies) => {
       <div class="teddy col-12 col-lg-4">
         <div class="main-color scale-up card mb-4 mt-3 mt-lg-3 mb-lg-4 mx-lg-0 mx-md-5 shadow">
         <div class="card-body main-color position-relative">
-        <img src="${ "../images/" + iteddy.imageUrl}" alt="Teddy ${iteddy.name}" class="card-img-top main-color" style="height: 15rem">
+        <img src="${imgUrl + iteddy.imageUrl}" alt="Teddy ${iteddy.name}" class="card-img-top main-color" style="height: 15rem">
         <h3 class="card-title fw-bold">${iteddy.name}</h3>
         <p class="card-text">${iteddy.description}</p>
         <a id="${iteddy._id}" class="btn btn-secondary bg-gradient rounded-pill stretched-link" href="produit.html?teddy=${iteddy._id}" role="button">
