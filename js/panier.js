@@ -1,9 +1,9 @@
 const getLocalOrder = localStorage.getItem("orderN°");
 
-const getPanier = () => {
+let getPanier = () => {
   return JSON.parse(localStorage.getItem(`panier`));
 };
-const setPanier = (panierToStore) => {
+let setPanier = (panierToStore) => {
   localStorage.setItem("panier", JSON.stringify(panierToStore));
 };
 let panier = getPanier();
