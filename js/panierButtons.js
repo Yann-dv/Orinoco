@@ -1,8 +1,9 @@
-import {panier, setPanier, deleteEmptypanier} from "./panier.js";
+import {getPanier, setPanier, deleteEmptypanier, sendForm, createOrder } from "./panier.js";
 
 // Bouton de suppresion d'article //
-const deleteItem = document.querySelectorAll(".btn.deleteArticle");
+let deleteItem = document.querySelectorAll(".btn.deleteArticle");
 let target = document.querySelectorAll("div.selectedArticles");
+let panier = getPanier();
 
 for (let i = 0; i < deleteItem.length; i++) {
   deleteItem[i].addEventListener("click", (event) => {
@@ -19,7 +20,7 @@ for (let i = 0; i < deleteItem.length; i++) {
 }
 
 //// Bouton de suppression du panier ////
-const deletePanier = document.querySelectorAll(".btn.deletePanier");
+let deletePanier = document.querySelectorAll(".btn.deletePanier");
 for (let i = 0; i < deletePanier.length; i++) {
   if ((deletePanier[i] != undefined && panier != 0) || panier != null) {
     deletePanier[i].addEventListener("click", (e) => {
@@ -32,8 +33,8 @@ for (let i = 0; i < deletePanier.length; i++) {
 
 if(panier != null && panier.length > 0) {
 //// Bouton d'ajout ou supprresion d'1 article à la fois
-const qtyPlus = document.querySelectorAll(".btn.btn-outline-dark.plus");
-const qtyMoins = document.querySelectorAll(".btn.btn-outline-dark.moins");
+let qtyPlus = document.querySelectorAll(".btn.btn-outline-dark.plus");
+let qtyMoins = document.querySelectorAll(".btn.btn-outline-dark.moins");
 for (let i = 0; i < panier.length; i++) {
   if (panier != 0 || panier != null) { // déplacer dans autre fichier JS //
     qtyPlus[i].addEventListener("click", (e) => {

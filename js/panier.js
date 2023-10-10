@@ -1,4 +1,4 @@
-const getLocalOrder = localStorage.getItem("orderN°");
+let getLocalOrder = localStorage.getItem("orderN°");
 
 let getPanier = () => {
   return JSON.parse(localStorage.getItem(`panier`));
@@ -151,7 +151,7 @@ function createArticles() {
   //Fonction du onsubmit du formulaire
       
   function sendForm () {
-      const formValues = { //Object pour localstorage
+      let formValues = { //Object pour localstorage
       firstName: document.querySelector('#firstName').value,
       lastName: document.querySelector('#lastName').value,
       address: document.querySelector('#address').value,
@@ -164,14 +164,14 @@ function createArticles() {
   
    async function createOrder() {
      //////////////////Envoi de la commande via POST //////////
-      const contact = JSON.parse(localStorage.getItem("formValues"));
-      const products = [];
+      let contact = JSON.parse(localStorage.getItem("formValues"));
+      let products = [];
       panier.forEach(element => {
         let elementId = element.productId;
         products.push(elementId);
         debugger;
       });
-      const data = {"contact": contact,"products": products}
+      let data = {"contact": contact,"products": products}
       const result = fetch(`${apiUrl}/api/teddies/order`, { 
               headers: {
               'Content-Type': 'application/json'

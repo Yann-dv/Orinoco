@@ -132,36 +132,42 @@ function addToBasket(tedFinder) {
     /////////////////////////////////////////////////////////////////
     //let foundIndex = -1;
 
-    if (panier != null) {
+    if (panier != null) 
+    {
        let pasTrouve = true;
-       for(let i = 0; i < panier.length; i++) {
-        if(panier[i].productId == SEARCHED_TEDDY_ID && panier[i].color == SEARCHED_TEDDY_COLOR) {
-          panier[i].quantity = parseInt(panier[i].quantity) + parseInt(qtyValue);
-          panier[i].fullPrice = parseInt(panier[i].fullPrice) + parseInt(itemPrice);
-          panier[i].cmdId = tedFinder.name+tedIdToCreate+panier[i].quantity+isCheckedColor.value+panier[i].fullPrice;
+       panier.forEach(element => {
+        if(element.productId == SEARCHED_TEDDY_ID && element.color == SEARCHED_TEDDY_COLOR)
+        {
+          element.quantity = parseInt(element.quantity);
+          element.fullPrice = parseInt(element.fullPrice);
+          element.cmdId = tedFinder.name+tedIdToCreate+element.quantity+isCheckedColor.value+element.fullPrice;
           setPanier(panier);
           pasTrouve = false;
-          break; // break utilisé pour ne pas boucler sur un grand nombre d'élément si on trouve le teddy souhaité dans le panier
         }
-      }//fin de boucle for i
-         
-      if (pasTrouve) {
+       });
+
+      if (pasTrouve) 
+      {
         panier.push(tedParams);
         setPanier(panier);
       }
-
-     } else if (panier == null) {
-      // Si panier inexistant, création puis push
-      panier = [];
-      panier.push(tedParams);
-      setPanier(panier);
+         
+    }
+     else if (panier == null) 
+     {
+        // Si panier inexistant, création puis push
+        panier = [];
+        panier.push(tedParams);
+        setPanier(panier);
       }
   
       //////////////////////////////////////////////////////////////////////////////////////
       window.location.reload();
       // Le reload indique plus clairement à l'utilisateur le transfert de son article dans le panier
-  } // fin de checkedcolor
-  else if(isCheckedColor == null){
-  alert("Veuillez séléctionner une couleur pour votre produit."); // Si pas de couleur checked, message d'alerte et pas d'envoi
+  } 
+  // fin de checkedcolor
+  else if(isCheckedColor == null)
+  {
+   alert("Veuillez séléctionner une couleur pour votre produit."); // Si pas de couleur checked, message d'alerte et pas d'envoi
   }
 } //fin de addToBasket
