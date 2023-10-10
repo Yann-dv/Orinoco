@@ -2,7 +2,7 @@ import { teddies } from "../datas.js";
 
 window.onload = deleteTrashes;
 
-const imgUrl = "https://github.com/Yann-dv/Orinoco/blob/master/images/";
+const imgUrl = "./images/";
 
 const addArticles = (teddies) => {
   const mainContainer = document.getElementById("teddyList");
