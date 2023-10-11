@@ -1,5 +1,5 @@
 import { teddies } from "../datas.js";
-import { getPanier, setPanier, panier } from "./panier.js";
+import { getPanier, setPanier } from "./panier.js";
 
 // Recherche de l'objet local correspondant à l'id du teddy passé en URL sur la page index
 var tedIdToCreate = new URLSearchParams(document.location.search.substring(1)).get("teddy");
