@@ -33,7 +33,7 @@ function emptyBasketHide() {
       let arnoldSrc = document.getElementById('min_arnold');
       arnoldSrc.setAttribute("src", `./images/teddy_2.jpg`);
       gustavSrc.setAttribute("src", `./images/teddy_4.jpg`);
-      garfunkelSrc.setAttribute("src", `../images/teddy_5.jpg`);
+      garfunkelSrc.setAttribute("src", `./images/teddy_5.jpg`);
     }
   }
 }
@@ -119,7 +119,7 @@ function createArticles() {
         <div class="selectedArticles my-2 card rounded shadow ${panier[i].productId}"> 
             <article class="main-color row g-0">
               <div class="main-color col-6">
-              <a href="produit.html?teddy=${panier[i].productId}"><img src="${"../images/" + panier[i].imageUrl}" class="main-color img-fluid p-3" title="Retourner vers la fiche produit"></a>
+              <a href="produit.html?teddy=${panier[i].productId}"><img src="${"./images/" + panier[i].imageUrl}" class="main-color img-fluid p-3" title="Retourner vers la fiche produit"></a>
               </div>
               <div class=" col-6">
                 <div class="card-body px-2 py-2">

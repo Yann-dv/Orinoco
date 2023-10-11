@@ -61,7 +61,7 @@ function createTeddy(tedFinder) {
     `
       <div class="teddy col-12 col-lg-6">
         <div class="product-image main-color">
-            <img src="${"../images/" + tedFinder.imageUrl}" alt="Teddy" class="img-fluid p-3">
+            <img src="${"./images/" + tedFinder.imageUrl}" alt="Teddy" class="img-fluid p-3">
         </div>
       </div>
       <div class="teddy col-12 col-lg-6 main-color px-3">
