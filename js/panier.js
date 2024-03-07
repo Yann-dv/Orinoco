@@ -205,13 +205,12 @@ function generateOrderId() {
   return `CMD-${timestamp}-${randomId}`;
 }
 
-function deleteEmptypanier () {
-  if (panier == 0 || panier == null) {
+function deleteEmptypanier() {
+  if (panier == null || panier.length < 1) {
     localStorage.removeItem("panier");
-    window.location.reload();
+    return;
   }
 }
-
 
 ////
 
@@ -225,7 +224,7 @@ for (let i = 0; i < deleteItem.length; i++) {
     let id_delete_target = panier[i].cmdId;
     panier = panier.filter((el) => el.cmdId !== id_delete_target);
     setPanier(panier);
-    window.location.reload();
+    setPanierAndRefresh(panier);
     // Si panier = vide, suppression du localStorage panier
     if (panier == 0 || panier == null) {
       localStorage.removeItem("panier");
@@ -240,7 +239,7 @@ for (let i = 0; i < deletePanier.length; i++) {
     deletePanier[i].addEventListener("click", (e) => {
       e.preventDefault();
       localStorage.removeItem("panier");
-      window.location.reload();
+      setPanierAndRefresh(panier);
     });
   }
 };
@@ -249,34 +248,43 @@ for (let i = 0; i < deletePanier.length; i++) {
 let qtyPlus = document.querySelectorAll(".btn.btn-outline-dark.plus");
 let qtyMoins = document.querySelectorAll(".btn.btn-outline-dark.moins");
 
-for (let i = 0; i < panier.length; i++) {
-  if (panier != 0 || panier != null) {
-    if (qtyPlus[i]) { // Vérifier si l'élément existe
+function updateQuantity(index, increment) {
+  if (panier != null && panier.length > 0 && panier[index]) {
+    panier[index].quantity = parseInt(panier[index].quantity) + (increment ? 1 : -1);
+    panier[index].fullPrice = increment ? panier[index].fullPrice + panier[index].unitPrice : panier[index].fullPrice - panier[index].unitPrice;
+    panier[index].cmdId = panier[index].name + panier[index].productId + panier[index].quantity + panier[index].color + panier[index].fullPrice;
+
+    if (panier[index].quantity === 0) {
+      panier = panier.filter((el) => el.quantity !== 0);
+    }
+
+    setPanierAndRefresh(panier);
+  }
+}
+
+function setPanierAndRefresh(newPanier) {
+  setPanier(newPanier);
+  window.location.reload();
+}
+
+function handleQtyButtonClick(e, index, increment) {
+  e.preventDefault();
+  updateQuantity(index, increment);
+}
+
+if (panier != null && panier.length > 0) {
+  for (let i = 0; i < panier.length; i++) {
+    if (qtyPlus[i]) {
       qtyPlus[i].addEventListener("click", (e) => {
         e.preventDefault();
-        if (panier[i].cmdId == qtyPlus[i].value) {
-          panier[i].quantity = parseInt(panier[i].quantity) + 1;
-          panier[i].fullPrice = panier[i].fullPrice + panier[i].unitPrice;
-          panier[i].cmdId = panier[i].name+panier[i].productId+panier[i].quantity+panier[i].color+panier[i].fullPrice;
-          setPanier(panier);
-          window.location.reload();
-        }
+        updateQuantity(i, true);
       });
     }
 
-    if (qtyMoins[i]) { // Vérifier si l'élément existe
+    if (qtyMoins[i]) {
       qtyMoins[i].addEventListener("click", (e) => {
         e.preventDefault();
-        if (panier[i].cmdId == qtyPlus[i].value) {
-          if (panier[i].quantity >= 1) {
-            panier[i].quantity = parseInt(panier[i].quantity) - 1;
-            panier[i].fullPrice = panier[i].fullPrice - panier[i].unitPrice;
-            panier[i].cmdId = panier[i].name+panier[i].productId+panier[i].quantity+panier[i].color+panier[i].fullPrice;
-            panier = panier.filter((el) => el.quantity !== 0);
-            setPanier(panier);
-            window.location.reload();
-          }
-        }
+        updateQuantity(i, false);
       });
     }
   }
